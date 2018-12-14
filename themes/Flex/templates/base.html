@@ -17,10 +17,6 @@
     <meta name="robots" content="{{ ROBOTS }}" />
   {% endif %}
 
-  {% if USE_GOOGLE_FONTS != False %}
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro|Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  {% endif %}
-
   {% if USE_LESS %}
     <link rel="stylesheet/less" type="text/css" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/stylesheet/style.less">
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
@@ -50,10 +46,6 @@
     <link rel="icon" href="{{ FAVICON }}" type="image/x-icon">
   {% endif %}
 
-  {% if GOOGLE_ANALYTICS %}
-    {% include "partial/ga.html" %}
-  {% endif %}
-
   {% if BROWSER_COLOR %}
     <!-- Chrome, Firefox OS and Opera -->
     <meta name="theme-color" content="{{ BROWSER_COLOR }}">
@@ -74,23 +66,8 @@
 
   <title>{{ SITENAME }}{% block title %}{% endblock %}</title>
 
-  {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.page_level_ads %}
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "{{ GOOGLE_ADSENSE.ca_id }}",
-      enable_page_level_ads: true
-    });
-  </script>
-  {% endif %}
-  {% if GOOGLE_TAG_MANAGER %}
-    {% include "partial/gtm.html" %}
-  {% endif %}
 </head>
 <body>
-  {% if GOOGLE_TAG_MANAGER %}
-    {% include "partial/gtm_noscript.html" %}
-  {% endif %}
   <aside>
     <div>
       <a href="{{ SITEURL }}">
@@ -131,28 +108,9 @@
       </ul>
     </div>
 
-    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.aside %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle ads-aside"
-           data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
-           data-ad-slot="{{ GOOGLE_ADSENSE.ads.aside }}"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    {% endif %}
 
   </aside>
   <main>
-    {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.main_menu %}
-      <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-      <ins class="adsbygoogle ads-responsive"
-           data-ad-client="{{ GOOGLE_ADSENSE.ca_id }}"
-           data-ad-slot="{{ GOOGLE_ADSENSE.ads.main_menu }}"></ins>
-      <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
-    {% endif %}
-
     {% if MAIN_MENU %}
     <nav>
       <a href="{{ SITEURL }}">{{ _('Home') }}</a>
