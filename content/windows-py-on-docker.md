@@ -1,6 +1,10 @@
 Title: Windows上做Python开发太痛苦？Docker了解一下
+url: /windows-py-on-docker
+save_as: windows-py-on-docker.html
 Date: 2018-11-26 10:20
 Category: Python
+Authors: Zhongqiang Shen
+Slug:
 
 用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样
 

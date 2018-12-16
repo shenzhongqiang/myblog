@@ -1,8 +1,10 @@
 Title: 破解点评网的反爬
+url: /dianping-anti-crawler
 Date: 2018-11-24 10:20
 Category: Python
 Tags: 爬虫
 Authors: Zhongqiang Shen
+Slug:
 
 点评网的反爬设置在我们爬取点评网页的时候给我们造成了不小的障碍。在网页上我们看到的是这样的
 
