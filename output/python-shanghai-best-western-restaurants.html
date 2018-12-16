@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="http://47.101.51.87:8080/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://47.101.51.87:8080/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://47.101.51.87:8080/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://47.101.51.87:8080/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://47.101.51.87:8080/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。 爬虫的原理不多说了，很简单 …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="Python告诉你上海有哪些高性价比的西餐厅"/>
+<meta property="og:description" content="七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。 爬虫的原理不多说了，很简单 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://47.101.51.87:8080/python-shanghai-best-western-restaurants"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-08-16 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://47.101.51.87:8080/author/zhongqiang-shen.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; Python告诉你上海有哪些高性价比的西餐厅</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://47.101.51.87:8080">
+        <img src="http://47.101.51.87:8080/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="http://47.101.51.87:8080">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="http://47.101.51.87:8080/pages/about">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="http://47.101.51.87:8080/pages/wechat" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pythongao-su-ni-shang-hai-you-na-xie-gao-xing-jie-bi-de-xi-can-ting">Python告诉你上海有哪些高性价比的西餐厅</h1>
+    <p>
+          发表于 2018-08-16 分类: <a href="http://47.101.51.87:8080/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <p>七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。</p>
+<p>爬虫的原理不多说了，很简单，按行政区爬取每个区的西餐厅，存入数据库。需要代码的同学可以在公众号【<strong>Python与数据分析</strong>】后台回复“西餐厅”获取代码地址。</p>
+<h4>餐厅综合评分</h4>
+<p>在展现数据前，我们先介绍一下我们的餐厅综合评分。</p>
+<p>点评上对每家餐厅的评分有口味、环境和服务三项，如下</p>
+<p><img alt="" src="http://47.101.51.87:8080/images/v2-c5274378fae66e576bdce8c7187d16d5_b.jpg"></p>
+<p>我们综合这三项算出一个评分，作为对这家餐厅的综合评分，计算公式如下</p>
+<p><img alt="" src="http://www.zhihu.com/equation?tex=%E7%BB%BC%E5%90%88%E8%AF%84%E5%88%86+%3D+3+%5Cdiv+%281%5Cdiv%E5%8F%A3%E5%91%B3%E8%AF%84%E5%88%86%2B1%5Cdiv%E7%8E%AF%E5%A2%83%E8%AF%84%E5%88%86%2B1%5Cdiv%E6%9C%8D%E5%8A%A1%E8%AF%84%E5%88%86%29"> </p>
+<h4>餐厅数据分析</h4>
+<p>我们共爬取了5000多家西餐厅，西餐厅的人均消费从10元到5000+不等，下图是不同价位的餐厅数量分布情况</p>
+<p><img alt="" src="http://47.101.51.87:8080/images/v2-97f7263fdec129ae4179aee8767157bd_r.jpg"></p>
+<p>可以看到，人均消费越低的餐厅数量越多，越是贵的餐厅数量越少。</p>
+<p>餐厅综合评分的分布情况如下</p>
+<p><img alt="" src="http://47.101.51.87:8080/images/v2-362b6ec98fd0812a5a91d07514caf13a_r.jpg"></p>
+<p>上图呈现偏态分布。放大图片可以看到，大部分餐厅的评分在7.8~8.6之间。</p>
+<p>我们来看看土豪们都去哪些餐厅。下图是上海最贵的10家西餐厅</p>
+<p><img alt="" src="http://47.101.51.87:8080/images/v2-26a689af464583bf26e806da1a054ec3_r.jpg"></p>
+<p>每一家的人均消费都在1000以上，最贵的一家更是超过了5000，果然贫穷限制了我的想象，土豪去的餐厅我们普通工薪阶层消费不起啊~</p>
+<p>上面的餐厅我们就过过眼瘾吧，我们来看看有哪些综合评分高，但价位又适中的餐厅。我们选取了综合评分8.8分以上，人均消费在200-300之间的餐厅，如下（排名按综合评分从高到低）</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/98286435"> 双立人美食学院 ZWILLING GOURMET SCHOOL </a>, 人均: 258, 综合评分: 9.30</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/67138913"> Sky Restaurant &amp; Lounge </a>, 人均: 251, 综合评分: 9.20</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/103629748"> TR TERRA ROSSA(中海环宇荟店) </a>, 人均: 285, 综合评分: 9.20</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/73553342"> esee LOUNGE &amp; BAR </a>, 人均: 291, 综合评分: 9.20</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/102282960"> MOSSO音乐酒吧（live house）(长乐路店) </a>, 人均: 220, 综合评分: 9.13</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/4227815"> SISTERS BAR &amp; RESTAURANT </a>, 人均: 241, 综合评分: 9.10</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/76854134"> DATING达庭西餐厅 </a>, 人均: 202, 综合评分: 9.10</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/18982841"> Crazy Oyster House </a>, 人均: 281, 综合评分: 9.10</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/67556261"> 碳匠音乐餐厅酒吧 </a>, 人均: 275, 综合评分: 9.06</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/93473032"> 泥土的味道Gout de Terroir </a>, 人均: 211, 综合评分: 9.06</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/21341829"> La casetta意式私家厨房(南京西路店) </a>, 人均: 269, 综合评分: 9.03</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/97732766"> C&amp;R </a>, 人均: 242, 综合评分: 9.03</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/37942497"> JSTONE.ITALIAN KITCHEN&amp;BAR(襄阳公园店) </a>, 人均: 240, 综合评分: 9.03</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/96401331"> Entrecôte法国牛扒馆 </a>, 人均: 234, 综合评分: 9.03</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/8866486"> Efes Turkish &amp; Mediterranean Cuisine 艾菲斯餐厅 </a>, 人均: 211, 综合评分: 9.00</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/9071330"> Babbo </a>, 人均: 204, 综合评分: 9.00</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/1926859"> 夏朵花园 </a>, 人均: 262, 综合评分: 9.00</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/95931702"> 远方北纬30度餐厅Horizone Restaurant </a>, 人均: 224, 综合评分: 9.00</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/17683780"> Porto Matto意大利餐厅 </a>, 人均: 259, 综合评分: 8.97</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/69448371"> CHEF PAPA(协信星光店) </a>, 人均: 211, 综合评分: 8.97</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/21343952"> DIONNE红酒西餐厅(天钥桥路店) </a>, 人均: 293, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/77218611"> Brownstone Tapas &amp; Lounge布朗石西班牙餐厅酒吧(陆家嘴店) </a>, 人均: 258, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/93747240"> DE CARBON BAR烤肉匠 </a>, 人均: 213, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/18338823"> 凤凰西餐吧Phoenix Restaurant&amp;Bar </a>, 人均: 208, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/22303119"> Ermans Kitchen 珥玛厨房 </a>, 人均: 233, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/18021257"> Mayita小玛雅墨西哥餐厅 </a>, 人均: 217, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/94309318"> CommBiz康睦社 </a>, 人均: 220, 综合评分: 8.96</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/72556891"> 衡山99 Francis </a>, 人均: 274, 综合评分: 8.95</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/69482454"> 弗兰克牛排馆 Ribone steakhouse(外滩店) </a>, 人均: 284, 综合评分: 8.93</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/20877970"> husk restaurant </a>, 人均: 255, 综合评分: 8.93</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/4599475"> Brownstone Tapas &amp; Lounge布朗石西班牙餐厅酒吧(永嘉庭店) </a>, 人均: 246, 综合评分: 8.93</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/2713810"> MAYA玛雅墨西哥餐厅(四方新城店) </a>, 人均: 231, 综合评分: 8.93</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/3994102"> 阿尔贝鲁西班牙餐厅 </a>, 人均: 298, 综合评分: 8.93</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/97297788"> loving Vincent-创意西餐(尚悦湾店) </a>, 人均: 208, 综合评分: 8.89</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/96027466"> Light &amp; Salt Backstage 光与盐(南京东路店) </a>, 人均: 292, 综合评分: 8.89</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/69623000"> SILEX </a>, 人均: 265, 综合评分: 8.89</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/22415791"> La Cabane </a>, 人均: 221, 综合评分: 8.87</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/21725401"> Host Wine&amp;Kitchen(Antoni) </a>, 人均: 234, 综合评分: 8.87</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/91599682"> LETS BURGER&amp;LOBSTER(兴业太古汇店) </a>, 人均: 201, 综合评分: 8.86</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/66866544"> 味可思精品肉类体验馆 </a>, 人均: 260, 综合评分: 8.86</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/19428889"> 拉蒂娜Latina巴西烧烤音乐餐厅(铜仁路店) </a>, 人均: 208, 综合评分: 8.86</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/27525052"> Yasmine's 茉莉西餐厅(襄阳店) </a>, 人均: 202, 综合评分: 8.83</p>
+<p><a href="http://link.zhihu.com/?target=http%3A//www.dianping.com/shop/95914018"> 煌庭LAVIDA </a>, 人均: 206, 综合评分: 8.82</p>
+<p>上面共43家餐厅。点开链接可以跳转到点评的餐厅主页，可以看到，点评上这几家在口味、环境、服务方面的评价都不错，性价比很高。上海性价比最高的适合约会的餐厅基本都在这里了。</p>
+<p>明天就是七夕了，七夕节还没有安排的，妹子还没追到手的，强哥只能帮你到这儿了~</p>
+<p>最后祝大家七夕节快乐：）</p>
+<p><img alt="" src="http://47.101.51.87:8080/images/v2-07dac14a2279972e16cda140648e4cb9_r.jpg"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "http://47.101.51.87:8080",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

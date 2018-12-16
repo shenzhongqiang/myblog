@@ -45,9 +45,14 @@ class Block(object):
 
         # head
         if element.tag == "h2":
-            text = Block.escape_underscore(element.text)
-            md = "#### {}".format(text)
-            return md
+            if len(element) == 0:
+                text = Block.escape_underscore(element.text)
+                md = "#### {}".format(text)
+                return md
+            elif len(element) == 1:
+                node = element[0]
+                md = Block.html2md(node)
+                return "#### {}".format(md)
 
         # html
         if element.tag == "p":
@@ -139,6 +144,15 @@ class Block(object):
         if element.tag == "img":
             img_url = element.attrib["src"]
             md = "![]({})".format(img_url)
+            return md
+
+        if element.tag == "span":
+            md = "" if element.text is None else Block.escape_underscore(element.text)
+            for node in element:
+                node_md = Block.html2md(node)
+                md += node_md
+                node_tail = "" if node.tail is None else Block.escape_underscore(node.tail)
+                md += node_tail
             return md
 
         raise Exception("unrecognized tag {}".format(element.tag))
