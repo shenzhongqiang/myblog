@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="With基本语法 Python老司机应该对下面的语法不陌生 with open(&#39;output …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="Python面试之with与上下文管理器"/>
+<meta property="og:description" content="With基本语法 Python老司机应该对下面的语法不陌生 with open(&#39;output …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://10.169.165.148:8001/understand-with-context-manager"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-05-09 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://10.169.165.148:8001/author/zhongqiang-shen.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; Python面试之with与上下文管理器</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://10.169.165.148:8001">
+        <img src="http://10.169.165.148:8001/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="http://10.169.165.148:8001">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="http://10.169.165.148:8001/pages/about">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="http://10.169.165.148:8001/pages/wechat" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pythonmian-shi-zhi-withyu-shang-xia-wen-guan-li-qi">Python面试之with与上下文管理器</h1>
+    <p>
+          发表于 2018-05-09 分类: <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <h4>With基本语法</h4>
+<p>Python老司机应该对下面的语法不陌生</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>上面的代码往output文件写入了Hello world字符串，with语句会在执行完代码块后自动关闭文件。这里无论写文件的操作成功与否，是否有异常抛出，with语句都会保证文件被关闭。</p>
+<p>如果不用with，我们可能要用下面的代码实现类似的功能</p>
+<div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;output&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;Hello world&quot;</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+
+
+<p>可以看到使用了with的代码比上面的代码简洁许多。</p>
+<p>上面的with代码背后发生了些什么？我们来看下它的执行流程</p>
+<ol>
+<li>
+<ul>
+<li>首先执行open('output', 'w')，返回一个文件对象</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>调用这个文件对象的__enter__方法，并将__enter__方法的返回值赋值给变量f</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>执行with语句体，即with语句包裹起来的代码块</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>不管执行过程中是否发生了异常，执行文件对象的__exit__方法，在__exit__方法中关闭文件。</li>
+</ul>
+</li>
+</ol>
+<p>这里的关键在于open返回的文件对象实现了__enter__和__exit__方法。一个实现了__enter__和__exit__方法的对象就称之为<strong>上下文管理器</strong>。</p>
+<h4>上下文管理器</h4>
+<p>上下文管理器定义执行 with 语句时要建立的运行时上下文，负责执行 with 语句块上下文中的进入与退出操作。__enter__方法在语句体执行之前进入运行时上下文，__exit__在语句体执行完后从运行时上下文退出。</p>
+<p>在实际应用中，__enter__一般用于资源分配，如打开文件、连接数据库、获取线程锁；__exit__一般用于资源释放，如关闭文件、关闭数据库连接、释放线程锁。</p>
+<h4>自定义上下文管理器</h4>
+<p>既然上下文管理器就是实现了__enter__和__exit__方法的对象，我们能不能定义自己的上下文管理器呢？答案是肯定的。</p>
+<p>我们先来看下__enter__和__exit__方法的定义：</p>
+<p><strong>__enter__() </strong>- 进入上下文管理器的运行时上下文，在语句体执行前调用。如果有as子句，with语句将该方法的返回值赋值给 as 子句中的 target。</p>
+<p><strong>__exit__(exception_type, exception_value, traceback) </strong>- 退出与上下文管理器相关的运行时上下文，返回一个布尔值表示是否对发生的异常进行处理。如果with语句体中没有异常发生，则__exit__的3个参数都为None，即调用 __exit__(None, None, None)，并且__exit__的返回值直接被忽略。如果有发生异常，则使用 sys.exc_info 得到的异常信息为参数调用__exit__(exception_type, exception_value, traceback)。出现异常时，如果__exit__(exception_type, exception_value, traceback)返回 False，则会重新抛出异常，让with之外的语句逻辑来处理异常；如果返回 True，则忽略异常，不再对异常进行处理。</p>
+<p>理解了__enter__和__exit__方法后，我们来自己定义一个简单的上下文管理器。这里不做实际的资源分配和释放，而用打印语句来表明当前的操作。</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">ContextManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in __enter__] acquiring resources&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception_type</span><span class="p">,</span> <span class="n">exception_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in __exit__] releasing resources&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exception_type</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in __exit__] Exited without exception&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in __exit__] Exited with exception: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">exception_value</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">with</span> <span class="n">ContextManager</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in with-body] Testing&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<p>运行上面的代码，会得到如下的输出</p>
+<div class="highlight"><pre><span></span>[in __enter__] acquiring resources
+[in with-body] Testing
+[in __exit__] releasing resources
+[in __exit__] Exited without exception
+</pre></div>
+
+
+<p>我们在with语句体中人为地抛出一个异常</p>
+<div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ContextManager</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in with-body] Testing&quot;</span><span class="p">)</span>
+    <span class="k">raise</span><span class="p">(</span><span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;something wrong&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>会得到如下的输出</p>
+<div class="highlight"><pre><span></span>[in __enter__] acquiring resources
+[in with-body] Testing
+[in __exit__] releasing resources
+[in __exit__] Exited with exception: something wrong
+Traceback (most recent call last):
+  File &quot;/tmp/a.py&quot;, line 15, in &lt;module&gt;
+    raise(Exception(&quot;something wrong&quot;))
+Exception: something wrong
+</pre></div>
+
+
+<p>如我们所期待，with语句体中抛出异常，__exit__方法中exception_type不为None，__exit__方法返回False，异常被重新抛出。</p>
+<p>以上，我们通过实现__enter__和__exit__方法来实现了一个自定义的上下文管理器。</p>
+<h4>contextlib库</h4>
+<p>除了上面的方法，我们也可以使用contextlib库来自定义上下文管理器。如果用contextlib来实现，可以用下面的代码来实现类似的上下文管理器</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">contextmanager</span>
+
+<span class="nd">@contextmanager</span>
+<span class="k">def</span> <span class="nf">func</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in __enter__] acquiring resources&quot;</span><span class="p">)</span>
+        <span class="k">yield</span>
+    <span class="k">finally</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in __exit__] releasing resources&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">func</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;[in with-body] Testing&quot;</span><span class="p">)</span>
+    <span class="k">raise</span><span class="p">(</span><span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;something wrong&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>上面的代码涉及到装饰器（@contextmanager），生成器（yield），有点难读。这里yield之前的代码相当于__enter__方法，在进入with语句体之前执行，yield之后的代码相当于__exit__方法，在退出with语句体的时候执行。</p>
+<p>接下来的几篇文章，我们来逐一介绍一下，什么是装饰器，什么是生成器，@contextmanager是如何实现上下文管理器的。敬请期待~</p>
+<p>本文已更新微信同名公众号，欢迎扫一扫关注~</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "http://10.169.165.148:8001",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

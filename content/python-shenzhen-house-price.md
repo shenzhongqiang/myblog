@@ -1,132 +1,80 @@
-Title: 用Python生成马赛克画
+Title: Python爬虫告诉你深圳房价有多高
 url: python-shenzhen-house-price
 save_as: python-shenzhen-house-price.html
-Date: 2018-09-12
+Date: 2018-08-10
 Category:
 Authors: Zhongqiang Shen
 
-大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~
+这一篇是前一篇[Python爬虫告诉你上海房价有多高](https://zhuanlan.zhihu.com/p/40293278)的姐妹篇，这一篇我们来看一看中国最具活力的城市**深圳**的房价。爬虫原理类似，我们直接分享数据。
 
-马赛克画是一张由小图拼成的大图，本文的封面就是我们的效果图，放大看细节，每一块都是一张独立的图片，拼在一起组成一张大图，感觉像是用马赛克拼出来的画，所以叫马赛克画。看到网上的一些马赛克画觉得很酷，于是自己用Python实现了一下将一张原图转换成马赛克画。
+贝壳上，深圳的在售房源共有**26822**套，在售房源的平均售价是**530万**/套，平均单价是**57436元**/平米，平均房龄**12.7**年。
 
+深圳各区县的房源数量分布如下
 
-
-
-封面的原图是这样的
-
-![]({static}/images/v2-02d2a072293c25d903646202c30e8410_r.jpg)
+![]({static}/images/v2-3574bcd44d86d6408649846aa4a3c559_r.jpg)
 
 
 
 
-实现的具体思路是这样
+每个区的均价如下
 
-第一步：首先收集一组图片，这些图片会作为大图中的小方格图片。图片越多，最后生成的图片颜色越接近。
+![]({static}/images/v2-aa4656316001151975bcf4f504f450d3_r.jpg)
 
-第二步：将要转换的图片分割成一个一个小方格图片，像下面这样
-
-![]({static}/images/v2-13616576364baef8063e962f9cb8ae6e_r.jpg)
-
-第三步：对于每一个小方格图片，取图片集里面最接近的图片替换。所有小方格都替换后，就生成了我们最终的马赛克画。
-
-听上去是不是很简单？
+所有的区里，南山和福田的单价最高。福田、南山、罗湖、盐田四个区俗称关内，我们所说的深圳经济特区就是指关内，其余的六个区是关外，不属于深圳经济特区。可以看到，关内的整体房价明显高于关外。
 
 
 
 
-我们来看一下具体的实现步骤，下面是一些核心代码。完整代码可在公众号【Python与数据分析】后台回复“mosaic”获取。
+下面是深圳最贵的十大板块
 
-
-我们的图片集存在images目录下，下面的代码加载目录下所有的图片，并缩放成统一的尺寸
-
-```python
-import re
-import os
-import cv2
-import numpy as np
-from tqdm import tqdm
-
-IMG_DIR = "images"
-
-def load_all_images(tile_row, tile_col):
-    img_dir = IMG_DIR
-    filenames = os.listdir(img_dir)
-    result = []
-    print(len(filenames))
-    for filename in tqdm(filenames):
-        if not re.search(".jpg", filename, re.I):
-            continue
-        try:
-            filepath = os.path.join(img_dir, filename)
-            im = cv2.imread(filepath)
-            row = im.shape[0]
-            col = im.shape[1]
-            im = resize(im, tile_row, tile_col)
-            result.append(np.array(im))
-        except Exception as e:
-            msg = "error with {} - {}".format(filepath, str(e))
-            print(msg)
-    return np.array(result, dtype=np.uint8)
-
-```
-
-这里load\_all\_images函数的参数就是统一后的尺寸，tile\_row和tile\_col分别对应高和宽。
+![]({static}/images/v2-97998be02fb0bfb289dcf3ff1a1be0c8_b.jpg)
 
 
 
 
-下面的代码对要转换的图片进行分割
+下面是深圳最贵的10大小区
 
-```python
-img = cv2.imread(infile)
-tile_row, tile_col = get_tile_row_col(img.shape)
-for row in range(0, img_shape[0], tile_row):
-    for col in range(0, img_shape[1], tile_col):
-        roi = img[row:row+tile_row,col:col+tile_col,:]
+![]({static}/images/v2-83bf764f96b5d584cfa0aafb03a2c2fe_r.jpg)
 
-```
-
-我们将要转换的图片分割成一个个小方格，tile\_row和tile\_col是小方格的高和宽，roi存取小方格中的图片数据。
+可以看到，最贵的板块和最贵的小区大多集中在关内的南山和福田两个区，这两个区也是深圳单价最高的两个区。
 
 
 
 
-下面是计算两张图片相似度的函数
+下面是深圳10大面积最大的在售房源
 
-```python
-from scipy.spatial.distance import euclidean
-def img_distance(im1, im2):
-    if im1.shape != im2.shape:
-        msg = "shapes are different {} {}".format(im1.shape, im2.shape)
-        raise Exception(msg)
-    array1 = im1.flatten()
-    array2 = im2.flatten()
-    dist = euclidean(array1, array2)
-    return dist
+![]({static}/images/v2-4347b51216b7a144743dbc915a897923_r.jpg)
 
-```
-
-im1和im2是两张图片的数据，图片数据是一个三维的numpy数组，这里我们将三维数组转换成一维数组后，比较两者的欧式距离。之后要找出最相似的图片，只需遍历图片集中所有的图片，找到距离最短的那张图片，去替换原图中的小方格就可以了。
+这些豪宅的面积都在400平米以上，房型都在6室以上。
 
 
 
 
-我们再来看一下最终实现的效果
+下面是总价前10的顶级豪宅
 
-![]({static}/images/v2-97cb4cfc307a40b0121560e6f1de3dcd_r.jpg)
+![]({static}/images/v2-a984e5e39b05645d2dd89045969425ee_r.jpg)
 
-放大图中局部的细节如下
-
-![]({static}/images/v2-c4506d984d721fb8cfbd9f502911d36d_r.jpg)
-
-如果对图片的画质不满意，想要更精细的画质，可以考虑在分割的时候把图片分割成更小的方格，不过这样也会增加程序运行的时间。
-
-生成图片的过程比较耗时，考虑到性能原因，原程序中使用多进程的方式并行处理。
+豪宅也大多簇拥在南山和福田两区，最贵的豪宅达到1个亿。
 
 
 
 
-完整代码已上传github，公众号【Python与数据分析】后台回复“mosaic”可获取地址。
+我们来看一下排名第二的豪宅所在的中信红树湾的小区环境
+
+![]({static}/images/v2-a0373bedfa707b4ad0d5a98d6d0eae6c_r.jpg)
+
+![]({static}/images/v2-e105bf3a57a286ac97ae565d7bd4908f_r.jpg)
+
+![]({static}/images/v2-432a0fefed722a0d41ab0e0b95de7aaa_r.jpg)
+
+![]({static}/images/v2-1dd05d139abfdb16ab59e9dd35d7bfa7_r.jpg)
+
+绿化覆盖率很高，小区环境看着很舒适，房子也很气派，很有豪宅的气质。
 
 
+
+
+比较一下深圳和上海两地的房价（上一篇[Python爬虫告诉你上海房价有多高](https://zhuanlan.zhihu.com/p/40293278)），可以发现，深圳和上海的平均单价和套均总价均相差不大。豪宅方面，上海的顶级豪宅要比深圳的顶级豪宅贵不少，上海排名前10的豪宅最便宜的也在1亿以上，而这里的数据里深圳最贵的豪宅也就1个亿，这有点令人难以置信。比较贝壳上这两个城市的房源数量，可以发现深圳的房源远少于上海的房源，可能深圳一些更贵的豪宅没有在贝壳上挂牌吧。
+
+本文我们分析了一下深圳的房价数据，下一篇我们来看一下北京的房价。敬请期待~
 

@@ -21,22 +21,22 @@
 
 
 <meta name="author" content="Zhongqiang Shen" />
-<meta name="description" content="大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~ 马赛克画是一张由小图拼成的大图，本文的封面就是我们的效果图，放大看细节 …" />
+<meta name="description" content="这一篇是前一篇Python爬虫告诉你上海房价有多高的姐妹篇，这一篇我们来看一看中国最具活力的城市深圳 …" />
 <meta name="keywords" content="">
 
 <meta property="og:site_name" content="Zhongqiang's World"/>
-<meta property="og:title" content="用Python生成马赛克画"/>
-<meta property="og:description" content="大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~ 马赛克画是一张由小图拼成的大图，本文的封面就是我们的效果图，放大看细节 …"/>
+<meta property="og:title" content="Python爬虫告诉你深圳房价有多高"/>
+<meta property="og:description" content="这一篇是前一篇Python爬虫告诉你上海房价有多高的姐妹篇，这一篇我们来看一看中国最具活力的城市深圳 …"/>
 <meta property="og:locale" content="en_US"/>
 <meta property="og:url" content="http://10.169.165.148:8001/python-shenzhen-house-price"/>
 <meta property="og:type" content="article"/>
-<meta property="article:published_time" content="2018-09-12 00:00:00+08:00"/>
+<meta property="article:published_time" content="2018-08-10 00:00:00+08:00"/>
 <meta property="article:modified_time" content=""/>
 <meta property="article:author" content="http://10.169.165.148:8001/author/zhongqiang-shen.html">
 <meta property="article:section" content="misc"/>
 <meta property="og:image" content="">
 
-  <title>Zhongqiang's World &ndash; 用Python生成马赛克画</title>
+  <title>Zhongqiang's World &ndash; Python爬虫告诉你深圳房价有多高</title>
 
 </head>
 <body>
@@ -94,95 +94,42 @@
 
 <article class="single">
   <header>
-          <div class="translations">
-    <a class="active" href="http://10.169.165.148:8001/python-shenzhen-house-price">en</a>
-        <a href="http://10.169.165.148:8001/python-beijing-house-price">en</a>
-        <a href="http://10.169.165.148:8001/python-create-mosaic-painting">en</a>
-    </div>
-
-    <h1 id="yong-pythonsheng-cheng-ma-sai-ke-hua">用Python生成马赛克画</h1>
+      
+    <h1 id="pythonpa-chong-gao-su-ni-shen-zhen-fang-jie-you-duo-gao">Python爬虫告诉你深圳房价有多高</h1>
     <p>
-          发表于 2018-09-12 分类: <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
+          发表于 2018-08-10 分类: <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
 
 
     </p>
   </header>
 
   <div>
-    <p>大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~</p>
-<p>马赛克画是一张由小图拼成的大图，本文的封面就是我们的效果图，放大看细节，每一块都是一张独立的图片，拼在一起组成一张大图，感觉像是用马赛克拼出来的画，所以叫马赛克画。看到网上的一些马赛克画觉得很酷，于是自己用Python实现了一下将一张原图转换成马赛克画。</p>
-<p>封面的原图是这样的</p>
-<p><img alt="" src="http://10.169.165.148:8001/images/v2-02d2a072293c25d903646202c30e8410_r.jpg"></p>
-<p>实现的具体思路是这样</p>
-<p>第一步：首先收集一组图片，这些图片会作为大图中的小方格图片。图片越多，最后生成的图片颜色越接近。</p>
-<p>第二步：将要转换的图片分割成一个一个小方格图片，像下面这样</p>
-<p><img alt="" src="http://10.169.165.148:8001/images/v2-13616576364baef8063e962f9cb8ae6e_r.jpg"></p>
-<p>第三步：对于每一个小方格图片，取图片集里面最接近的图片替换。所有小方格都替换后，就生成了我们最终的马赛克画。</p>
-<p>听上去是不是很简单？</p>
-<p>我们来看一下具体的实现步骤，下面是一些核心代码。完整代码可在公众号【Python与数据分析】后台回复“mosaic”获取。</p>
-<p>我们的图片集存在images目录下，下面的代码加载目录下所有的图片，并缩放成统一的尺寸</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-
-<span class="n">IMG_DIR</span> <span class="o">=</span> <span class="s2">&quot;images&quot;</span>
-
-<span class="k">def</span> <span class="nf">load_all_images</span><span class="p">(</span><span class="n">tile_row</span><span class="p">,</span> <span class="n">tile_col</span><span class="p">):</span>
-    <span class="n">img_dir</span> <span class="o">=</span> <span class="n">IMG_DIR</span>
-    <span class="n">filenames</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">img_dir</span><span class="p">)</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">filenames</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">filename</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">filenames</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;.jpg&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">):</span>
-            <span class="k">continue</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">filepath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">img_dir</span><span class="p">,</span> <span class="n">filename</span><span class="p">)</span>
-            <span class="n">im</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-            <span class="n">row</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">col</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">im</span> <span class="o">=</span> <span class="n">resize</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">tile_row</span><span class="p">,</span> <span class="n">tile_col</span><span class="p">)</span>
-            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">im</span><span class="p">))</span>
-        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;error with {} - {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-</pre></div>
-
-
-<p>这里load_all_images函数的参数就是统一后的尺寸，tile_row和tile_col分别对应高和宽。</p>
-<p>下面的代码对要转换的图片进行分割</p>
-<div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">infile</span><span class="p">)</span>
-<span class="n">tile_row</span><span class="p">,</span> <span class="n">tile_col</span> <span class="o">=</span> <span class="n">get_tile_row_col</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img_shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">tile_row</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">tile_col</span><span class="p">):</span>
-        <span class="n">roi</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">row</span><span class="p">:</span><span class="n">row</span><span class="o">+</span><span class="n">tile_row</span><span class="p">,</span><span class="n">col</span><span class="p">:</span><span class="n">col</span><span class="o">+</span><span class="n">tile_col</span><span class="p">,:]</span>
-</pre></div>
-
-
-<p>我们将要转换的图片分割成一个个小方格，tile_row和tile_col是小方格的高和宽，roi存取小方格中的图片数据。</p>
-<p>下面是计算两张图片相似度的函数</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">euclidean</span>
-<span class="k">def</span> <span class="nf">img_distance</span><span class="p">(</span><span class="n">im1</span><span class="p">,</span> <span class="n">im2</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">im1</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">im2</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;shapes are different {} {}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">im1</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">im2</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
-    <span class="n">array1</span> <span class="o">=</span> <span class="n">im1</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">array2</span> <span class="o">=</span> <span class="n">im2</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
-    <span class="n">dist</span> <span class="o">=</span> <span class="n">euclidean</span><span class="p">(</span><span class="n">array1</span><span class="p">,</span> <span class="n">array2</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">dist</span>
-</pre></div>
-
-
-<p>im1和im2是两张图片的数据，图片数据是一个三维的numpy数组，这里我们将三维数组转换成一维数组后，比较两者的欧式距离。之后要找出最相似的图片，只需遍历图片集中所有的图片，找到距离最短的那张图片，去替换原图中的小方格就可以了。</p>
-<p>我们再来看一下最终实现的效果</p>
-<p><img alt="" src="http://10.169.165.148:8001/images/v2-97cb4cfc307a40b0121560e6f1de3dcd_r.jpg"></p>
-<p>放大图中局部的细节如下</p>
-<p><img alt="" src="http://10.169.165.148:8001/images/v2-c4506d984d721fb8cfbd9f502911d36d_r.jpg"></p>
-<p>如果对图片的画质不满意，想要更精细的画质，可以考虑在分割的时候把图片分割成更小的方格，不过这样也会增加程序运行的时间。</p>
-<p>生成图片的过程比较耗时，考虑到性能原因，原程序中使用多进程的方式并行处理。</p>
-<p>完整代码已上传github，公众号【Python与数据分析】后台回复“mosaic”可获取地址。</p>
+    <p>这一篇是前一篇<a href="https://zhuanlan.zhihu.com/p/40293278">Python爬虫告诉你上海房价有多高</a>的姐妹篇，这一篇我们来看一看中国最具活力的城市<strong>深圳</strong>的房价。爬虫原理类似，我们直接分享数据。</p>
+<p>贝壳上，深圳的在售房源共有<strong>26822</strong>套，在售房源的平均售价是<strong>530万</strong>/套，平均单价是<strong>57436元</strong>/平米，平均房龄<strong>12.7</strong>年。</p>
+<p>深圳各区县的房源数量分布如下</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-3574bcd44d86d6408649846aa4a3c559_r.jpg"></p>
+<p>每个区的均价如下</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-aa4656316001151975bcf4f504f450d3_r.jpg"></p>
+<p>所有的区里，南山和福田的单价最高。福田、南山、罗湖、盐田四个区俗称关内，我们所说的深圳经济特区就是指关内，其余的六个区是关外，不属于深圳经济特区。可以看到，关内的整体房价明显高于关外。</p>
+<p>下面是深圳最贵的十大板块</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-97998be02fb0bfb289dcf3ff1a1be0c8_b.jpg"></p>
+<p>下面是深圳最贵的10大小区</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-83bf764f96b5d584cfa0aafb03a2c2fe_r.jpg"></p>
+<p>可以看到，最贵的板块和最贵的小区大多集中在关内的南山和福田两个区，这两个区也是深圳单价最高的两个区。</p>
+<p>下面是深圳10大面积最大的在售房源</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-4347b51216b7a144743dbc915a897923_r.jpg"></p>
+<p>这些豪宅的面积都在400平米以上，房型都在6室以上。</p>
+<p>下面是总价前10的顶级豪宅</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-a984e5e39b05645d2dd89045969425ee_r.jpg"></p>
+<p>豪宅也大多簇拥在南山和福田两区，最贵的豪宅达到1个亿。</p>
+<p>我们来看一下排名第二的豪宅所在的中信红树湾的小区环境</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-a0373bedfa707b4ad0d5a98d6d0eae6c_r.jpg"></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-e105bf3a57a286ac97ae565d7bd4908f_r.jpg"></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-432a0fefed722a0d41ab0e0b95de7aaa_r.jpg"></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-1dd05d139abfdb16ab59e9dd35d7bfa7_r.jpg"></p>
+<p>绿化覆盖率很高，小区环境看着很舒适，房子也很气派，很有豪宅的气质。</p>
+<p>比较一下深圳和上海两地的房价（上一篇<a href="https://zhuanlan.zhihu.com/p/40293278">Python爬虫告诉你上海房价有多高</a>），可以发现，深圳和上海的平均单价和套均总价均相差不大。豪宅方面，上海的顶级豪宅要比深圳的顶级豪宅贵不少，上海排名前10的豪宅最便宜的也在1亿以上，而这里的数据里深圳最贵的豪宅也就1个亿，这有点令人难以置信。比较贝壳上这两个城市的房源数量，可以发现深圳的房源远少于上海的房源，可能深圳一些更贵的豪宅没有在贝壳上挂牌吧。</p>
+<p>本文我们分析了一下深圳的房价数据，下一篇我们来看一下北京的房价。敬请期待~</p>
   </div>
   <div class="tag-cloud">
     <p>

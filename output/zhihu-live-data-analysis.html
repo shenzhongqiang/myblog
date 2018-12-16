@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频 …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="知乎Live数据面面观"/>
+<meta property="og:description" content="从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://10.169.165.148:8001/zhihu-live-data-analysis"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-06-23 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://10.169.165.148:8001/author/zhongqiang-shen.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; 知乎Live数据面面观</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://10.169.165.148:8001">
+        <img src="http://10.169.165.148:8001/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="http://10.169.165.148:8001">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="http://10.169.165.148:8001/pages/about">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="http://10.169.165.148:8001/pages/wechat" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="zhi-hu-liveshu-ju-mian-mian-guan">知乎Live数据面面观</h1>
+    <p>
+          发表于 2018-06-23 分类: <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <p>从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频、视频的知识分享途径，知乎Live以直播的方式分享知识，给用户一种全新的体验。</p>
+<p>最近爬取了所有成功举办的知乎Live。从2016年知乎Live开播以来，知乎共计举办了5707场Live。通过数据分析，本文将会告诉你知乎Live的发展情况如何，覆盖哪些专业领域，有哪些奇特的Live，哪些Live最受欢迎，哪些Live最受好评，哪些Live最吸金等有趣的答案。</p>
+<h4>每月新开Live数量</h4>
+<p>下图为从2016年5月至今的每月新开播的Live数量统计（横轴是月份，看不清可以放大图片）</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-d91d22f820cbcd13df7f301bf43f9cb8_r.jpg"></p>
+<p>2016年5月知乎Live上线后，每月新开播的知乎Live数量就一路上升，至2017年5月达到顶峰，随后逐渐下降。这里值得一提的是，在2017年1月和2月Live数量出现明显的下降，这应该和那段时间过春节有关，2017年的春节在一月底二月初。春节到了，主讲人也要回家过年的，开播的Live数量自然就少了。</p>
+<h4>各领域Live分布</h4>
+<p>知乎Live按照专业领域分类。下图是每个领域的知乎Live数量分布情况</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-942cf49cb275b4509772c13b1703a58b_r.jpg"></p>
+<p>可以看到大多数的Live的都集中于教育、职业、互联网、金融与经济、生活方式这几个领域，这几个领域也都是知乎上关注度比较高的领域，相关话题的关注度都超过了8百万。</p>
+<h4>Live类型分布</h4>
+<p>知乎Live有视频和音频两种类型，下图为其分布情况</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-bf1761913d6a28654ba35fda3a9facc3_r.jpg"></p>
+<p>可以看到除了极少部分的视频形式的Live，大多数Live是音频形式的。这或许是由于音频Live对于主讲人来说有更大的自由度，不像视频主讲人需要考虑讲授的环境，视频中拍到的背景之类的因素。</p>
+<h4>最贵Live</h4>
+<p>知乎Live价格的中位数是19元，90%分位数是39.9元，超过39.9元的Live就进入前10%最贵Live的列表了。</p>
+<p>按价格区间划分，统计每个区间的Live数量，如下图</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-ec6b9b4f5b76476918657c4808ab4172_r.jpg"></p>
+<p>可以看出，大部分Live的价格集中在0-10元和10-100元两个区间，只有少数Live在100元以上，100元以上的Live共有34场。</p>
+<p>我们来看下最贵的5场知乎Live</p>
+<p><a href="https://www.zhihu.com/lives/893842955469721600">如何避免股市中的各种坑？</a>  499.99元</p>
+<p><a href="https://www.zhihu.com/lives/865921682613891072">在中国做期货高频交易的日子</a>  499.99元</p>
+<p><a href="https://www.zhihu.com/lives/890544211793956865">作者摄影Lv1.5：摄影中的光照与材质分析</a>  549.00元</p>
+<p><a href="https://www.zhihu.com/lives/890546314826379264">作者摄影Lv1.7：建设你的专业暗房工作室</a>  598.00元</p>
+<p><a href="https://www.zhihu.com/lives/890542532243652608">作者摄影Lv1.6：学不会的区域曝光法，这次解决</a>  698.00元</p>
+<p>之前APP端给我推荐过 <a href="https://www.zhihu.com/lives/865921682613891072">在中国做期货高频交易的日子</a> ，当时着实被500大洋的价格吓到了，但没想到统计发现还有比这更贵的。</p>
+<h4>时间最长Live</h4>
+<p>对于音频类型的Live，时间长度就是Live的语音时间；对于视频类型的Live，时间长度就是视频的长度。知乎Live时间长度的中位数是62分钟，90%分位数是112分钟，超过112分钟的Live就进入前10%最长Live的列表了。</p>
+<p>按照时间长度划分区间，不同区间的Live数量如下图</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-eff8d48ce62c2fc5f92b3c3e404ac9cc_r.jpg"></p>
+<p>可以看到，大部分的Live时长都集中在10-100分钟的区间。</p>
+<p>来看下最长的5场知乎Live</p>
+<p><a href="https://www.zhihu.com/lives/805891453787176960">装修及家具造成甲醛等污染的防控</a>  302分钟</p>
+<p><a href="https://www.zhihu.com/lives/935181446809792512">【考研那些坑】 二本如何高分考入北航</a>  333分钟</p>
+<p><a href="https://www.zhihu.com/lives/815217146249494528">普通学生，从审计到投行</a>  357分钟</p>
+<p><a href="https://www.zhihu.com/lives/919153088173056000">英菲尼迪走「芯」全拆解</a>  378分钟</p>
+<p><a href="https://www.zhihu.com/lives/789872613613633536">LED 照明设计如何避坑</a>  692分钟</p>
+<p>非常有趣，场场都超过了5个小时。注意看最后一场，是的，你没有看错，最长的一场居然超过了11个小时。能够坚持听完11个小时的同学，应该也是主讲人的真爱了吧。</p>
+<h4>最受欢迎Live</h4>
+<p>知乎Live的参与人数中位数是247人，90%分位数是1673人，参与人数大于1673的Live就跻身前10%受欢迎的Live了。</p>
+<p>按照参与人数划分区间，统计每个区间的Live数量，如下图</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-a24b524ffee7f26733a1a4aef8f5134e_r.jpg"></p>
+<p>可以看到，大部分Live的参与人数在0-10万人之间，有少数Live的参与人数超过了10万人。</p>
+<p>我们来看下参与人数最多的5场Live</p>
+<p><a href="https://www.zhihu.com/lives/757587093366009856">我的读书经验</a>  48423 人参与</p>
+<p><a href="https://www.zhihu.com/lives/889162560450990080">知乎 2018 校园招聘空中宣讲会</a>  50676 人参与</p>
+<p><a href="https://www.zhihu.com/lives/778982517263843328">如何在短时间内掌握一项技能</a>  55566 人参与</p>
+<p><a href="https://www.zhihu.com/lives/772120076848467968">人人都能用英语</a>  56481 人参与</p>
+<p><a href="https://www.zhihu.com/lives/763851343583547392">一小时建立终生受用的阅读操作系统</a>  121678 人参与</p>
+<p>注意看最后一场Live，有超过12万人参与。我国最大的体育场能容纳9万多人，可以说这场Live的热门程度超过了绝大多数体育赛事、演唱会的现场参与人数。</p>
+<h4>最受好评Live</h4>
+<p>用户听完Live可以对Live进行评分。知乎Live评分的平均值是3.56分，90%分位数是4.88分，评分大于4.88的Live就跻身前10%的优质Live了。</p>
+<p>Live的评分最低0分，最高5分。按照评分划分区间，不同区间的Live数量如下图</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-d888f73ab923a97189e95c3735e35909_r.jpg"></p>
+<p>非常有意思，大多数知乎Live的评分都在3-4分和4-5分这两个区间，可以看出来，知乎用户在评分上还是很nice的。</p>
+<p>我们来看一下参与人数在100人以上的最受好评的5场Live</p>
+<p><a href="https://www.zhihu.com/lives/893139172620140544">留学文书：讲一个故事打动名校</a>  5.0         </p>
+<p><a href="https://www.zhihu.com/lives/866307074416599040">加密数字货币 ICO 入门及前景</a>  5.0         </p>
+<p><a href="https://www.zhihu.com/lives/918546107322212352">从零学会数据分析：数据分析的基本过程</a>  5.0         </p>
+<p><a href="https://www.zhihu.com/lives/818491503964987392">春季日本樱花之旅的正确打开方式</a>  5.0         </p>
+<p><a href="https://www.zhihu.com/lives/880788993145475072">游戏设计：易用性</a>  5.0   </p>
+<p>这5场Live都是满分Live，不知是不是名副其实。</p>
+<h4>最吸金Live</h4>
+<p>这里用 </p>
+<p><img alt="" src="http://www.zhihu.com/equation?tex=%E6%94%B6%E5%85%A5+%3D+Live%E4%BB%B7%E6%A0%BC+%5Ctimes+%E5%8F%82%E4%B8%8E%E4%BA%BA%E6%95%B0"> </p>
+<p>来估算Live的收入情况。由于知乎Live会搞促销活动，实际收入可能会低于此数值。知乎Live收入的中位数是4168元，90%分位数是33953元，收入大于33953元的Live就跻身前10%最吸金行列了。</p>
+<p>按照Live收入划分区间，不同区间的Live数量如下图</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-a0b4b7b46a176466f3d77ea930b04530_r.jpg"></p>
+<p>可以看到，大多数Live的收入在10万以下。</p>
+<p>我们来看下最吸金的5场Live</p>
+<p><a href="https://www.zhihu.com/lives/772120076848467968">人人都能用英语</a>  1129055.19元</p>
+<p><a href="https://www.zhihu.com/lives/752228199001247744">正装入门：先穿对，再穿贵</a>  1704708.99元</p>
+<p><a href="https://www.zhihu.com/lives/795679158356312064">从月球回来这 48 年</a>  2386296.00元</p>
+<p><a href="https://www.zhihu.com/lives/823888660779892736">诺贝尔经济学奖得主：特朗普上台，中国该往何处去</a>  3499353.00元</p>
+<p><a href="https://www.zhihu.com/lives/763851343583547392">一小时建立终生受用的阅读操作系统</a>  12167800.00元</p>
+<p>非常震惊，上面的每场Live都超过了百万收入，最后一场 <a href="http://www.zhihu.com/people/e8e1b3c9f41a0528399733b96005db69">@李笑来</a> 老师的Live更是超过了千万收入。仔细阅读本文的同学可以发现，这场Live除了是最吸金的Live之外，还是最受欢迎（参与人数最多）的Live。</p>
+<p>以上是本次统计的所有图表和数据。本人还是非常喜欢Live这种知识分享的模式，收听的几场Live质量都很高，给了我很多启发。知乎Live还在不断发展中，也期待将来能够有越来越多高质量的Live出现。</p>
+<p>本文已更新微信同名公众号【Python与数据分析】，欢迎关注~</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "http://10.169.165.148:8001",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

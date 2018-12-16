@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么 …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="Python告诉你iPhone X有多热卖"/>
+<meta property="og:description" content="老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://10.169.165.148:8001/iphonex-sales"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-12-14 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://10.169.165.148:8001/author/zhongqiang-shen.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; Python告诉你iPhone X有多热卖</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://10.169.165.148:8001">
+        <img src="http://10.169.165.148:8001/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="http://10.169.165.148:8001">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="http://10.169.165.148:8001/pages/about">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="http://10.169.165.148:8001/pages/wechat" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="pythongao-su-ni-iphone-xyou-duo-re-mai">Python告诉你iPhone X有多热卖</h1>
+    <p>
+          发表于 2017-12-14 分类: <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <p>老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么。老婆要买iPhone X，强哥当然支持了。强哥立刻转了一笔巨款给老婆</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-4b784f72b1964ddcaa68408337f6ebbd_r.jpg"></p>
+<p>发完转账，老婆就把强哥给拉黑了。强哥当时的心情是这样的</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-497886754145e37caf08601d2123bece_b.jpg"></p>
+<p>强哥挺郁闷的，强哥到底做错了什么，老婆要这样对我。</p>
+<p>带着沉重的心情，强哥决定深入了解一下老婆为什么这么喜欢iPhone X，于是强哥<strong>用Python爬取淘宝店铺的数据分析了一下iPhone X到底有多热卖</strong>。</p>
+<p>我们先来看下淘宝上的销量数据长什么样。</p>
+<p>淘宝上的销量数据有两种方式估算，一种方式是用<strong>累计付款人数</strong>近似销量，像下面这种</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-d583f86f36fb991a3059c9da9f05b1ba_r.jpg"></p>
+<p>显示在这个数字里的每个人都至少购买了一部手机，所以总销量一定大于等于累计付款人数。</p>
+<p>淘宝上并不是每一家店铺都显示累计付款人数，对于下面这种只显示<strong>评论数</strong>的情况</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-63785e0be453175fb564f9e869a68d61_r.jpg"></p>
+<p>就只能用评论数来估算销量了。具体怎么估算后面会提到。</p>
+<p>知道怎么获得销量数据，接下类我们就开始爬数据了。</p>
+<p>我们要爬的数据藏在下面高亮的URL里</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-a0ce2622a4799f346c4802abdc92bd77_r.jpg"></p>
+<p>我们用Python的Scrapy框架来实现一个爬虫，爬取不同搜索页的URL</p>
+<p>爬虫代码如下：</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">scrapy</span>
+<span class="kn">import</span> <span class="nn">pymongo</span>
+
+
+<span class="k">def</span> <span class="nf">load_param</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/param&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;start&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">start</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+
+<span class="k">def</span> <span class="nf">save_param</span><span class="p">(</span><span class="n">start</span><span class="p">):</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/param&quot;</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
+            <span class="s2">&quot;start&quot;</span><span class="p">:</span> <span class="n">start</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">QuotesSpider</span><span class="p">(</span><span class="n">scrapy</span><span class="o">.</span><span class="n">Spider</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;iphonex&quot;</span>
+    <span class="n">url_patt</span> <span class="o">=</span> <span class="s1">&#39;https://s.taobao.com/search?data-key=s&amp;data-value=</span><span class="si">%d</span><span class="s1">&amp;ajax=true&amp;_ksTS=1513178695257_1962&amp;callback=jsonp1963&amp;q=iphone+x&amp;imgfile=&amp;commend=all&amp;ssid=s5-e&amp;search_type=item&amp;sourceId=tb.index&amp;spm=a21bo.2017.201856-taobao-item.1&amp;ie=utf8&amp;initiative_id=tbindexz_20170306&amp;app=detailproduct&amp;through=1&amp;bcoffset=4&amp;p4ppushleft=6</span><span class="si">%%</span><span class="s1">2C48&#39;</span>
+
+    <span class="k">def</span> <span class="nf">start_requests</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">load_param</span><span class="p">()</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_patt</span> <span class="o">%</span> <span class="p">(</span><span class="n">start</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="k">yield</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">):</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">body</span>
+        <span class="n">patt</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;jsonp\d+\((.*)\);&#39;</span>
+        <span class="n">matched</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">patt</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">MULTILINE</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mods&quot;</span><span class="p">][</span><span class="s2">&quot;itemlist&quot;</span><span class="p">][</span><span class="s2">&quot;data&quot;</span><span class="p">][</span><span class="s2">&quot;auctions&quot;</span><span class="p">]</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">()</span>
+        <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s2">&quot;iphonex&quot;</span><span class="p">]</span>
+        <span class="n">new_items</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert_many</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">start</span> <span class="o">+</span> <span class="mi">44</span>
+        <span class="n">save_param</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url_patt</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">yield</span> <span class="n">scrapy</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">parse</span><span class="p">)</span>
+</pre></div>
+
+
+<p>我们爬得温柔点，这里设了爬完一次休息2秒再爬。</p>
+<p>爬完的数据存入了mongodb，接下来我们将数据从mongodb中读出来，去除不相关的产品和重复的产品，估算一下缺失累计付款人数商品的销量数据，然后统计总的销量和销售额。</p>
+<p>这里重点讲述一下怎么用评论数来估算商品销量。</p>
+<p>淘宝上的商品的评论只有在购买成功后才能添加，一次购买行为最多对应一条评论（首评，追评都会归结到一条）。按常理分析，商品累计付款人数和评论数应该呈正相关的关系。</p>
+<p>我们提取mongodb里累计付款人数大于0并且评论数大于200的商品。销量太少的商品的评论数量可能会存在一定随机性，因此我们限定用于分析的商品的评论数必须大于200。</p>
+<p>用散点图画出累计付款人数和评论数的关系，如下</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-64181e8a446b612a10b30d7d7d6d3a67_r.jpg"></p>
+<p>上图横轴是评论数，纵轴是累计付款人数，<strong>累计付款人数和评论数还是呈现很明显的正相关关系的</strong>。我们用线性来拟合这个关系，对于那些只有评论数的商品，<strong>我们用拟合出来的公式来推算该商品的累计付款人数，由此来估算销量。</strong></p>
+<p>数据分析部分的代码如下：</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_iphonex</span><span class="p">():</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">()</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="s2">&quot;iphonex&quot;</span><span class="p">]</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="s2">&quot;items&quot;</span><span class="p">]</span>
+    <span class="n">prices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">sales</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">com_counts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">urls</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">nids</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">find</span><span class="p">():</span>
+        <span class="n">title</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;raw_title&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iphonex&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span> <span class="ow">or</span> \
+            <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iphone x&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">))</span> <span class="ow">and</span> \
+            <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iphone 8&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">)</span> <span class="ow">and</span> \
+            <span class="ow">not</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;iphone8&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">I</span><span class="p">):</span>
+            <span class="n">titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">nids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;nid&quot;</span><span class="p">])</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;detail_url&quot;</span><span class="p">]</span>
+        <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">view_price</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;view_price&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">prices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">view_price</span><span class="p">))</span>
+        <span class="n">comment_count</span> <span class="o">=</span> <span class="mi">0</span> 
+        <span class="k">if</span> <span class="s2">&quot;comment_count&quot;</span> <span class="ow">in</span> <span class="n">item</span> <span class="ow">and</span> <span class="n">item</span><span class="p">[</span><span class="s2">&quot;comment_count&quot;</span><span class="p">]:</span>
+            <span class="n">comment_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s2">&quot;comment_count&quot;</span><span class="p">])</span>
+        <span class="n">com_counts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comment_count</span><span class="p">)</span>
+        <span class="n">view_sales</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&quot;view_sales&quot;</span><span class="p">,</span> <span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">matched</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\d+)&#39;</span><span class="p">,</span> <span class="n">view_sales</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">matched</span><span class="p">:</span>
+            <span class="n">view_sales_num</span> <span class="o">=</span> <span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">sales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">view_sales_num</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sales</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">prices</span><span class="p">,</span> <span class="s2">&quot;sales&quot;</span><span class="p">:</span> <span class="n">sales</span><span class="p">,</span> <span class="s2">&quot;urls&quot;</span><span class="p">:</span> <span class="n">urls</span><span class="p">,</span> <span class="s2">&quot;titles&quot;</span><span class="p">:</span> <span class="n">titles</span><span class="p">,</span> <span class="s2">&quot;nids&quot;</span><span class="p">:</span> <span class="n">nids</span><span class="p">,</span> <span class="s2">&quot;comment_count&quot;</span><span class="p">:</span> <span class="n">com_counts</span><span class="p">})</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="s2">&quot;nids&quot;</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s2">&quot;last&quot;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">df_test</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">&gt;</span><span class="mi">6000</span><span class="p">][(</span><span class="n">df</span><span class="o">.</span><span class="n">sales</span><span class="o">!=</span><span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">comment_count</span><span class="o">!=</span><span class="mi">0</span><span class="p">)]</span>
+
+    <span class="n">df_train</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">df_test</span><span class="o">.</span><span class="n">comment_count</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">][</span><span class="n">df_test</span><span class="o">.</span><span class="n">sales</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">reg</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">linear_model</span><span class="o">.</span><span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df_train</span><span class="p">[[</span><span class="s2">&quot;comment_count&quot;</span><span class="p">]],</span> <span class="n">df_train</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">])</span>
+
+    <span class="n">df_tofill</span> <span class="o">=</span> <span class="n">df_test</span><span class="p">[</span><span class="n">df_test</span><span class="o">.</span><span class="n">sales</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df_tofill</span><span class="p">[</span><span class="s2">&quot;sales&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">df_tofill</span><span class="p">[[</span><span class="s2">&quot;comment_count&quot;</span><span class="p">]])</span>
+    <span class="n">df_test</span><span class="p">[</span><span class="n">df_test</span><span class="o">.</span><span class="n">sales</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_tofill</span>
+    <span class="k">print</span> <span class="s2">&quot;iPhone X sold number:&quot;</span><span class="p">,</span> <span class="n">df_test</span><span class="o">.</span><span class="n">sales</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">print</span> <span class="s2">&quot;iPhone X sold money:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df_test</span><span class="o">.</span><span class="n">sales</span><span class="o">*</span><span class="n">df_test</span><span class="o">.</span><span class="n">price</span><span class="p">)</span>
+
+<span class="n">get_iphonex</span><span class="p">()</span>
+</pre></div>
+
+
+<p>上面这段代码有如下的输出：</p>
+<div class="highlight"><pre><span></span>iPhone X sold number: <span class="m">194037</span>.766983
+iPhone X sold money: <span class="m">1605100188</span>.36
+</pre></div>
+
+
+<p>可以看到，至今为止，<strong>iPhone X在淘宝上共卖出了19万部，销售额达到了16亿多。</strong></p>
+<p>这个销售量到底什么水平呢？我们可以统计一下差不多同期上市的几款手机的销量，做个比较。</p>
+<p>用同样的方法，我们从淘宝上爬取了iPhone 8，华为Mate 10，小米Mix 2的销量数据，将它们和iPhone X放在一起做比较，有如下的数据</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-d6ed7aa37ad1427363cc99edbcacc0cd_r.jpg"></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-c525d7955bc4d3c097485d71c319bb88_r.jpg"></p>
+<p>可以看到<strong>iPhone X无论在销量还是销售额上都遥遥领先，远远超过其他手机</strong>。</p>
+<p>当然淘宝只是iPhone X的一个销售平台，同样在销售iPhone X的还有京东，苏宁，苹果线上和线下的实体商店等。由于很多大平台并不公开销量数据，要统计iPhone X总的销售量还有很大的难度。但根据之前新闻报道iPhone X开卖2小时招行销售额破20亿、双十一京东购机预约数量破200万、苹果商店门前排起长队、黄牛将一部手机价格炒到2万等这些来判断，这次的iPhone X一定是大受好评的。</p>
+<p>至此，强哥算是明白老婆为什么这么喜欢iPhone X了。强哥知道错了，强哥这就给老婆买iPhone X去。</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-e0028b21e1882896d138de10d641b5fe_b.jpg"></p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "http://10.169.165.148:8001",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>

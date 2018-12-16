@@ -1,0 +1,528 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。 本文由以下内容组成 …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="Docker初体验"/>
+<meta property="og:description" content="最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。 本文由以下内容组成 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://10.169.165.148:8001/docker-intro"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2017-11-30 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://10.169.165.148:8001/author/zhongqiang-shen.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; Docker初体验</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://10.169.165.148:8001">
+        <img src="http://10.169.165.148:8001/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="http://10.169.165.148:8001">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="http://10.169.165.148:8001/pages/about">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="http://10.169.165.148:8001/pages/wechat" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="dockerchu-ti-yan">Docker初体验</h1>
+    <p>
+          发表于 2017-11-30 分类: <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <p>最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。</p>
+<p>本文由以下内容组成：</p>
+<ul>
+<li>什么是Docker</li>
+<li>Docker基本概念</li>
+<li>容器和传统VM的区别</li>
+<li>安装Docker</li>
+<li>Docker命令简介</li>
+<li>创建Docker镜像</li>
+<li>多容器部署</li>
+</ul>
+<h4>什么是Docker</h4>
+<p>Docker用Go语言开发实现，基于Linux内核的cgroup，namespace，和AUFS类的Union FS等技术，对进程进行封装隔离，属于操作系统层面的虚拟化技术。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。Docker 在容器的基础上，进行了进一步的封装，从文件系统、网络互联到进程隔离等等，极大的简化了容器的创建和维护。使得 Docker 技术比虚拟机技术更为轻便、快捷。</p>
+<h4>Docker基本概念</h4>
+<p><strong>镜像（image）</strong>- 一个独立的文件系统，类似虚拟机里的镜像，包含运行时需要的系统、软件、代码、库、环境变量、配置文件等</p>
+<p><strong>容器（container）</strong>- 由镜像（image）创建的运行实例，类似虚拟机，可以对它执行启动、停止、删除等操作</p>
+<p><strong>仓库（repository）</strong>- 提供集中存储、镜像分发的服务，类似github。用户可以从仓库（repository）上传或下载镜像</p>
+<h4>容器和传统VM的区别</h4>
+<p><strong>传统VM架构</strong></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-7ee61067dfb9eac458ced806d2bd4fa6_r.jpg"></p>
+<p><strong>容器架构</strong></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-f211aa72def9826fb7050944bdd5c108_r.jpg"></p>
+<p>每个虚拟机都有自己独立的操作系统，而不同的容器可以共享同一个操作系统。虚拟机面向操作系统，而Docker是面向应用的。容器一般被设计为运行一个主要进程，而不是管理多个进程集合。</p>
+<h4>安装Docker</h4>
+<p>以ubuntu为例，运行以下命令</p>
+<div class="highlight"><pre><span></span>$ apt-get install docker
+$ apt-get install docker.io
+</pre></div>
+
+
+<p>测试docker是否安装成功，运行</p>
+<div class="highlight"><pre><span></span>$ docker run hello-world
+
+Hello from Docker.
+This message shows that your installation appears to be working correctly.
+...
+</pre></div>
+
+
+<h4>Docker命令简介</h4>
+<p>以busybox镜像为例</p>
+<p><strong>下载镜像</strong></p>
+<div class="highlight"><pre><span></span>$ docker pull busybox
+</pre></div>
+
+
+<p>这条命令从docker hub上下载busybox镜像存在本地</p>
+<p><strong>列出本地的镜像</strong></p>
+<div class="highlight"><pre><span></span>$ docker images
+REPOSITORY
+busybox                                     latest              6ad733544a63        3 weeks ago         1.129 MB
+</pre></div>
+
+
+<p><strong>基于镜像创建容器</strong></p>
+<div class="highlight"><pre><span></span>$ docker run busybox
+$
+</pre></div>
+
+
+<p>这里没有任何输出，容器被创建后并没有运行任何命令，所以创建后就退出了</p>
+<p><strong>在容器中执行命令</strong></p>
+<div class="highlight"><pre><span></span>$ docker run busybox <span class="nb">echo</span> <span class="s2">&quot;hello from busybox&quot;</span>
+hello from busybox 
+</pre></div>
+
+
+<p>echo命令退出，容器也随即退出。</p>
+<p><strong>显示所有的容器</strong></p>
+<div class="highlight"><pre><span></span>$ docker ps -a 
+CONTAINER ID        IMAGE                                       COMMAND                  CREATED             STATUS                     PORTS               NAMES
+0f6621b18dbe        busybox                                     <span class="s2">&quot;sh&quot;</span>                     <span class="m">3</span> minutes ago       Exited <span class="o">(</span><span class="m">0</span><span class="o">)</span> <span class="m">3</span> minutes ago                       desperate_torvalds
+</pre></div>
+
+
+<p><strong>显示正在运行的容器</strong></p>
+<div class="highlight"><pre><span></span>$ docker run -d busybox top <span class="c1"># 启动一个容器，容器中运行top命令，这里-d表示detach模式</span>
+$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+27c2844e3a5d        busybox             <span class="s2">&quot;top&quot;</span>               <span class="m">5</span> minutes ago       Up <span class="m">5</span> minutes                            sleepy_wilson
+</pre></div>
+
+
+<p><strong>在容器中运行命令</strong></p>
+<div class="highlight"><pre><span></span>$ docker run -it busybox <span class="c1"># -it表示连接到容器中的tty</span>
+/ <span class="c1"># ls</span>
+bin   dev   etc   home  proc  root  sys   tmp   usr   var
+/ <span class="c1"># echo &quot;hello&quot;</span>
+hello
+</pre></div>
+
+
+<p><strong>删除容器</strong></p>
+<div class="highlight"><pre><span></span>$ docker rm  0f6621b18dbe
+0f6621b18dbe
+</pre></div>
+
+
+<p><strong>删除镜像</strong></p>
+<div class="highlight"><pre><span></span>$ docker rmi busybox
+Untagged: busybox:latest
+Untagged: busybox@sha256:bbc3a03235220b170ba48a157dd097dd1379299370e1ed99ce976df0355d24f0
+Deleted: sha256:6ad733544a6317992a6fac4eb19fe1df577d4dec7529efec28a5bd0edad0fd30
+Deleted: sha256:0271b8eebde3fa9a6126b1f2335e170f902731ab4942f9f1914e77016540c7bb
+</pre></div>
+
+
+<p><strong>在Docker Hub上搜索镜像</strong></p>
+<div class="highlight"><pre><span></span>$ docker search busybox <span class="c1"># 搜索image名字包含busybox的镜像</span>
+NAME                        DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+busybox                     Busybox base image.                             <span class="m">1149</span>      <span class="o">[</span>OK<span class="o">]</span>
+progrium/busybox                                                            <span class="m">66</span>                   <span class="o">[</span>OK<span class="o">]</span>
+hypriot/rpi-busybox-httpd   Raspberry Pi compatible Docker Image with ...   <span class="m">39</span>
+radial/busyboxplus          Full-chain, Internet enabled, busybox made...   <span class="m">16</span>                   <span class="o">[</span>OK<span class="o">]</span>
+hypriot/armhf-busybox       Busybox base image <span class="k">for</span> ARM.                     <span class="m">8</span>
+armhf/busybox               Busybox base image.                             <span class="m">4</span>
+arm32v7/busybox             Busybox base image.                             <span class="m">3</span>
+...
+</pre></div>
+
+
+<p><strong>检查容器中的命令输出</strong></p>
+<div class="highlight"><pre><span></span>$ docker run -d busybox top <span class="c1"># 启动一个容器</span>
+$ docker logs 10b72de4bd77 <span class="c1"># 查看容器中top的输出</span>
+Mem: 8700192K used, 15989388K free, 247764K shrd, 299432K buff, 6261884K cached
+CPU:  <span class="m">0</span>.0% usr  <span class="m">0</span>.1% sys  <span class="m">0</span>.0% nic <span class="m">99</span>.7% idle  <span class="m">0</span>.0% io  <span class="m">0</span>.0% irq  <span class="m">0</span>.0% sirq
+Load average: <span class="m">0</span>.16 <span class="m">0</span>.09 <span class="m">0</span>.11 <span class="m">1</span>/363 <span class="m">6</span>
+</pre></div>
+
+
+<h4>创建Docker镜像</h4>
+<p>Dockerfile可用来自动化Docker镜像的创建，它包含一系列指令来描述如何创建一个镜像。</p>
+<p>这里我们来展示如何用Dockerfile创建一个zookeeper的镜像。</p>
+<p>首先需要在Dockerfile中指定base镜像，FROM关键字用于指定base镜像。因为zookeeper要用到java，我们的镜像使用openjdk作为base</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="s"> openjdk</span>
+</pre></div>
+
+
+<p>MAINTAINER关键字描述镜像的创建者</p>
+<div class="highlight"><pre><span></span><span class="k">MAINTAINER</span><span class="s"> Zhongqiang Shen</span>
+</pre></div>
+
+
+<p>WORKDIR设置容器内的当前工作目录，如果不存在则创建目录</p>
+<div class="highlight"><pre><span></span><span class="k">WORKDIR</span><span class="s"> /tmp</span>
+</pre></div>
+
+
+<p>启动zookeeper服务需要从官网下载zookeeper包，撰写conf/zoo.cfg，并启动zookeeper进程。ADD关键字将URL中的内容下载到指定目录中</p>
+<div class="highlight"><pre><span></span><span class="k">ADD</span> http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+</pre></div>
+
+
+<p>RUN关键字可以在容器中运行命令。在容器中解压zookeeper包，并将加压后的包移到/opt/zookeeper位置</p>
+<div class="highlight"><pre><span></span><span class="k">RUN</span> tar -xzf zookeeper-3.4.10.tar.gz
+<span class="k">RUN</span> mv zookeeper-3.4.10 /opt/zookeeper
+</pre></div>
+
+
+<p>设置zookeeper的路径为当前的工作目录</p>
+<div class="highlight"><pre><span></span><span class="k">WORKDIR</span><span class="s"> /opt/zookeeper</span>
+</pre></div>
+
+
+<p>撰写conf/zoo.cfg</p>
+<div class="highlight"><pre><span></span><span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;tickTime=2000&quot;</span> &gt;&gt; conf/zoo.cfg
+<span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;dataDir=/var/lib/zookeeper&quot;</span> &gt;&gt; conf/zoo.cfg
+<span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;clientPort=2181&quot;</span> &gt;&gt; conf/zoo.cfg
+</pre></div>
+
+
+<p>暴露容器的2181端口，使用expose关键字</p>
+<div class="highlight"><pre><span></span><span class="k">EXPOSE</span><span class="s"> 2181</span>
+</pre></div>
+
+
+<p>启动zookeeper进程，使用CMD关键字。start-foreground参数让zookeeper在前台运行，如果没有这个参数，.sh脚本退出后会导致容器也退出</p>
+<div class="highlight"><pre><span></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;/opt/zookeeper/bin/zkServer.sh&quot;</span><span class="p">,</span> <span class="s2">&quot;start-foreground&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>这里需要注意RUN和CMD的区别，RUN用于创建镜像的时候执行命令，每次执行命令都会创建新的镜像层。CMD用于指定容器启动后默认执行的命令和参数。</p>
+<p>完整的Dockerfile是这样的：</p>
+<div class="highlight"><pre><span></span><span class="k">FROM</span><span class="s"> openjdk</span>
+<span class="k">MAINTAINER</span><span class="s"> Zhongqiang Shen</span>
+
+<span class="k">WORKDIR</span><span class="s"> /tmp</span>
+<span class="k">ADD</span> http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+<span class="k">RUN</span> tar -xzf zookeeper-3.4.10.tar.gz
+<span class="k">RUN</span> mv zookeeper-3.4.10 /opt/zookeeper
+<span class="k">WORKDIR</span><span class="s"> /opt/zookeeper</span>
+<span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;tickTime=2000&quot;</span> &gt;&gt; conf/zoo.cfg
+<span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;dataDir=/var/lib/zookeeper&quot;</span> &gt;&gt; conf/zoo.cfg
+<span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;clientPort=2181&quot;</span> &gt;&gt; conf/zoo.cfg
+<span class="k">EXPOSE</span><span class="s"> 2181</span>
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;/opt/zookeeper/bin/zkServer.sh&quot;</span><span class="p">,</span> <span class="s2">&quot;start-foreground&quot;</span><span class="p">]</span>
+</pre></div>
+
+
+<p>创建完Dockerfile，就可以用下面的命令来创建镜像了</p>
+<div class="highlight"><pre><span></span>$ docker build -t zookeeper .
+Sending build context to Docker daemon  <span class="m">5</span>.632kB
+Step <span class="m">1</span>/12 : FROM openjdk
+latest: Pulling from library/openjdk
+3e17c6eae66c: Pull <span class="nb">complete</span>
+fdfb54153de7: Pull <span class="nb">complete</span>
+a4ca6e73242a: Pull <span class="nb">complete</span>
+93bd198d0a5f: Pull <span class="nb">complete</span>
+ca4d78fb08d6: Pull <span class="nb">complete</span>
+ad3d1bdcab4b: Pull <span class="nb">complete</span>
+4853d1e6d0c1: Pull <span class="nb">complete</span>
+49e4624ad45f: Pull <span class="nb">complete</span>
+bcbcd4c3ef93: Pull <span class="nb">complete</span>
+Digest: sha256:b89826260c9f5ebb94ebff7ef23720f2b6de9f879df52e91afd112f53f5f7531
+Status: Downloaded newer image <span class="k">for</span> openjdk:latest
+ ---&gt; 377371113dab
+Step <span class="m">2</span>/12 : MAINTAINER zhongqiang Shen
+ ---&gt; Running in 03bf1c8ef563
+ ---&gt; 7cd7ffa57b0c
+Removing intermediate container 03bf1c8ef563
+Step <span class="m">3</span>/12 : WORKDIR /tmp
+ ---&gt; b180924d0413
+Removing intermediate container 1461e2b93f70
+Step <span class="m">4</span>/12 : ADD http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+Downloading <span class="o">[==================================================</span>&gt;<span class="o">]</span>  <span class="m">35</span>.04MB/35.04MB
+ ---&gt; c2858e418073
+Step <span class="m">5</span>/12 : RUN tar -xzf zookeeper-3.4.10.tar.gz
+ ---&gt; Running in 0cb7b253c12f
+ ---&gt; 0f7afb29ae74
+Removing intermediate container 0cb7b253c12f
+Step <span class="m">6</span>/12 : RUN mv zookeeper-3.4.10 /opt/zookeeper
+ ---&gt; Running in 68ce7228ca7e
+ ---&gt; 65d309c5340a
+Removing intermediate container 68ce7228ca7e
+Step <span class="m">7</span>/12 : WORKDIR /opt/zookeeper
+ ---&gt; b2dbec2aed3c
+Removing intermediate container 8ac9df07f732
+Step <span class="m">8</span>/12 : RUN <span class="nb">echo</span> <span class="s2">&quot;tickTime=2000&quot;</span> &gt;&gt; conf/zoo.cfg
+ ---&gt; Running in ef1d9dd5269a
+ ---&gt; 0c20dd205282
+Removing intermediate container ef1d9dd5269a
+Step <span class="m">9</span>/12 : RUN <span class="nb">echo</span> <span class="s2">&quot;dataDir=/var/lib/zookeeper&quot;</span> &gt;&gt; conf/zoo.cfg
+ ---&gt; Running in 7dcdb7eb07b1
+ ---&gt; a0a0a7341dba
+Removing intermediate container 7dcdb7eb07b1
+Step <span class="m">10</span>/12 : RUN <span class="nb">echo</span> <span class="s2">&quot;clientPort=2181&quot;</span> &gt;&gt; conf/zoo.cfg
+ ---&gt; Running in c2b0127e5cca
+ ---&gt; 6f7564eeaf4f
+Removing intermediate container c2b0127e5cca
+Step <span class="m">11</span>/12 : EXPOSE <span class="m">2181</span>
+ ---&gt; Running in cd97242108e5
+ ---&gt; eb91473e8a4c
+Removing intermediate container cd97242108e5
+Step <span class="m">12</span>/12 : CMD /opt/zookeeper/bin/zkServer.sh start-foreground
+ ---&gt; Running in 665686b5ec56
+ ---&gt; c4515a39ff83
+Removing intermediate container 665686b5ec56
+Successfully built c4515a39ff83
+Successfully tagged zk:latest
+</pre></div>
+
+
+<p>这样一个docker镜像就创建好了。可以用下面的命令来启动它</p>
+<div class="highlight"><pre><span></span>$ docker run zookeeper
+</pre></div>
+
+
+<h4>多容器部署</h4>
+<p>一个应用通常由多个服务构成，将这些服务运行在容器中，就涉及到多个容器的部署。使用Docker Compose可以实现复杂的多容器应用的部署运行。</p>
+<p>Docker Compose使用docker-compose.yml来定义服务。在docker-compose.yml中，所有的容器通过services来定义。</p>
+<p>这里以kafka为例，kafka下层使用zookeeper作协调，因此这里需要定义zookeeper和kafka两个服务，先启动zookeeper，后启动kafka。</p>
+<p>首先安装Docker Compose</p>
+<div class="highlight"><pre><span></span>$ apt-get install docker-compose
+</pre></div>
+
+
+<p>定义docker-compose.yml，如下：</p>
+<div class="highlight"><pre><span></span>version: <span class="s1">&#39;2&#39;</span>
+services:
+  zookeeper:
+    container_name: iop-zookeeper
+    image: jplock/zookeeper
+    ports:
+      - <span class="s2">&quot;2181:2181&quot;</span>
+  kafka:
+    container_name: iop-kafka
+    image: wurstmeister/kafka
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: iop-zookeeper:2181
+      KAFKA_CREATE_TOPICS: <span class="s2">&quot;metrics&quot;</span>
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_BROKER_ID: <span class="m">1</span>
+    ports:
+      - <span class="s2">&quot;9092:9092&quot;</span>
+    links:
+      - zookeeper
+</pre></div>
+
+
+<p>version指定Docker Compose的版本</p>
+<p>container_name指定容器的名字</p>
+<p>image指定使用的镜像的名字，这里使用了docker hub上现有的Dockerfile来创建zookeeper和kafka的镜像</p>
+<p>ports定义端口映射</p>
+<p>environment设置环境变量</p>
+<p>links定义容器之间的关联关系和依赖关系，这里kafka依赖于zookeeper，定义了这个依赖关系后，kafka启动前会先启动zookeeper</p>
+<p>定义了docker-compose.yml文件后，就可以通过如下命令来一键启动服务</p>
+<div class="highlight"><pre><span></span>$ docker-compose up -d <span class="c1"># -d表示后台模式运行服务</span>
+Pulling zookeeper <span class="o">(</span>jplock/zookeeper:latest<span class="o">)</span>...
+latest: Pulling from jplock/zookeeper
+b56ae66c2937: Pull <span class="nb">complete</span>
+81cebc5bcaf8: Pull <span class="nb">complete</span>
+3b27fd892ecb: Pull <span class="nb">complete</span>
+40bb2918284a: Pull <span class="nb">complete</span>
+Digest: sha256:5fe911a016393439a963bcab2f1cc03d107816ce2c6977bfa77bfb45edef5ad0
+Status: Downloaded newer image <span class="k">for</span> jplock/zookeeper:latest
+Pulling kafka <span class="o">(</span>wurstmeister/kafka:latest<span class="o">)</span>...
+latest: Pulling from wurstmeister/kafka
+90f4dba627d6: Pull <span class="nb">complete</span>
+11dbde1d93a0: Pull <span class="nb">complete</span>
+c89218b0f06c: Pull <span class="nb">complete</span>
+134279c08227: Pull <span class="nb">complete</span>
+341b4d59b9c3: Pull <span class="nb">complete</span>
+2ce0b628d981: Pull <span class="nb">complete</span>
+82b065c991b8: Pull <span class="nb">complete</span>
+d4f3b865c0e2: Pull <span class="nb">complete</span>
+af829f3a4ec8: Pull <span class="nb">complete</span>
+Digest: sha256:2aa183fd201d693e24d4d5d483b081fc2c62c198a7acb8484838328c83542c96
+Status: Downloaded newer image <span class="k">for</span> wurstmeister/kafka:latest
+Creating iop-zookeeper ...
+Creating iop-zookeeper ... <span class="k">done</span>
+Creating iop-kafka ...
+Creating iop-kafka ... <span class="k">done</span>
+</pre></div>
+
+
+<p>运行下列命令可以看到容器已启动</p>
+<div class="highlight"><pre><span></span>$ docker ps
+CONTAINER ID        IMAGE                COMMAND                  CREATED             STATUS                             PORTS                                        NAMES
+08a14f1c462a        wurstmeister/kafka   <span class="s2">&quot;start-kafka.sh&quot;</span>         <span class="m">28</span> seconds ago      Up <span class="m">26</span> seconds                      <span class="m">0</span>.0.0.0:9092-&gt;9092/tcp                       iop-kafka
+f47d27f80aac        jplock/zookeeper     <span class="s2">&quot;/opt/zookeeper/bi...&quot;</span>   <span class="m">28</span> seconds ago      Up <span class="m">27</span> seconds <span class="o">(</span>health: starting<span class="o">)</span>   <span class="m">2888</span>/tcp, <span class="m">0</span>.0.0.0:2181-&gt;2181/tcp, <span class="m">3888</span>/tcp   iop-zookeeper
+</pre></div>
+
+
+<p>我们用python写个程序来测试一下启动的kafka服务</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">optparse</span> <span class="kn">import</span> <span class="n">OptionParser</span>
+<span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaConsumer</span>
+<span class="kn">from</span> <span class="nn">kafka</span> <span class="kn">import</span> <span class="n">KafkaProducer</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">OptionParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_option</span><span class="p">(</span><span class="s2">&quot;--action&quot;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">&quot;store&quot;</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;produce&quot;</span><span class="p">,</span> <span class="s2">&quot;consume&quot;</span><span class="p">],</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;choice&quot;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;action&quot;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">options</span><span class="p">,</span> <span class="n">args</span><span class="p">)</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;produce&quot;</span><span class="p">:</span>
+    <span class="n">producer</span> <span class="o">=</span> <span class="n">KafkaProducer</span><span class="p">(</span><span class="n">bootstrap_servers</span><span class="o">=</span><span class="s2">&quot;localhost:9092&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+            <span class="n">producer</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">producer</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="k">if</span> <span class="n">options</span><span class="o">.</span><span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;consume&quot;</span><span class="p">:</span>
+    <span class="n">consumer</span> <span class="o">=</span> <span class="n">KafkaConsumer</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">bootstrap_servers</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;localhost:9092&quot;</span><span class="p">],</span> <span class="n">auto_offset_reset</span><span class="o">=</span><span class="s1">&#39;earliest&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">consumer</span><span class="p">:</span>
+        <span class="k">print</span> <span class="n">message</span>
+</pre></div>
+
+
+<p>上面的代码包含两个功能：向kafka队列生产数据和从kafka队列消费数据。</p>
+<p>我们先向kafka队列生产数据</p>
+<div class="highlight"><pre><span></span>$ python test.py --action<span class="o">=</span>produce
+</pre></div>
+
+
+<p>随后从kafka队列中消费数据，并打印出数据</p>
+<div class="highlight"><pre><span></span>$ python test.py --action<span class="o">=</span>consume
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">0</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733036</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;0&#39;</span>, <span class="nv">checksum</span><span class="o">=</span><span class="m">1395146535</span>, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">1</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733045</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;1&#39;</span>, <span class="nv">checksum</span><span class="o">=</span>-7035501, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">2</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733047</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;2&#39;</span>, <span class="nv">checksum</span><span class="o">=</span><span class="m">1650992148</span>, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">3</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733049</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;3&#39;</span>, <span class="nv">checksum</span><span class="o">=</span><span class="m">195437617</span>, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">4</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733051</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;4&#39;</span>, <span class="nv">checksum</span><span class="o">=</span>-1858641489, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">5</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733053</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;5&#39;</span>, <span class="nv">checksum</span><span class="o">=</span>-349298306, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">6</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733055</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;6&#39;</span>, <span class="nv">checksum</span><span class="o">=</span><span class="m">1993515257</span>, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">7</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733057</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;7&#39;</span>, <span class="nv">checksum</span><span class="o">=</span>-824249467, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">8</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733059</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;8&#39;</span>, <span class="nv">checksum</span><span class="o">=</span><span class="m">1519664681</span>, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+ConsumerRecord<span class="o">(</span><span class="nv">topic</span><span class="o">=</span>u<span class="s1">&#39;test&#39;</span>, <span class="nv">partition</span><span class="o">=</span><span class="m">0</span>, <span class="nv">offset</span><span class="o">=</span><span class="m">9</span>, <span class="nv">timestamp</span><span class="o">=</span><span class="m">1511934733061</span>, <span class="nv">timestamp_type</span><span class="o">=</span><span class="m">0</span>, <span class="nv">key</span><span class="o">=</span>None, <span class="nv">value</span><span class="o">=</span><span class="s1">&#39;9&#39;</span>, <span class="nv">checksum</span><span class="o">=</span><span class="m">546143992</span>, <span class="nv">serialized_key_size</span><span class="o">=</span>-1, <span class="nv">serialized_value_size</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>可以看到之前插入的数据被成功的读取到。</p>
+<h4>总结</h4>
+<p>本文对Docker做了个简单介绍，包括Docker的基本概念、基本命令、如何创建Docker镜像、以及如何部署多容器。</p>
+<p>除以上内容，Kubernetes也是Docker生态圈中的重要一员。Kubernetes是一个开源的容器集群管理系统，提供资源调度、均衡容灾、服务注册、动态扩缩容等功能，可以作为下一步学习的内容。</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "http://10.169.165.148:8001",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
