@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="http://10.169.165.148:8001/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="9月13日发布的iPhone Xs算是手机界的大新闻了，新款iPhone的价格也再度刷新了手机定价的记录。看完发布会，相信很多人的心情是这样的 …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="用数据分析选购手机"/>
+<meta property="og:description" content="9月13日发布的iPhone Xs算是手机界的大新闻了，新款iPhone的价格也再度刷新了手机定价的记录。看完发布会，相信很多人的心情是这样的 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="http://10.169.165.148:8001/data-analysis-for-cellphone-purchase"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2018-10-03 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="http://10.169.165.148:8001/author/zhongqiang-shen.html">
+<meta property="article:section" content="misc"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; 用数据分析选购手机</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="http://10.169.165.148:8001">
+        <img src="http://10.169.165.148:8001/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="http://10.169.165.148:8001">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="http://10.169.165.148:8001/pages/about">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="http://10.169.165.148:8001/pages/wechat" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="yong-shu-ju-fen-xi-xuan-gou-shou-ji">用数据分析选购手机</h1>
+    <p>
+          Posted on Wed 03 October 2018 in <a href="http://10.169.165.148:8001/category/misc.html">misc</a>
+
+
+    </p>
+  </header>
+
+  <div>
+    <p>9月13日发布的iPhone Xs算是手机界的大新闻了，新款iPhone的价格也再度刷新了手机定价的记录。看完发布会，相信很多人的心情是这样的</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-1dd05a440d6c28b92e4c1c9a71d38bcb_r.jpg"></p>
+<p>强哥之前用的iPhone 6，最近准备换手机。经济形势严峻，换iPhone是换不起了，只能消费降级，投奔安卓阵营。</p>
+<p>1500元的预算，连个二手的iPhone都买不了，但是在安卓机里却有不少选择。本文我们就来看看怎样用数据分析选购手机。</p>
+<h4>分析思路</h4>
+<p>思路很简单，上京东商城把所有手机的数据爬下来，然后根据配置、价格过滤出符合条件的手机，在过滤出来的手机里选择一部性价比最高的。画成流程图，大致是这样的</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-ba3498aaf932d94719cc8a1fdca92c31_b.jpg"></p>
+<h4>爬取数据</h4>
+<p>第一步，我们先从京东商城爬取所有在售的手机数据。这里我们关心的主要是价格和配置信息，商品页面上的价格和配置信息像下面两张图所示</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-10cd0c6a1a477d6aee0efa887eef2f59_r.jpg"></p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-c03ba922bb48675d36c77f2ce5f3a491_r.jpg"></p>
+<p>我们编写代码爬取所有手机的价格和配置信息，爬虫的核心代码如下</p>
+<div class="highlight"><pre><span></span><span class="c1"># 获取手机单品的价格</span>
+<span class="k">def</span> <span class="nf">get_price</span><span class="p">(</span><span class="n">skuid</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://c0.3.cn/stock?skuId=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">skuid</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&amp;area=1_72_4137_0&amp;venderId=1000004123&amp;cat=9987,653,655&amp;buyNum=1&amp;choseSuitSkuIds=&amp;extraParam={</span><span class="si">%22o</span><span class="s2">riginid%22:</span><span class="si">%221%</span><span class="s2">22}&amp;ch=1&amp;fqsp=0&amp;pduid=15379228074621272760279&amp;pdpin=&amp;detailedAdd=null&amp;callback=jQuery3285040&quot;</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;GBK&#39;</span><span class="p">)</span>
+    <span class="n">matched</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;jQuery\d+\((.*)\)&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">M</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">matched</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;stock&quot;</span><span class="p">][</span><span class="s2">&quot;jdPrice&quot;</span><span class="p">][</span><span class="s2">&quot;p&quot;</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">price</span>
+    <span class="k">return</span> <span class="mi">0</span>
+
+<span class="c1"># 获取手机的配置信息</span>
+<span class="k">def</span> <span class="nf">get_item</span><span class="p">(</span><span class="n">skuid</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">get_price</span><span class="p">(</span><span class="n">skuid</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">nodes</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//div[@class=&quot;Ptable&quot;]/div[@class=&quot;Ptable-item&quot;]&#39;</span><span class="p">)</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="n">price</span><span class="p">,</span> <span class="s2">&quot;skuid&quot;</span><span class="p">:</span> <span class="n">skuid</span><span class="p">}</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">:</span>
+        <span class="n">text_nodes</span> <span class="o">=</span> <span class="n">node</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;./dl&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">text_node</span> <span class="ow">in</span> <span class="n">text_nodes</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">text_node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;dt&quot;</span><span class="p">:</span>
+                <span class="n">k</span> <span class="o">=</span> <span class="n">text_node</span><span class="o">.</span><span class="n">text</span>
+            <span class="k">elif</span> <span class="n">text_node</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;dd&quot;</span> <span class="ow">and</span> <span class="s2">&quot;class&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">text_node</span><span class="o">.</span><span class="n">attrib</span><span class="p">:</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="n">text_node</span><span class="o">.</span><span class="n">text</span>
+                <span class="n">params</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">return</span> <span class="n">params</span>
+
+<span class="c1"># 获取一个页面中的所有手机信息</span>
+<span class="k">def</span> <span class="nf">get_cellphone</span><span class="p">(</span><span class="n">page</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://list.jd.com/list.html?cat=9987,653,655&amp;page={}&amp;sort=sort_rank_asc&amp;trans=1&amp;JL=6_0_0&amp;ms=4#J_main&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">cell_nodes</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//div[@class=&quot;p-img&quot;]/a&#39;</span><span class="p">)</span>
+    <span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">()</span>
+    <span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">cell_nodes</span><span class="p">:</span>
+        <span class="n">item_url</span> <span class="o">=</span> <span class="n">fix_url</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;href&quot;</span><span class="p">])</span>
+        <span class="n">matched</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s1">&#39;item.jd.com/(\d+)\.html&#39;</span><span class="p">,</span> <span class="n">item_url</span><span class="p">)</span>
+        <span class="n">skuid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">matched</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">saved</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">find</span><span class="p">({</span><span class="s2">&quot;skuid&quot;</span><span class="p">:</span> <span class="n">skuid</span><span class="p">})</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">saved</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="n">saved</span><span class="p">)</span>
+            <span class="k">continue</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">get_item</span><span class="p">(</span><span class="n">skuid</span><span class="p">,</span> <span class="n">item_url</span><span class="p">)</span>
+        <span class="c1"># 结果存入MongoDB</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+</pre></div>
+
+
+<p>需要注意的是，上面的get_price和get_item函数分别从两个url获取数据，这是因为配置信息可以直接从商品页面中解析得到，而价格信息需要从另外一个ajax请求里获得。爬下来的所有数据存入MongoDB。</p>
+<h4>过滤数据</h4>
+<p>爬下来的手机数据当中，信息完整的共有4700多条数据，这4700多部手机属于70个手机品牌。 这些品牌画成词云图是这样的</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-cf40a63ec3cd7015fa3c1f62ac40eda7_r.jpg"></p>
+<p>手机的配置主要有以下这些参数</p>
+<ul>
+<li>是否双卡双待</li>
+<li>机身材质</li>
+<li>CPU型号</li>
+<li>内存大小</li>
+<li>存储容量</li>
+<li>电池容量</li>
+<li>屏幕材质</li>
+<li>屏幕大小</li>
+<li>分辨率</li>
+<li>摄像头</li>
+</ul>
+<p>强哥平时用手机主要是看看书、刷刷知乎微信、买买东西，所以选购新手机的时候最关心的就是速度、容量、待机时间这几项，对摄像头、屏幕材质倒不是特别在乎。考虑以上因素，在对数据做过滤的时候，我设定了以下几个条件</p>
+<ul>
+<li>CPU的品牌是高通</li>
+<li>内存大小大于等于6GB</li>
+<li>存储容量大于等于64GB </li>
+<li>电池容量大于3000mAh</li>
+<li>必须是双卡双待</li>
+<li>价格在1500元以内</li>
+</ul>
+<p>过滤数据的代码如下</p>
+<div class="highlight"><pre><span></span><span class="n">client</span> <span class="o">=</span> <span class="n">pymongo</span><span class="o">.</span><span class="n">MongoClient</span><span class="p">()</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">client</span><span class="p">[</span><span class="n">DB</span><span class="p">]</span>
+<span class="n">items</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">find</span><span class="p">({})</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">df_res</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">cpu_brand</span><span class="o">==</span><span class="s2">&quot;骁龙（Snapdragon)&quot;</span><span class="p">][</span><span class="n">df</span><span class="o">.</span><span class="n">battery_cap</span> <span class="o">&gt;=</span> <span class="mi">3000</span><span class="p">][</span><span class="n">df</span><span class="o">.</span><span class="n">rom</span> <span class="o">&gt;=</span> <span class="mi">64</span><span class="p">][</span><span class="n">df</span><span class="o">.</span><span class="n">ram</span> <span class="o">&gt;=</span> <span class="mi">6</span><span class="p">][</span><span class="n">df</span><span class="o">.</span><span class="n">dual_sim</span> <span class="o">==</span> <span class="bp">True</span><span class="p">][</span><span class="n">df</span><span class="o">.</span><span class="n">price</span><span class="o">&lt;=</span><span class="mi">1500</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">df_res</span><span class="p">[[</span><span class="s2">&quot;brand&quot;</span><span class="p">,</span> <span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu_brand&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu_freq&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu_core&quot;</span><span class="p">,</span> <span class="s2">&quot;cpu_model&quot;</span><span class="p">,</span> <span class="s2">&quot;rom&quot;</span><span class="p">,</span> <span class="s2">&quot;ram&quot;</span><span class="p">,</span> <span class="s2">&quot;battery_cap&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s2">&quot;price&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>首先从MongoDB里读取数据，然后创建DataFrame，对DataFrame里的数据按照上面的条件作选择。代码的最后一行将筛选出来的手机打印出来，并按价格从低到高排序。</p>
+<p>经过了这样一轮筛选后，我们得到了下面的38款手机</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-713e2ad330ddab5afac16f4485729842_r.jpg"></p>
+<p>上面的几部手机配置都比较接近，但是网上对小米的评价普遍比较高，于是又在上面的列表里筛选出了所有的小米手机，得到下面7款</p>
+<p><img alt="" src="http://10.169.165.148:8001/images/v2-22c121e96e6fac877fd939534850636f_r.jpg"></p>
+<p>这里就变成了红米Note5和小米6X的PK了。价格上，两者不差上下。配置方面，网上查到红米Note5的cpu是骁龙636的（上面的表格里缺少红米Note5的cpu型号），相比小米6X的骁龙660，636虽然性能上不如660，但更省电，而且考虑到红米Note5 4000毫安的超大容量电池，最后决定了购买红米Note 5这一款。作为一款千元机，骁龙636八核CPU、6G大内存、64G大存储、5.99英寸大视野全面屏、前置相机+后置双摄、超长的待机时间，这款手机大概算是千元机中的机皇了。</p>
+<p>所有代码已上传github，公众号【Python与数据分析】后台回复“选购手机”可获取地址。</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "http://10.169.165.148:8001",
+  "image": "",
+  "description": ""
+}
+</script>
+
+</body>
+</html>
