@@ -5,19 +5,6 @@ Date: 2018-06-23
 Category:
 Authors: Zhongqiang Shen
 
-本文已更新微信同名公众号【Python与数据分析】，欢迎关注~
-
-![]({static}/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg)
-
-
-
-
-
-
-
-
-
-
 最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味。装上了Momentum后，打开新的Tab页面，展现在你眼前的是一张漂亮的风景照片，不由让人觉得耳目一新，心情也随之振奋起来。
 
 Momentum每天换一张图，装上了Momentum的Chrome的新页面长这样
