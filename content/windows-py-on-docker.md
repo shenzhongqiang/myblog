@@ -1,5 +1,5 @@
 Title: Windows上做Python开发太痛苦？Docker了解一下
-url: /windows-py-on-docker
+url: windows-py-on-docker
 save_as: windows-py-on-docker.html
 Date: 2018-11-26 10:20
 Category: Python
@@ -8,13 +8,13 @@ Slug:
 
 用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样
 
-![](https://pic1.zhimg.com/v2-402a08b55cd89812b83bb3848c33cbc0_b.jpg)
+![]({static}/images/v2-402a08b55cd89812b83bb3848c33cbc0_b.jpg)
 
 之前我的解决方法是在Windows上装VMWare，VMWare上运行Ubuntu，然后在Ubuntu里面做开发。但这样也不太方便，每次进入开发环境都要先启动VMWare，再启动Ubuntu，然后打开命令行窗口开始开发，而且有时候需要在宿主机和虚拟机之间来回切换，也很麻烦。
 
 最近了解到Docker也有Windows的版本，于是就想到在windows上利用Docker运行一个Ubuntu镜像，在容器里搭建Python开发环境，这 样既解决了安装库的问题，也解决了VMWare虚拟机的不方便之处。
 
-![](https://pic1.zhimg.com/v2-5e97f157eb2f8660c60672b440cdd4f0_r.jpg)
+![]({static}/images/v2-5e97f157eb2f8660c60672b440cdd4f0_r.jpg)
 
 
 
@@ -40,7 +40,7 @@ Slug:
 
 Docker运行后可以在状态栏里看到有一个小鲸鱼的图标，如下所示
 
-![](https://pic4.zhimg.com/v2-2dc9098e780c3bb757fd5e94957768d7_b.jpg)
+![]({static}/images/v2-2dc9098e780c3bb757fd5e94957768d7_b.jpg)
 
 
 
