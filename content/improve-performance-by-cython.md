@@ -1,5 +1,5 @@
 Title: 用Cython和PyPy提升Python性能
-url: improve-performance-by-cython
+url: improve-performance-by-cython.html
 save_as: improve-performance-by-cython.html
 Date: 2018-03-22
 Category:

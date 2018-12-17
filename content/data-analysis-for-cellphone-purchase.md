@@ -1,5 +1,5 @@
 Title: 用数据分析选购手机
-url: data-analysis-for-cellphone-purchase
+url: data-analysis-for-cellphone-purchase.html
 save_as: data-analysis-for-cellphone-purchase.html
 Date: 2018-10-03
 Category:

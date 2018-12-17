@@ -1,5 +1,5 @@
 Title: Numpy的结构化数组
-url: numpy-structured-array
+url: numpy-structured-array.html
 save_as: numpy-structured-array.html
 Date: 2018-03-22
 Category:

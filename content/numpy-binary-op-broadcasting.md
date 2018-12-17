@@ -1,5 +1,5 @@
 Title: Numpy的结构化数组
-url: numpy-binary-op-broadcasting
+url: numpy-binary-op-broadcasting.html
 save_as: numpy-binary-op-broadcasting.html
 Date: 2018-03-22
 Category:

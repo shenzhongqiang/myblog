@@ -1,5 +1,5 @@
 Title: Python面试之连接字符串用join还是+
-url: diff-between-join-and-plus
+url: diff-between-join-and-plus.html
 save_as: diff-between-join-and-plus.html
 Date: 2018-06-23
 Category:

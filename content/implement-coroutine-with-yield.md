@@ -1,5 +1,5 @@
 Title: 用yield实现协程
-url: implement-coroutine-with-yield
+url: implement-coroutine-with-yield.html
 save_as: implement-coroutine-with-yield.html
 Date: 2018-05-28
 Category:

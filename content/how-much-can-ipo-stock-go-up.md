@@ -1,5 +1,5 @@
 Title: 数据告诉你新股上市能涨多久
-url: how-much-can-ipo-stock-go-up
+url: how-much-can-ipo-stock-go-up.html
 save_as: how-much-can-ipo-stock-go-up.html
 Date: 2018-03-22
 Category:

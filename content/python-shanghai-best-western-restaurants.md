@@ -1,5 +1,5 @@
 Title: Python告诉你上海有哪些高性价比的西餐厅
-url: python-shanghai-best-western-restaurants
+url: python-shanghai-best-western-restaurants.html
 save_as: python-shanghai-best-western-restaurants.html
 Date: 2018-08-29
 Category:

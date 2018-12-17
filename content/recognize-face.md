@@ -1,5 +1,5 @@
 Title: 基于face_recognition实现人脸识别
-url: recognize-face
+url: recognize-face.html
 save_as: recognize-face.html
 Date: 2018-06-23
 Category:

@@ -1,5 +1,5 @@
 Title: 一款超酷的Chrome插件
-url: cool-chrome-extensions-momentum
+url: cool-chrome-extensions-momentum.html
 save_as: cool-chrome-extensions-momentum.html
 Date: 2018-06-23
 Category:

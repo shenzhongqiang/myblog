@@ -1,5 +1,5 @@
 Title: 破解点评网的反爬
-url: dianping-anti-crawler
+url: dianping-anti-crawler.html
 save_as: dianping-anti-crawler.html
 Date: 2018-11-24 10:20
 Category: Python

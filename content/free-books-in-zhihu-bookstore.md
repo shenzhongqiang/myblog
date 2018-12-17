@@ -1,5 +1,5 @@
 Title: 263本知乎书店的免费图书
-url: free-books-in-zhihu-bookstore
+url: free-books-in-zhihu-bookstore.html
 save_as: free-books-in-zhihu-bookstore.html
 Date: 2018-04-12
 Category:

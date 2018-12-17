@@ -1,5 +1,5 @@
 Title: 用Python算24点
-url: python-calc-24
+url: python-calc-24.html
 save_as: python-calc-24.html
 Date: 2018-06-02
 Category:

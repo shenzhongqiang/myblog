@@ -1,5 +1,5 @@
 Title: Python面试之交换变量值
-url: swap-value
+url: swap-value.html
 save_as: swap-value.html
 Date: 2018-04-02
 Category:

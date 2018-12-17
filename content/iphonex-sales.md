@@ -1,5 +1,5 @@
 Title: Python告诉你iPhone X有多热卖
-url: iphonex-sales
+url: iphonex-sales.html
 save_as: iphonex-sales.html
 Date: 2017-12-14
 Category:

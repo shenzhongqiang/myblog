@@ -1,5 +1,5 @@
 Title: 个人微信号
-url: pages/wechat
+url: pages/wechat.html
 save_as: pages/wechat.html
 Date: 2018-12-15 16:00
 Authors: Zhongqiang Shen

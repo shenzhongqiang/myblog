@@ -1,5 +1,5 @@
 Title: 酷酷的format
-url: understand-python-keyword-format
+url: understand-python-keyword-format.html
 save_as: understand-python-keyword-format.html
 Date: 2018-05-20
 Category:

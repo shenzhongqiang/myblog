@@ -1,5 +1,5 @@
 Title: 用Python生成马赛克画
-url: python-create-mosaic-painting
+url: python-create-mosaic-painting.html
 save_as: python-create-mosaic-painting.html
 Date: 2018-09-12
 Category:

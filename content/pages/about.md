@@ -1,5 +1,5 @@
 Title: 关于我
-url: pages/about
+url: pages/about.html
 save_as: pages/about.html
 Date: 2018-12-15 16:00
 Authors: Zhongqiang Shen

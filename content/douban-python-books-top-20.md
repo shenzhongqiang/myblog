@@ -1,5 +1,5 @@
 Title: 豆瓣最受好评的20本Python图书
-url: douban-python-books-top-20
+url: douban-python-books-top-20.html
 save_as: douban-python-books-top-20.html
 Date: 2018-03-22
 Category:

@@ -1,5 +1,5 @@
 Title: Python 2与Python 3的区别
-url: diff-between-python2-and-python3
+url: diff-between-python2-and-python3.html
 save_as: diff-between-python2-and-python3.html
 Date: 2018-06-23
 Category:

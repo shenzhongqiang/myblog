@@ -1,5 +1,5 @@
 Title: 用Python给图片加上抖音效果
-url: douyin-effect-text
+url: douyin-effect-text.html
 save_as: douyin-effect-text.html
 Date: 2018-06-15
 Category:

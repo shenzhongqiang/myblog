@@ -1,5 +1,5 @@
 Title: Docker初体验
-url: docker-intro
+url: docker-intro.html
 save_as: docker-intro.html
 Date: 2017-11-30
 Category:

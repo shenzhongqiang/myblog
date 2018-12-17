@@ -1,5 +1,5 @@
 Title: Python爬虫告诉你深圳房价有多高
-url: python-shenzhen-house-price
+url: python-shenzhen-house-price.html
 save_as: python-shenzhen-house-price.html
 Date: 2018-08-10
 Category:

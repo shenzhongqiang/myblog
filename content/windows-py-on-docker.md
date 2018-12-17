@@ -1,5 +1,5 @@
 Title: Windows上做Python开发太痛苦？Docker了解一下
-url: windows-py-on-docker
+url: windows-py-on-docker.html
 save_as: windows-py-on-docker.html
 Date: 2018-11-26 10:20
 Category: Python

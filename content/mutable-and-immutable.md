@@ -1,5 +1,5 @@
 Title: Python面试之可变对象和不可变对象
-url: mutable-and-immutable
+url: mutable-and-immutable.html
 save_as: mutable-and-immutable.html
 Date: 2018-06-23
 Category:

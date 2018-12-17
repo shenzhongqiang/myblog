@@ -6,7 +6,7 @@ AUTHOR = 'Zhongqiang Shen'
 SITENAME = "Zhongqiang's World"
 SITETITLE = "强哥的世界"
 SITESUBTITLE = "技术 | 生活 | 摄影"
-SITEURL = 'http://47.101.51.87:8080/'
+SITEURL = "http://shenzhongqiang.com:8080/"
 
 PATH = 'content'
 

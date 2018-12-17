@@ -1,5 +1,5 @@
 Title: Python面试之 is 和 == 的区别
-url: diff-between-is-and-doubleequal
+url: diff-between-is-and-doubleequal.html
 save_as: diff-between-is-and-doubleequal.html
 Date: 2018-06-23
 Category:

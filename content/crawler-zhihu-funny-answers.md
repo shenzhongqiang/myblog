@@ -1,5 +1,5 @@
 Title: 60行代码爬取知乎神回复
-url: crawler-zhihu-funny-answers
+url: crawler-zhihu-funny-answers.html
 save_as: crawler-zhihu-funny-answers.html
 Date: 2018-11-05 10:20
 Category: Python

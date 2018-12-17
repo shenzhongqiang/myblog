@@ -1,5 +1,5 @@
 Title: Python爬虫告诉你北京房价有多高
-url: python-beijing-house-price
+url: python-beijing-house-price.html
 save_as: python-beijing-house-price.html
 Date: 2018-08-16
 Category:

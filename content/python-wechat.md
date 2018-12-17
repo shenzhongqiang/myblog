@@ -1,5 +1,5 @@
 Title: Python也能聊微信
-url: python-wechat
+url: python-wechat.html
 save_as: python-wechat.html
 Date: 2018-06-23
 Category:

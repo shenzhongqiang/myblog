@@ -1,5 +1,5 @@
 Title: 推荐一款提升web开发效率的利器
-url: chrome-json-view
+url: chrome-json-view.html
 save_as: chrome-json-view.html
 Date: 2018-05-30
 Category:

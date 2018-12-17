@@ -1,5 +1,5 @@
 Title: 知乎Live数据面面观
-url: zhihu-live-data-analysis
+url: zhihu-live-data-analysis.html
 save_as: zhihu-live-data-analysis.html
 Date: 2018-06-23
 Category:

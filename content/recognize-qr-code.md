@@ -1,5 +1,5 @@
 Title: 10行代码识别二维码
-url: recognize-qr-code
+url: recognize-qr-code.html
 save_as: recognize-qr-code.html
 Date: 2018-06-23
 Category:

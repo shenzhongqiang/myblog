@@ -1,5 +1,5 @@
 Title: 理解python中的yield关键字
-url: understand-yield-in-python
+url: understand-yield-in-python.html
 save_as: understand-yield-in-python.html
 Date: 2018-05-26
 Category:

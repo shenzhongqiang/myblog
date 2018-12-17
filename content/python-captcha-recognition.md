@@ -1,5 +1,5 @@
 Title: 用Python识别验证码
-url: python-captcha-recognition
+url: python-captcha-recognition.html
 save_as: python-captcha-recognition.html
 Date: 2018-08-28
 Category:

@@ -1,5 +1,5 @@
 Title: 50行代码实现人脸检测
-url: python-face-detection
+url: python-face-detection.html
 save_as: python-face-detection.html
 Date: 2018-06-23
 Category:

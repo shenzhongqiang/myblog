@@ -1,5 +1,5 @@
 Title: Python爬虫告诉你上海房价有多高
-url: python-shanghai-house-price
+url: python-shanghai-house-price.html
 save_as: python-shanghai-house-price.html
 Date: 2018-07-22
 Category:

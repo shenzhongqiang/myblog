@@ -1,5 +1,5 @@
 Title: Kafka入门简介
-url: kafka-intro
+url: kafka-intro.html
 save_as: kafka-intro.html
 Date: 2018-03-22
 Category:
