@@ -21,16 +21,23 @@
 
 
 
-    <meta name="author" content="Zhongqiang Shen" />
-    <meta name="description" content="" />
-<meta property="og:site_name" content="Zhongqiang's World"/>
-<meta property="og:type" content="blog"/>
-<meta property="og:title" content="Zhongqiang's World"/>
-<meta property="og:description" content=""/>
-<meta property="og:locale" content="en_US"/>
-<meta property="og:url" content="https://www.shenzhongqiang.com"/>
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="Github的认证方式有两种：HTTPS和SSH key，默认的方式是HTTPS。 以我自己的 …" />
+<meta name="keywords" content="">
 
-  <title>Zhongqiang's World</title>
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="Github启用SSH key认证"/>
+<meta property="og:description" content="Github的认证方式有两种：HTTPS和SSH key，默认的方式是HTTPS。 以我自己的 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.shenzhongqiang.com/connect-github-with-ssh.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-03-09 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://www.shenzhongqiang.com/author/zhongqiang-shen.html">
+<meta property="article:section" content="github"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; Github启用SSH key认证</title>
 
 </head>
 <body>
@@ -86,212 +93,76 @@
   </aside>
   <main>
 
-
-<article>
+<article class="single">
   <header>
-    <h2><a href="https://www.shenzhongqiang.com/diff-between-is-and-doubleequal.html">Python面试之 is 和 == 的区别</a></h2>
+      
+    <h1 id="githubqi-yong-ssh-keyren-zheng">Github启用SSH key认证</h1>
     <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
+          发表于 2019-03-09 分类: <a href="https://www.shenzhongqiang.com/category/github.html">github</a>
 
 
-
-        &#8226; 阅读时间 8分钟
+      <span id="busuanzi_container_page_pv">
+        &#8226; 阅读 <span id="busuanzi_value_page_pv"></span>次
+      </span>
+        &#8226; 阅读时间 4分钟
     </p>
   </header>
+
   <div>
-      <p>面试实习生的时候，当问到 is 和 == 的区别时 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/diff-between-is-and-doubleequal.html">    阅读全文
-</a>
+    <p>Github的认证方式有两种：HTTPS和SSH key，默认的方式是HTTPS。</p>
+<p>以我自己的<a href="https://github.com/shenzhongqiang/myblog">博客项目</a>为例，在repo里面运行</p>
+<div class="highlight"><pre><span></span>git remote show origin
+</pre></div>
+
+
+<p>可以看到这样的输出</p>
+<div class="highlight"><pre><span></span>* remote origin
+  Fetch URL: https://github.com/shenzhongqiang/myblog.git
+  Push  URL: https://github.com/shenzhongqiang/myblog.git
+</pre></div>
+
+
+<p>这里URL里面是个https的链接，这个表示的就是，我们用的是HTTPS的认证方式。</p>
+<p>使用HTTPS的方式有个不方便的地方，就是每次push代码的时候都要输入用户名密码。而启用SSH key认证的方式可以省去这个麻烦。</p>
+<p>接下来我们就来看下怎么样启用SSH key认证。</p>
+<p>配置的过程包括这样几个步骤
+<em> 生成密钥对
+</em> 将公钥上传到Github
+* 将本地repo的remote改成SSH</p>
+<h1>1. 生成密钥对</h1>
+<p>运行下面的命令生成一组密钥对</p>
+<div class="highlight"><pre><span></span>ssh-keygen -t rsa -b <span class="m">4096</span> -C <span class="s2">&quot;&lt;username@domain.com&gt;&quot;</span> <span class="c1"># &lt;username@domain.com&gt;替换为自己的邮箱</span>
+</pre></div>
+
+
+<p>在提示<code>Enter passphrase</code>的那一步，我们直接回车。这样不输入任何passphrase，push的时候就不需要密码。
+这行命令会在<code>~/.ssh/</code>下生成两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>。<code>id_rsa</code>是我们的私钥，<code>id_rsa.pub</code>是我们的公钥，后面我们会将公钥上传到Github。</p>
+<p>接下来我们把私钥添加到<code>ssh-agent</code>。运行下面的命令确保ssh-agent在运行：</p>
+<div class="highlight"><pre><span></span><span class="nb">eval</span> <span class="k">$(</span>ssh-agent -s<span class="k">)</span>
+</pre></div>
+
+
+<p>如果输出类似<code>Agent pid 13370</code>，表示ssh-agent在正常工作。</p>
+<p>运行下面的命令将私钥添加到<code>ssh-agent</code>：</p>
+<div class="highlight"><pre><span></span>ssh-add ~/.ssh/id_rsa
+</pre></div>
+
+
+<h1>2. 将公钥上传到Github</h1>
+<p>登录Github，点击右上角自己的头像，选择Settings</p>
+<p>在新打开的页面中，选择SSH and GPG keys</p>
+<p>点击New SSH key</p>
+<p>输入key的Title，并且将刚刚生成的<code>~/.ssh/id_rsa.pub</code>里的内容复制粘贴进去，保存即可。</p>
   </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/mutable-and-immutable.html">Python面试之可变对象和不可变对象</a></h2>
+  <div class="tag-cloud">
     <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 9分钟
     </p>
-  </header>
-  <div>
-      <p>上一篇<a href="https://zhuanlan.zhihu.com/p/35219174">Python面试之 is 和 == 的区别 …</a></p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/mutable-and-immutable.html">    阅读全文
-</a>
   </div>
-  <hr />
+
+
+
+
 </article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/diff-between-new-and-init">Python面试之理解__new__和__init__的区别</a></h2>
-    <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 8分钟
-    </p>
-  </header>
-  <div>
-      <p>很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/diff-between-new-and-init">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/diff-between-join-and-plus.html">Python面试之连接字符串用join还是+</a></h2>
-    <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 7分钟
-    </p>
-  </header>
-  <div>
-      <p>上一篇<a href="https://zhuanlan.zhihu.com/p/35389687">Python面试之可变对象和不可变对象</a>的最后留了一个问题</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Group …</span></pre></div>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/diff-between-join-and-plus.html">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/python-wechat.html">Python也能聊微信</a></h2>
-    <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 10分钟
-    </p>
-  </header>
-  <div>
-      <p>最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/python-wechat.html">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/cool-chrome-extensions-momentum.html">一款超酷的Chrome插件</a></h2>
-    <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 2分钟
-    </p>
-  </header>
-  <div>
-      <p>最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/cool-chrome-extensions-momentum.html">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/zhihu-live-data-analysis.html">知乎Live数据面面观</a></h2>
-    <p>
-          发表于 2018-06-23 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 11分钟
-    </p>
-  </header>
-  <div>
-      <p>从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/zhihu-live-data-analysis.html">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/douyin-effect-image.html">用Python给图片加上抖音效果</a></h2>
-    <p>
-          发表于 2018-06-15 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 8分钟
-    </p>
-  </header>
-  <div>
-      <p>前一篇 <a href="https://zhuanlan.zhihu.com/p/37951669">Python实现抖音体</a> 给文字加上抖音效果，这一篇我们来用Python给图片加上抖音效果。原理其实是类似的 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/douyin-effect-image.html">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/douyin-effect-text">Python实现抖音体</a></h2>
-    <p>
-          发表于 2018-06-11 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 3分钟
-    </p>
-  </header>
-  <div>
-      <p>周末在家沉迷抖音。看完抖音，索性用Python写了个程序实现抖音效果的字体。</p>
-<p>程序的名字就叫<strong><em>douyinti …</em></strong></p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/douyin-effect-text">    阅读全文
-</a>
-  </div>
-  <hr />
-</article>
-<article>
-  <header>
-    <h2><a href="https://www.shenzhongqiang.com/python-calc-24.html">用Python算24点</a></h2>
-    <p>
-          发表于 2018-06-02 分类: <a href="https://www.shenzhongqiang.com/category/misc.html">misc</a>
-
-
-
-        &#8226; 阅读时间 12分钟
-    </p>
-  </header>
-  <div>
-      <p>小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：</p>
-<p>7 …</p>
-        <br>
-        <a class="btn" href="https://www.shenzhongqiang.com/python-calc-24.html">    阅读全文
-</a>
-  </div>
-</article>
-
-  <div class="pagination">
-    <a class="btn float-left" href="https://www.shenzhongqiang.com/index4.html">
-      <i class="fa fa-angle-left"></i>     以前的文章
-
-    </a>
-    <a class="btn float-right" href="https://www.shenzhongqiang.com/index2.html">
-          以后的文章
- <i class="fa fa-angle-right"></i>
-    </a>
-  </div>
-
-
 
     <footer>
 <p>&copy; Zhongqiang Shen 2018</p>
