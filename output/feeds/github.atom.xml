@@ -40,7 +40,29 @@
 
 
 &lt;h1&gt;2. 将公钥上传到Github&lt;/h1&gt;
-&lt;p&gt;登录Github，点击右上角自己的头像，选择Settings&lt;/p&gt;
-&lt;p&gt;在新打开的页面中，选择SSH and GPG keys&lt;/p&gt;
-&lt;p&gt;点击New SSH key&lt;/p&gt;
-&lt;p&gt;输入key的Title，并且将刚刚生成的&lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;里的内容复制粘贴进去，保存即可。&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;登录Github，点击右上角自己的头像，选择Settings
+&lt;img alt="" src="https://www.shenzhongqiang.com/images/userbar-account-settings.png"&gt;&lt;/p&gt;
+&lt;p&gt;在新打开的页面中，选择SSH and GPG keys
+&lt;img alt="" src="https://www.shenzhongqiang.com/images/settings-sidebar-ssh-keys.png"&gt;&lt;/p&gt;
+&lt;p&gt;点击New SSH key
+&lt;img alt="" src="https://www.shenzhongqiang.com/images/ssh-add-ssh-key.png"&gt;&lt;/p&gt;
+&lt;p&gt;输入key的Title，并且将刚刚生成的&lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;里的内容复制粘贴进去，保存即可。&lt;/p&gt;
+&lt;p&gt;上传公钥后，我们来测一下Github的SSH，运行下面的命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -T git@github.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果返回&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Hi shenzhongqiang! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;恭喜你，配置已生效。&lt;/p&gt;
+&lt;h1&gt;3. 将本地repo的remote改成SSH&lt;/h1&gt;
+&lt;p&gt;如果本地的repo原先是HTTPS的认证方式，最后我们需要将它改成SSH key的认证方式。设置方式非常简单，只需要重新设置remote的URL即可。&lt;/p&gt;
+&lt;p&gt;运行下面的命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git remote set-url origin git@github.com:&amp;lt;username&amp;gt;/&amp;lt;reponame&amp;gt;.git &lt;span class="c1"&gt;# 将username和reponame替换成自己的用户名、repo名字&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;好了，这样我们的配置就全部完成了。现在我们再push看看，是不是不需要密码了？&lt;/p&gt;</content></entry></feed>

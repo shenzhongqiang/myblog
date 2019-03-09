@@ -40,10 +40,32 @@
 
 
 &lt;h1&gt;2. 将公钥上传到Github&lt;/h1&gt;
-&lt;p&gt;登录Github，点击右上角自己的头像，选择Settings&lt;/p&gt;
-&lt;p&gt;在新打开的页面中，选择SSH and GPG keys&lt;/p&gt;
-&lt;p&gt;点击New SSH key&lt;/p&gt;
-&lt;p&gt;输入key的Title，并且将刚刚生成的&lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;里的内容复制粘贴进去，保存即可。&lt;/p&gt;</content></entry><entry><title>年终奖多发一元，少得千元？Python告诉你为什么</title><link href="https://www.shenzhongqiang.com/annual-bonus-tax.html" rel="alternate"></link><published>2019-01-18T00:00:00+08:00</published><updated>2019-01-18T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-01-18:/annual-bonus-tax.html</id><summary type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？&lt;/p&gt;
+&lt;p&gt;登录Github，点击右上角自己的头像，选择Settings
+&lt;img alt="" src="https://www.shenzhongqiang.com/images/userbar-account-settings.png"&gt;&lt;/p&gt;
+&lt;p&gt;在新打开的页面中，选择SSH and GPG keys
+&lt;img alt="" src="https://www.shenzhongqiang.com/images/settings-sidebar-ssh-keys.png"&gt;&lt;/p&gt;
+&lt;p&gt;点击New SSH key
+&lt;img alt="" src="https://www.shenzhongqiang.com/images/ssh-add-ssh-key.png"&gt;&lt;/p&gt;
+&lt;p&gt;输入key的Title，并且将刚刚生成的&lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;里的内容复制粘贴进去，保存即可。&lt;/p&gt;
+&lt;p&gt;上传公钥后，我们来测一下Github的SSH，运行下面的命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -T git@github.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果返回&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Hi shenzhongqiang! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;恭喜你，配置已生效。&lt;/p&gt;
+&lt;h1&gt;3. 将本地repo的remote改成SSH&lt;/h1&gt;
+&lt;p&gt;如果本地的repo原先是HTTPS的认证方式，最后我们需要将它改成SSH key的认证方式。设置方式非常简单，只需要重新设置remote的URL即可。&lt;/p&gt;
+&lt;p&gt;运行下面的命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git remote set-url origin git@github.com:&amp;lt;username&amp;gt;/&amp;lt;reponame&amp;gt;.git &lt;span class="c1"&gt;# 将username和reponame替换成自己的用户名、repo名字&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;好了，这样我们的配置就全部完成了。现在我们再push看看，是不是不需要密码了？&lt;/p&gt;</content></entry><entry><title>年终奖多发一元，少得千元？Python告诉你为什么</title><link href="https://www.shenzhongqiang.com/annual-bonus-tax.html" rel="alternate"></link><published>2019-01-18T00:00:00+08:00</published><updated>2019-01-18T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-01-18:/annual-bonus-tax.html</id><summary type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-93705d574116cb79418b2d01462f8b88_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;上了这么多年班，我也是最近才搞清楚年终奖的税是怎么算的。年终奖的税和工资税的最大区别就是，年终奖&lt;strong&gt;没有阶梯税率，没有阶梯税率，没有阶梯税率&lt;/strong&gt;，重要的事情说三遍。&lt;/p&gt;
 &lt;p&gt;具体怎么算，我们来看下面的公式&lt;/p&gt;
