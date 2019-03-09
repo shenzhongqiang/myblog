@@ -3,7 +3,7 @@
 from __future__ import unicode_literals
 
 AUTHOR = 'Zhongqiang Shen'
-SITENAME = "Zhongqiang's World"
+SITENAME = "强哥的世界"
 SITETITLE = "强哥的世界"
 SITESUBTITLE = "技术 | 生活 | 摄影"
 SITEURL = "http://shenzhongqiang.com:8080/"
