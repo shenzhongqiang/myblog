@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zhongqiang's World - Python</title><link href="http://shenzhongqiang.com/" rel="alternate"></link><link href="http://shenzhongqiang.com/feeds/python.atom.xml" rel="self"></link><id>http://shenzhongqiang.com/</id><updated>2018-11-26T10:20:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>Windows上做Python开发太痛苦？Docker了解一下</title><link href="http://shenzhongqiang.com/windows-py-on-docker.html" rel="alternate"></link><published>2018-11-26T10:20:00+08:00</published><updated>2018-11-26T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:shenzhongqiang.com,2018-11-26:/windows-py-on-docker.html</id><summary type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-402a08b55cd89812b83bb3848c33cbc0_b.jpg"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zhongqiang's World - Python</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/python.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2018-11-26T10:20:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>Windows上做Python开发太痛苦？Docker了解一下</title><link href="https://www.shenzhongqiang.com/windows-py-on-docker.html" rel="alternate"></link><published>2018-11-26T10:20:00+08:00</published><updated>2018-11-26T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-11-26:/windows-py-on-docker.html</id><summary type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-402a08b55cd89812b83bb3848c33cbc0_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;之前我的解决方法是在Windows上装VMWare，VMWare上运行Ubuntu，然后在Ubuntu里面做开发。但这样也不太方便，每次进入开发环境都要先启动VMWare，再启动Ubuntu，然后打开命令行窗口开始开发，而且有时候需要在宿主机和虚拟机之间来回切换，也很麻烦。&lt;/p&gt;
 &lt;p&gt;最近了解到Docker也有Windows的版本，于是就想到在windows上利用Docker运行一个Ubuntu镜像，在容器里搭建Python开发环境，这 样既解决了安装库的问题，也解决了VMWare虚拟机的不方便之处。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-5e97f157eb2f8660c60672b440cdd4f0_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-5e97f157eb2f8660c60672b440cdd4f0_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;关于容器的基本使用，可以参考我之前的一篇文章 &lt;a href="https://zhuanlan.zhihu.com/p/31436920"&gt;Docker初体验&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;需要注意的是，Windows上安装Docker对系统有以下的要求：&lt;/p&gt;
 &lt;ul&gt;
@@ -15,7 +15,7 @@
 &lt;p&gt;安装程序可以从这里下载 &lt;a href="http://link.zhihu.com/?target=https%3A//download.docker.com/win/stable/Docker%2520for%2520Windows%2520Installer.exe"&gt;Docker for Windows&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;安装完之后，运行Docker for Windows。&lt;/p&gt;
 &lt;p&gt;Docker运行后可以在状态栏里看到有一个小鲸鱼的图标，如下所示&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-2dc9098e780c3bb757fd5e94957768d7_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-2dc9098e780c3bb757fd5e94957768d7_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;打开命令行窗口，运行下面的命令查看Docker版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker --version
 &lt;/pre&gt;&lt;/div&gt;
@@ -161,22 +161,22 @@ ubuntu                      18.04               93fd78260bd1        6 days ago  
 
 
 &lt;p&gt;如果大家有更好的Windows上配置Python开发环境的建议，也欢迎在评论里告诉我~&lt;/p&gt;
-&lt;p&gt;本文已同步更新到公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;</content></entry><entry><title>破解点评网的反爬</title><link href="http://shenzhongqiang.com/dianping-anti-crawler.html" rel="alternate"></link><published>2018-11-24T10:20:00+08:00</published><updated>2018-11-24T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:shenzhongqiang.com,2018-11-24:/dianping-anti-crawler.html</id><summary type="html">&lt;p&gt;点评网的反爬设置在我们爬取点评网页的时候给我们造成了不小的障碍。在网页上我们看到的是这样的&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-713839a83e9e16e65dc9f76feb23ab90_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;本文已同步更新到公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;</content></entry><entry><title>破解点评网的反爬</title><link href="https://www.shenzhongqiang.com/dianping-anti-crawler.html" rel="alternate"></link><published>2018-11-24T10:20:00+08:00</published><updated>2018-11-24T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-11-24:/dianping-anti-crawler.html</id><summary type="html">&lt;p&gt;点评网的反爬设置在我们爬取点评网页的时候给我们造成了不小的障碍。在网页上我们看到的是这样的&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-713839a83e9e16e65dc9f76feb23ab90_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;网页上可以看到这家餐厅有1405条评论，人均387。但在分析页面源码的时候 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;点评网的反爬设置在我们爬取点评网页的时候给我们造成了不小的障碍。在网页上我们看到的是这样的&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-713839a83e9e16e65dc9f76feb23ab90_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-713839a83e9e16e65dc9f76feb23ab90_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;网页上可以看到这家餐厅有1405条评论，人均387。但在分析页面源码的时候，我们却看不到网页上的数字，看到是这样的代码&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-4fec3b668135f3e7d3c9418d5baed6db_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-4fec3b668135f3e7d3c9418d5baed6db_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;点评网对数字做了处理，一些数字的信息像评论条数、人均、评分等都做了反爬保护。上面的网页中评论条数是1405条，但在页面源 码中，除了第一个数字1以外，后面的数字我们看不到，都是一些像随机编码一样的css class。&lt;/p&gt;
 &lt;p&gt;如果我们仔细分析这个css class，其实是不难发现背后的原理的。&lt;/p&gt;
 &lt;p&gt;通过开发者工具，我们找到这个css的定义，可以看到是下面这样的&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-99963314a3cb5aec9f80ecb9adb22311_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-99963314a3cb5aec9f80ecb9adb22311_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;background-image属性里面是一个url，我们在浏览器里打开它，看到它的内容是&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-c1080556faba624a1d434bbdbe84e1e6_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c1080556faba624a1d434bbdbe84e1e6_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;lc-mY1i 这个css class里面是一个background属性，定义了背景图片偏移的位置。&lt;/p&gt;
 &lt;p&gt;所以点评网上显示数字的原理就是通过设置不同的偏移位置，显示背景图片相应位置上的数字。我们可以想象背景图片的前面有一个 窗口，窗口的大小刚好够显示一个数字。窗口是固定不动的，背景图片在后面移动，移动到不同的位置就能显示这个位置上的数字。&lt;/p&gt;
 &lt;p&gt;进一步分析背景图片，我们可以发现，这是一个SVG图片，图片中的数字可以在svg的源码中看到，如下&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-677f504d989747ef91fb5bc9de80a136_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-677f504d989747ef91fb5bc9de80a136_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;理解了原理后，我们用代码来实现一下解析的过程。&lt;/p&gt;
 &lt;p&gt;首先我们从点评的网页上找出css文件的url，代码如下&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_css&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -282,10 +282,10 @@ restaurant: 宝丽嘉酒店Cafe Bellagio&lt;span class="o"&gt;(&lt;/span&gt;宝�
 
 
 &lt;p&gt;对照网页上的数据，可以看到，餐厅的评论条数都被正确的解析出来了。&lt;/p&gt;
-&lt;p&gt;本文已同步更新到公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;</content><category term="爬虫"></category></entry><entry><title>60行代码爬取知乎神回复</title><link href="http://shenzhongqiang.com/crawler-zhihu-funny-answers.html" rel="alternate"></link><published>2018-11-05T10:20:00+08:00</published><updated>2018-11-05T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:shenzhongqiang.com,2018-11-05:/crawler-zhihu-funny-answers.html</id><summary type="html">&lt;p&gt;之前的一篇文章 &lt;a href="https://zhuanlan.zhihu.com/p/46132179"&gt;爬虫爬了下知乎上的神回复，已笑趴～&lt;/a&gt; 在公众号发布后，引发了大家热烈的反响 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前的一篇文章 &lt;a href="https://zhuanlan.zhihu.com/p/46132179"&gt;爬虫爬了下知乎上的神回复，已笑趴～&lt;/a&gt; 在公众号发布后，引发了大家热烈的反响。很多朋友觉得很神奇，在后台问强哥是怎么做到的，有的朋友还表示不太相信。其实爬取知乎神回复很简单，这篇文章 我们就来揭晓一下背后的原理。&lt;/p&gt;
+&lt;p&gt;本文已同步更新到公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;</content><category term="爬虫"></category></entry><entry><title>60行代码爬取知乎神回复</title><link href="https://www.shenzhongqiang.com/crawler-zhihu-funny-answers.html" rel="alternate"></link><published>2018-11-05T10:20:00+08:00</published><updated>2018-11-05T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-11-05:/crawler-zhihu-funny-answers.html</id><summary type="html">&lt;p&gt;之前的一篇文章 &lt;a href="https://zhuanlan.zhihu.com/p/46132179"&gt;爬虫爬了下知乎上的神回复，已笑趴～&lt;/a&gt; 在公众号发布后，引发了大家热烈的反响 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;之前的一篇文章 &lt;a href="https://zhuanlan.zhihu.com/p/46132179"&gt;爬虫爬了下知乎上的神回复，已笑趴～&lt;/a&gt; 在公众号发布后，引发了大家热烈的反响。很多朋友觉得很神奇，在后台问强哥是怎么做到的，有的朋友还表示不太相信。其实爬取知乎神回复很简单，这篇文章 我们就来揭晓一下背后的原理。&lt;/p&gt;
 &lt;p&gt;知乎神回复都有些什么特点呢？我们先来观察一下。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-57f6debdb9cf67c21ef0b544f4d8373d_r.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-5b2beaeaeed1d6141e6b9fceb69f8b6b_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-57f6debdb9cf67c21ef0b544f4d8373d_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-5b2beaeaeed1d6141e6b9fceb69f8b6b_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;大家看出什么规律了么？短小精辟有没有？赞同很多有没有？所以爬取知乎神回复我们只要爬取那些赞同多又字数少的回答就可以。 简单的两个步骤就能实现，第一步爬取知乎回答，第二部筛选回答。是不是很easy？&lt;/p&gt;
 &lt;h4&gt;爬取知乎回答&lt;/h4&gt;
 &lt;p&gt;第一步我们爬取知乎上的回答。知乎上的回答太多了，一下子爬取所有的回答会很费时，我们可以选定几个话题，爬取这几个话题里 的内容。&lt;/p&gt;
@@ -312,7 +312,7 @@ restaurant: 宝丽嘉酒店Cafe Bellagio&lt;span class="o"&gt;(&lt;/span&gt;宝�
 
 &lt;p&gt;get_answers_by_page函数有两个参数，第一个参数是话题的id，第二个参数表示爬的是第几页的内容。&lt;/p&gt;
 &lt;p&gt;爬下来的内容当中有几个需要注意的字段，下图中用黄框高亮出来了&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-45fd9f3c05a0ecd3544969c6068aa4f7_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-45fd9f3c05a0ecd3544969c6068aa4f7_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;这几个字段的含义如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;question.title - 问题的标题&lt;/li&gt;

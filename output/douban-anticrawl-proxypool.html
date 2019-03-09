@@ -1,0 +1,359 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="" />
+
+    <link rel="stylesheet" type="text/css" href="https://www.shenzhongqiang.com/theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="https://www.shenzhongqiang.com/theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.shenzhongqiang.com/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://www.shenzhongqiang.com/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://www.shenzhongqiang.com/theme/font-awesome/css/solid.css">
+
+
+    <link href="https://www.shenzhongqiang.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Zhongqiang's World Atom">
+
+
+
+
+<meta name="author" content="Zhongqiang Shen" />
+<meta name="description" content="爬过豆瓣的同学应该都有过这样的经历，一开始爬取的过程挺正常的，但爬着爬着就不能获取到数据了。这是因为豆瓣对IP作了限制，如果短时间内来自同一个IP的请求太多 …" />
+<meta name="keywords" content="">
+
+<meta property="og:site_name" content="Zhongqiang's World"/>
+<meta property="og:title" content="从豆瓣的反爬说说自建代理池"/>
+<meta property="og:description" content="爬过豆瓣的同学应该都有过这样的经历，一开始爬取的过程挺正常的，但爬着爬着就不能获取到数据了。这是因为豆瓣对IP作了限制，如果短时间内来自同一个IP的请求太多 …"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="https://www.shenzhongqiang.com/douban-anticrawl-proxypool.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-01-13 00:00:00+08:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://www.shenzhongqiang.com/author/zhongqiang-shen.html">
+<meta property="article:section" content="爬虫"/>
+<meta property="og:image" content="">
+
+  <title>Zhongqiang's World &ndash; 从豆瓣的反爬说说自建代理池</title>
+
+</head>
+<body>
+  <aside>
+    <div>
+      <a href="https://www.shenzhongqiang.com">
+        <img src="https://www.shenzhongqiang.com/theme/img/qiangge.jpg" alt="强哥的世界" title="强哥的世界">
+      </a>
+      <h1><a href="https://www.shenzhongqiang.com">强哥的世界</a></h1>
+
+<p>技术 | 生活 | 摄影</p>
+      <nav>
+        <ul class="list">
+          <li>
+            <a href="https://www.shenzhongqiang.com/pages/about.html">关于我</a>
+          </li>
+        </ul>
+        <ul class="social">
+          <li>
+            <a data-title="www.zhihu.com/people/shenzhongqiang" href="https://www.zhihu.com/people/shenzhongqiang" target="_blank">
+              <svg class="icon icon-zhihu" viewBox="0 0 120 120" width="100%" height="100%">
+                <path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="个人微信" href="https://www.shenzhongqiang.com/pages/wechat.html" target="_blank">
+              <svg class="icon icon-wechat" viewBox="0 0 27 27" width="100%" height="100%">
+                <path d="M21.502 19.525c1.524-1.105 2.498-2.738 2.498-4.554 0-3.326-3.237-6.023-7.229-6.023s-7.229 2.697-7.229 6.023c0 3.327 3.237 6.024 7.229 6.024.825 0 1.621-.117 2.36-.33l.212-.032c.139 0 .265.043.384.111l1.583.914.139.045c.133 0 .241-.108.241-.241l-.039-.176-.326-1.215-.025-.154c0-.162.08-.305.202-.392zm-12.827-17.228c-4.791 0-8.675 3.236-8.675 7.229 0 2.178 1.168 4.139 2.997 5.464.147.104.243.276.243.471l-.03.184-.391 1.458-.047.211c0 .16.13.29.289.29l.168-.054 1.899-1.097c.142-.082.293-.133.46-.133l.255.038c.886.255 1.842.397 2.832.397l.476-.012c-.188-.564-.291-1.158-.291-1.771 0-3.641 3.542-6.593 7.911-6.593l.471.012c-.653-3.453-4.24-6.094-8.567-6.094zm5.686 11.711c-.532 0-.963-.432-.963-.964 0-.533.431-.964.963-.964.533 0 .964.431.964.964 0 .532-.431.964-.964.964zm4.82 0c-.533 0-.964-.432-.964-.964 0-.533.431-.964.964-.964.532 0 .963.431.963.964 0 .532-.431.964-.963.964zm-13.398-5.639c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156zm5.783 0c-.639 0-1.156-.518-1.156-1.156 0-.639.517-1.157 1.156-1.157.639 0 1.157.518 1.157 1.157 0 .638-.518 1.156-1.157 1.156z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="github.com/shenzhongqiang" href="https://github.com/shenzhongqiang" target="_blank">
+              <svg class="icon icon-github" viewBox="0 0 1024 1024" width="100%" height="100%">
+                <path d="M674.816 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211s66.56-41.318 66.56-92.211c-0.051-50.79-29.798-92.109-66.56-92.109zM906.547 339.251c7.629-18.688 7.936-124.877-32.512-226.611 0 0-92.723 10.189-233.011 106.496-29.44-8.192-79.258-12.186-128.973-12.186-49.818 0-99.584 3.994-129.024 12.186-140.339-96.307-233.062-106.496-233.062-106.496-40.397 101.734-39.987 207.923-32.461 226.611-47.514 51.61-76.544 113.613-76.544 198.195 0 367.923 305.306 373.811 382.31 373.811 17.51 0 52.122 0.102 88.781 0.102 36.608 0 71.27-0.102 88.678-0.102 77.107 0 382.31-5.888 382.31-373.811 0-84.582-28.979-146.586-76.493-198.195zM513.434 866.048h-2.867c-193.075 0-343.501-22.989-343.501-210.688 0-45.005 15.872-86.682 53.606-121.293 62.822-57.702 169.216-27.187 289.894-27.187 0.512 0 1.024 0 1.485 0 0.512 0 0.922 0 1.382 0 120.678 0 227.123-30.515 289.997 27.187 37.632 34.611 53.504 76.288 53.504 121.293 0 187.699-150.374 210.688-343.501 210.688zM349.235 579.021c-36.762 0-66.56 41.318-66.56 92.109 0 50.893 29.798 92.211 66.56 92.211 36.813 0 66.611-41.318 66.611-92.211 0-50.79-29.798-92.109-66.611-92.109z"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a data-title="linkedin.com/in/shenzhongqiang" href="http://linkedin.com/in/shenzhongqiang" target="_blank">
+              <svg class="icon icon-linkedin" viewBox="0 0 600 600" width="100%" height="100%">
+                <path d="M409.391,511.359V317.203c0,0-5.75-51.938-56-51.938c-50.219,0-59.406,49.375-59.406,49.375v196.719h-103.5l1.688-320.719   h100.125l-0.813,40.313c0,0,20.876-52.688,99.531-52.688c78.625,0,114.25,45.188,120.875,129.688c0,84.531,0,203.406,0,203.406   H409.391z M63.547,145.078c-35.563,0-64.438-25.438-64.438-56.875s28.875-56.938,64.438-56.938s64.438,25.5,64.438,56.938   S99.109,145.078,63.547,145.078z M127.422,511.734H0.172V191.453l127.25-0.813V511.734z"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+    </div>
+
+
+  </aside>
+  <main>
+
+<article class="single">
+  <header>
+      
+    <h1 id="cong-dou-ban-de-fan-pa-shuo-shuo-zi-jian-dai-li-chi">从豆瓣的反爬说说自建代理池</h1>
+    <p>
+          发表于 2019-01-13 分类: <a href="https://www.shenzhongqiang.com/category/pa-chong.html">爬虫</a>
+
+
+      <span id="busuanzi_container_page_pv">
+        &#8226; 阅读 <span id="busuanzi_value_page_pv"></span>次
+      </span>
+        &#8226; 阅读时间 22分钟
+    </p>
+  </header>
+
+  <div>
+    <p>爬过豆瓣的同学应该都有过这样的经历，一开始爬取的过程挺正常的，但爬着爬着就不能获取到数据了。这是因为豆瓣对IP作了限制，如果短时间内来自同一个IP的请求太多，就会禁止来自这个IP的访问，我们的爬虫也就无法继续获取到数据了。</p>
+<h4>豆瓣的反爬</h4>
+<p>我们先来真实地感受一下豆瓣的反爬。假如我们有这样一个豆瓣的爬虫，这个爬虫是要爬取豆瓣上某几个标签页下的图书的数据（像下面这样的页面里的数据）</p>
+<p><img alt="" src="https://www.shenzhongqiang.com/images/v2-b8da186e8cd483330b0811a52bf5b73f_r.jpg"></p>
+<p>爬虫的代码如下（这里只是为了展示豆瓣的反爬机制，代码作了简化）</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_books_by_page</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">page_no</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">page_no</span> <span class="o">*</span> <span class="mi">20</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://book.douban.com/tag/{}?start={}&amp;type=T&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)&quot;</span><span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1">#r = requests.get(url, headers=headers, verify=False, proxies={&quot;https&quot;: proxy})</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//li[@class=&quot;subject-item&quot;]&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">))</span>
+
+        <span class="n">books</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">title_node</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//div[@class=&quot;info&quot;]/h2/a&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">title_node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">title_node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">books</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">books</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SQL&quot;</span><span class="p">,</span> <span class="s2">&quot;数据分析&quot;</span><span class="p">,</span> <span class="s2">&quot;计算机&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+        <span class="n">page_no</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+            <span class="n">books</span> <span class="o">=</span> <span class="n">get_books_by_page</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">page_no</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">books</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">page_no</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>上面的爬虫会爬取SQL、数据分析和计算机这三个标签下的所有图书。每爬取一页数据，我们都会打印出HTTP返回码 r.status_code 和爬取到的图书的数量 len(items) 。</p>
+<p>我们在命令行窗口运行这个爬虫，可以看到这样的结果</p>
+<div class="highlight"><pre><span></span><span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+...
+</pre></div>
+
+
+<p>上面的输出表明爬取的页面都返回了HTTP 200，并且获取到了每一页里面的20条图书信息。</p>
+<p>但如果我们多运行几次程序后，结果就变成了下面这样了</p>
+<div class="highlight"><pre><span></span>200 0
+200 0
+200 0
+</pre></div>
+
+
+<p>HTTP还是返回200的响应，但我们获取不到页面里的图书信息了，因为我们的爬虫被禁了。</p>
+<p>要解决爬虫被禁的问题，一个直观的思路就是使用代理池，每次爬取页面我们都使用不同的IP发出请求，这样就可以避免同一个IP频繁发出请求被禁的情况。</p>
+<p>代理按照是否匿名，大致可分成这样几类</p>
+<ul>
+<li>透明代理</li>
+<li>匿名代理</li>
+<li>高匿代理</li>
+</ul>
+<p>透明代理在HTTP头里设置了你的真实IP，服务器可以通过HTTP头知晓你真实的IP。</p>
+<p>匿名代理虽然隐藏了你的真实IP，但服务器还是知道你使用了代理。</p>
+<p>高匿代理不仅隐藏了你的真实IP，而且让服务器无法发现你在使用代理，这是我们自建代理池的最佳的选择，我们下一步自建代理池的步骤中用到的也是高匿代理。</p>
+<h4>自建代理池</h4>
+<p>西刺代理（[]https://www.xicidaili.com/)）是一个提供免费代理的网站，他的首页是下面这样的</p>
+<p><img alt="" src="https://www.shenzhongqiang.com/images/v2-6ba145b7268323ff078be33b28149d95_r.jpg"></p>
+<p>我们通过爬取西刺上可用的免费高匿代理，来建立我们的代理池。</p>
+<p>爬取西刺高匿代理的代码如下</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
+
+<span class="k">def</span> <span class="nf">get_xici_proxy</span><span class="p">(</span><span class="n">page_no</span><span class="p">):</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://www.xicidaili.com/nn/{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">page_no</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)&quot;</span><span class="p">}</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="n">tr_nodes</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//table[@id=&quot;ip_list&quot;]/tr&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">tr_node</span> <span class="ow">in</span> <span class="n">tr_nodes</span><span class="p">:</span>
+        <span class="n">td_nodes</span> <span class="o">=</span> <span class="n">tr_node</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;./td&#39;</span><span class="p">)</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="n">td_nodes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">port</span> <span class="o">=</span> <span class="n">td_nodes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">proxy_type</span> <span class="o">=</span> <span class="n">td_nodes</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">proto</span> <span class="o">=</span> <span class="n">td_nodes</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">proxy</span> <span class="o">=</span> <span class="s2">&quot;{}://{}:{}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">proto</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+        <span class="n">uptime</span> <span class="o">=</span> <span class="n">td_nodes</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+        <span class="k">if</span> <span class="n">proxy_type</span> <span class="o">==</span> <span class="s2">&quot;高匿&quot;</span> <span class="ow">and</span> <span class="n">proto</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;https&quot;</span><span class="p">:</span>
+            <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">proxy</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+
+
+<p>上面的get_xici_proxy函数每次获取一个页面的代理。因为豆瓣图书的URL都是HTTPS的，所以我们这里只关心HTTPS的代理，上面的代码中我们筛选出高匿的并且是HTTPS的代理。</p>
+<p>爬下了免费代理以后，接下来，我们来验证一下这些代理是不是可用。我们通过代理去访问豆瓣的网页，测试代理的有效性。代码如下</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_proxy</span><span class="p">(</span><span class="n">proxy</span><span class="p">):</span>
+    <span class="n">https_url</span> <span class="o">=</span> <span class="s2">&quot;https://book.douban.com/tag/SQL?start=20&amp;type=T&quot;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36&quot;</span><span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">proxies</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;https&quot;</span><span class="p">:</span> <span class="n">proxy</span><span class="p">}</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">https_url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="n">proxies</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//li[@class=&quot;subject-item&quot;]&#39;</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">==</span> <span class="mi">20</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">return</span> <span class="bp">False</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+
+
+<p>我们获取到这样几个有效的代理</p>
+<div class="highlight"><pre><span></span><span class="c1"># proxy文件内容</span>
+https://110.52.235.11:9999
+https://119.101.114.44:9999
+https://119.101.117.59:9999
+https://112.85.129.162:9999
+https://119.101.112.66:9999
+https://119.101.117.72:9999
+https://125.123.136.156:9999
+https://119.101.112.210:9999
+https://119.101.114.72:9999
+https://119.101.112.202:9999
+https://119.101.112.173:9999
+https://119.101.112.251:9999
+https://119.101.112.64:9999
+https://119.101.114.103:9999
+https://119.101.112.172:9999
+https://119.177.210.163:9999
+</pre></div>
+
+
+<p>我们把上面测试有效的代理存入到一个叫proxy的文件中。</p>
+<p>接下来，我们实现一个Proxy类来获取这个列表中的代理</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Proxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">_instance</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">proxyfile</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Proxy</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">proxyfile</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">content</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+                <span class="n">lines</span> <span class="o">=</span> <span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span><span class="o">.</span><span class="n">_proxies</span> <span class="o">=</span> <span class="n">lines</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span><span class="o">.</span><span class="n">_curr</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_instance</span>
+
+    <span class="k">def</span> <span class="nf">get_proxy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_curr</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_proxies</span><span class="p">)</span>
+        <span class="n">proxy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxies</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_curr</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">proxy</span>
+</pre></div>
+
+
+<p>上面的Proxy是一个Singleton的类。get_proxy方法用于从代理列表中获取代理，每次使用一个代理，如果所有的代理都用过了，我们回到第一个代理，重新开始选择。</p>
+<p>好，到这里我们就建立我们自己的代理池，并且创建了一个获取代理的类Proxy。</p>
+<p>接下来我们修改我们之前豆瓣爬虫的代码，我们使用代理池中的代理来发出请求。我们将get_books_by_page函数修改成如下</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_books_by_page</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">page_no</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">page_no</span> <span class="o">*</span> <span class="mi">20</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://book.douban.com/tag/{}?start={}&amp;type=T&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;User-Agent&quot;</span><span class="p">:</span> <span class="s2">&quot;User-Agent: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; 360SE)&quot;</span><span class="p">}</span>
+    <span class="n">inst</span> <span class="o">=</span> <span class="n">Proxy</span><span class="p">(</span><span class="s2">&quot;proxy&quot;</span><span class="p">)</span>
+    <span class="n">proxy</span> <span class="o">=</span> <span class="n">inst</span><span class="o">.</span><span class="n">get_proxy</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">proxies</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;https&quot;</span><span class="p">:</span> <span class="n">proxy</span><span class="p">},</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">content</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">etree</span><span class="o">.</span><span class="n">HTML</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//li[@class=&quot;subject-item&quot;]&#39;</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">status_code</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">))</span>
+
+        <span class="n">books</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+            <span class="n">title_node</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">xpath</span><span class="p">(</span><span class="s1">&#39;.//div[@class=&quot;info&quot;]/h2/a&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">title_node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">title_node</span><span class="o">.</span><span class="n">attrib</span><span class="p">[</span><span class="s2">&quot;href&quot;</span><span class="p">]</span>
+            <span class="n">books</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span> <span class="s2">&quot;url&quot;</span><span class="p">:</span> <span class="n">url</span><span class="p">})</span>
+        <span class="k">return</span> <span class="n">books</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+</pre></div>
+
+
+<p>我们再次运行我们的豆瓣爬虫，可以看到如下的输出</p>
+<div class="highlight"><pre><span></span><span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+<span class="m">200</span> <span class="m">20</span>
+...
+</pre></div>
+
+
+<p>现在爬虫又重新开始工作，可以获取到图书的信息了。</p>
+<p>通过这样的自建代理池，我们破解了豆瓣的反爬。不过需要注意的是，很多免费代理有效时间比较短，毕竟是免费的，稳定性没保障。大家获取免费代理后，还是要趁热尽快使用。如果要追求稳定性，建议大家还是使用付费代理。</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+    </p>
+  </div>
+
+
+
+
+</article>
+
+    <footer>
+<p>&copy; Zhongqiang Shen 2018</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p>    </footer>
+  </main>
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Zhongqiang's World ",
+  "url" : "https://www.shenzhongqiang.com",
+  "image": "",
+  "description": ""
+}
+</script>
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+  </script>
+  <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275829773'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s96.cnzz.com/z_stat.php%3Fid%3D1275829773' type='text/javascript'%3E%3C/script%3E"));</script>
+</body>
+</html>

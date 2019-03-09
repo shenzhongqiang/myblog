@@ -249,7 +249,7 @@ def save(article, name):
     content = replace_img_path(content)
     with open(filepath, "w") as f:
         title_line = "Title: {}\n".format(article.title)
-        url_line = "url: {}\n".format(name)
+        url_line = "url: {}\n".format(name + ".html")
         save_as_line = "save_as: {}\n".format(name + ".html")
         date_line = "Date: {}\n".format(article.time)
         category_line = "Category:\n"
@@ -270,4 +270,8 @@ if __name__ == "__main__":
     url = sys.argv[1]
     name = sys.argv[2]
     article = get_zhihu_content(url)
+    matched = re.search(r'(.*)\.md$', name)
+    if matched:
+        name = matched.group(1)
+    print(name)
     save(article, name)

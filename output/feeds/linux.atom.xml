@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Zhongqiang's World - Linux</title><link href="http://shenzhongqiang.com/" rel="alternate"></link><link href="http://shenzhongqiang.com/feeds/linux.atom.xml" rel="self"></link><id>http://shenzhongqiang.com/</id><updated>2018-10-28T10:20:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>一款超酷的Linux终端工具</title><link href="http://shenzhongqiang.com/cool-linux-colorful-util" rel="alternate"></link><published>2018-10-28T10:20:00+08:00</published><updated>2018-10-28T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:shenzhongqiang.com,2018-10-28:/cool-linux-colorful-util</id><summary type="html">&lt;p&gt;今天偶然发现一款超酷的终端工具，可以让你的终端变得像彩虹一样五彩斑斓。这款工具的名字叫做lolcat，类似于&lt;code&gt;cat …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天偶然发现一款超酷的终端工具，可以让你的终端变得像彩虹一样五彩斑斓。这款工具的名字叫做lolcat，类似于&lt;code&gt;cat&lt;/code&gt;命令，但为&lt;code&gt;cat&lt;/code&gt;的输出添加彩虹般的效果。封面就是这个工具的help输出。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Zhongqiang's World - Linux</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/linux.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2018-10-28T10:20:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>一款超酷的Linux终端工具</title><link href="https://www.shenzhongqiang.com/cool-linux-colorful-util" rel="alternate"></link><published>2018-10-28T10:20:00+08:00</published><updated>2018-10-28T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-10-28:/cool-linux-colorful-util</id><summary type="html">&lt;p&gt;今天偶然发现一款超酷的终端工具，可以让你的终端变得像彩虹一样五彩斑斓。这款工具的名字叫做lolcat，类似于&lt;code&gt;cat …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天偶然发现一款超酷的终端工具，可以让你的终端变得像彩虹一样五彩斑斓。这款工具的名字叫做lolcat，类似于&lt;code&gt;cat&lt;/code&gt;命令，但为&lt;code&gt;cat&lt;/code&gt;的输出添加彩虹般的效果。封面就是这个工具的help输出。&lt;/p&gt;
 &lt;p&gt;mac上面安装这款工具非常简单，只需要运行下面的一行命令就行&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install lolcat
 &lt;/pre&gt;&lt;/div&gt;
@@ -21,21 +21,21 @@ gem install lolcat
 
 
 &lt;p&gt;输出&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-772a2d4a17b1afb677fab3fba1b1bca5_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-772a2d4a17b1afb677fab3fba1b1bca5_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;显示文件内容，运行&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;lolcat app.py
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;输出&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-5d1b2b609584b3d537293e6507fcb975_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-5d1b2b609584b3d537293e6507fcb975_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;结合figlet输出艺术字，运行&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;figlet I Love You &lt;span class="p"&gt;|&lt;/span&gt; lolcat
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;输出&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-fc05ba6cfa61d37b726f0b7c9887e8b7_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-fc05ba6cfa61d37b726f0b7c9887e8b7_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;画爱心，将下面的代码保存成heart.py&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;([(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;Love&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;[(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.05&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.05&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mf"&gt;0.1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;**&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="mi"&gt;30&lt;/span&gt;&lt;span class="p"&gt;)])&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;15&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)]))&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
@@ -47,8 +47,8 @@ gem install lolcat
 
 
 &lt;p&gt;输出&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-21d474186e1bbf1f49662b518333acf2_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-21d474186e1bbf1f49662b518333acf2_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;原本黑底白字冷冰冰的爱心也变得有温度起来了。&lt;/p&gt;
 &lt;p&gt;是不是很酷呢？是不是想赶紧在心仪的女生面前秀一下呢？&lt;/p&gt;
 &lt;p&gt;听说转发的人都找到妹子了哦&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="http://shenzhongqiang.com/images/v2-12dda8504671a0d68a538551f7879026_b.jpg"&gt;&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-12dda8504671a0d68a538551f7879026_b.jpg"&gt;&lt;/p&gt;</content></entry></feed>

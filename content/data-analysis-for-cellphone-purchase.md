@@ -2,7 +2,7 @@ Title: 用数据分析选购手机
 url: data-analysis-for-cellphone-purchase.html
 save_as: data-analysis-for-cellphone-purchase.html
 Date: 2018-10-03
-Category:
+Category: 数据分析
 Authors: Zhongqiang Shen
 
 9月13日发布的iPhone Xs算是手机界的大新闻了，新款iPhone的价格也再度刷新了手机定价的记录。看完发布会，相信很多人的心情是这样的
