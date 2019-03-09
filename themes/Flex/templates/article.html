@@ -17,7 +17,7 @@
       {% import 'partial/translations.html' as translations with context %}
       {{ translations.translations_for(article) }}
     {% endif %}
-    <h1 id="{{ article.slug }}">{{ article.title }}</h1>
+    <h3 id="{{ article.slug }}">{{ article.title }}</h3>
     <p>
       {{ _('发表于 %(when)s 分类: %(category)s',
            when=article.locale_date,
