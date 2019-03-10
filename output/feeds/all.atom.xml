@@ -1,5 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/all.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2019-03-09T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>Github启用SSH key认证</title><link href="https://www.shenzhongqiang.com/connect-github-with-ssh.html" rel="alternate"></link><published>2019-03-09T00:00:00+08:00</published><updated>2019-03-09T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-03-09:/connect-github-with-ssh.html</id><summary type="html">&lt;p&gt;Github的认证方式有两种：HTTPS和SSH key，默认的方式是HTTPS。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/all.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2019-03-10T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>一个靠爬虫赚钱的思路</title><link href="https://www.shenzhongqiang.com/proxy-business.html" rel="alternate"></link><published>2019-03-10T00:00:00+08:00</published><updated>2019-03-10T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-03-10:/proxy-business.html</id><summary type="html">&lt;p&gt;今天早上登录我的虚拟机，发现速度慢得出奇。每次运行命令，都要等好一段时间才能看到结果。就如 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天早上登录我的虚拟机，发现速度慢得出奇。每次运行命令，都要等好一段时间才能看到结果。就如 cat 一个文件的内容这种命令，都要等好一会儿。查看CPU使用率、内存使用率，都很正常。但查看网络连接的时候，发现有好多人连到我的3128端口。&lt;/p&gt;
+&lt;p&gt;熟悉代理服务器的朋友们知道，3128是squid的默认端口。之前我在虚拟机上配了一个squid，本来是自己用的，因为没有设用户名密码，这两天被别人扫出来，作为公共的代理被用了。于是我停掉squid服务，果然，一下子虚拟机的速度就回复正常了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;但是问题来了，是谁在用我的代理呢？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其实猜也才能猜到，一定是那些代理提供商扫出了我的机器，然后把我的代理提供给他们的用户。我拿我的IP去百度了一下，果然发现被一些代理提供商收录了。&lt;/p&gt;
+&lt;p&gt;进一步深入思考一下，&lt;strong&gt;代理提供商是怎么扫到我的代理的呢？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;扫代理的原理其实很简单，就是扫描一个网络中的服务器，扫出那些启用代理服务的机器，测试它们是哪种类型的代理（透明代理、匿名代理还是高匿代理），然后代理提供商将这些代理提供给它的客户。&lt;/p&gt;
+&lt;p&gt;这么想想，其实做一个代理提供商也不是很难。&lt;strong&gt;那这样，我们不是自己也可以扫描代理，把资源卖给有需要的客户了？&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;顺着上面的思路，我整理了一下自己搭建这样一个服务涉及的几个步骤，列了几个关键点。&lt;/p&gt;
+&lt;h4&gt;扫描代理服务器&lt;/h4&gt;
+&lt;p&gt;扫端口我们可以用 nmap 这个工具。nmap 是一个网络扫描的工具，它可以用来扫描对方服务器启用了哪些端口、哪些服务，服务器是否在线，以及猜测服务器可能运行的操作系统。&lt;/p&gt;
+&lt;p&gt;我们针对一台机器运行 nmap 命令，可以扫出这个机器启用了哪些端口（服务），比如&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nmap &lt;span class="m"&gt;49&lt;/span&gt;.51.193.128
+
+Starting Nmap &lt;span class="m"&gt;7&lt;/span&gt;.01 &lt;span class="o"&gt;(&lt;/span&gt; https://nmap.org &lt;span class="o"&gt;)&lt;/span&gt; at &lt;span class="m"&gt;2019&lt;/span&gt;-03-09 &lt;span class="m"&gt;20&lt;/span&gt;:32 CST
+Nmap scan report &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="m"&gt;49&lt;/span&gt;.51.193.128
+Host is up &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.18s latency&lt;span class="o"&gt;)&lt;/span&gt;.
+Not shown: &lt;span class="m"&gt;995&lt;/span&gt; closed ports
+PORT     STATE    SERVICE
+&lt;span class="m"&gt;22&lt;/span&gt;/tcp   open     ssh
+&lt;span class="m"&gt;25&lt;/span&gt;/tcp   filtered smtp
+&lt;span class="m"&gt;111&lt;/span&gt;/tcp  open     rpcbind
+&lt;span class="m"&gt;445&lt;/span&gt;/tcp  filtered microsoft-ds
+&lt;span class="m"&gt;1080&lt;/span&gt;/tcp open     socks
+
+Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&gt; IP address &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; host up&lt;span class="o"&gt;)&lt;/span&gt; scanned in &lt;span class="m"&gt;27&lt;/span&gt;.34 seconds
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;要扫出一个网段中的代理服务器，我们可以针对一个网段作扫描，如下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nmap &lt;span class="m"&gt;49&lt;/span&gt;.51.193.0/24
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;上面的命令会扫出所有在 49.51.193.0/24这个网段中有哪些在线的机器，每台机器上启用了哪些服务。&lt;/p&gt;
+&lt;h4&gt;检测代理类型&lt;/h4&gt;
+&lt;p&gt;扫出来代理服务器后，我们可以对这些代理服务器做测试，看看它们是什么类型的代理。&lt;/p&gt;
+&lt;p&gt;代理基本上分成这三种类型：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;透明代理&lt;/li&gt;
+&lt;li&gt;匿名代理&lt;/li&gt;
+&lt;li&gt;高匿代理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通过字面意思，大致能猜到这三种代理的区别。简单的说，透明代理就是用了之后，对方服务器很清楚的知道你是谁，你来自哪个IP。匿名代理用了之后，对方没法知道你是谁，但是知道你用了代理。而高匿代理比匿名代理隐藏性更高，对方不仅不知道你是谁，也不知道你用了代理。&lt;/p&gt;
+&lt;p&gt;三者在技术层面的区别，主要在于HTTP请求头的内容不同&lt;/p&gt;
+&lt;p&gt;透明代理&lt;/p&gt;
+&lt;p&gt;REMOTE_ADDR = Proxy IP&lt;/p&gt;
+&lt;p&gt;HTTP_VIA = Proxy IP&lt;/p&gt;
+&lt;p&gt;HTTP_X_FORWARDED_FOR = Your IP&lt;/p&gt;
+&lt;p&gt;匿名代理&lt;/p&gt;
+&lt;p&gt;REMOTE_ADDR = proxy IP&lt;/p&gt;
+&lt;p&gt;HTTP_VIA = proxy IP&lt;/p&gt;
+&lt;p&gt;HTTP_X_FORWARDED_FOR = proxy IP&lt;/p&gt;
+&lt;p&gt;高匿代理&lt;/p&gt;
+&lt;p&gt;REMOTE_ADDR = Proxy IP&lt;/p&gt;
+&lt;p&gt;HTTP_VIA = not determined&lt;/p&gt;
+&lt;p&gt;HTTP_X_FORWARDED_FOR = not determined&lt;/p&gt;
+&lt;p&gt;检测代理类型的方法也非常简单，只需要自己搭建一个web服务器，在上面跑一个web程序。客户端通过代理向web服务器发起请求，web程序打印出请求头，通过分析请求头的内容就可以知道这个代理是哪种类型的。&lt;/p&gt;
+&lt;p&gt;下面是我用 Flask 写了一个例子，大致是这么个意思&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;REMOTE_ADDR&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;REMOTE_ADDR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;REMOTE_ADDR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;HTTP_VIA&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_VIA&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_VIA&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;HTTP_X_FORWARDED_FOR&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_X_FORWARDED_FOR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_X_FORWARDED_FOR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.0.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;运行这个程序，当我们通过代理访问这个web服务，它就会返回代理请求头的信息，我们可以据此判断代理是透明、匿名还是高匿代理。&lt;/p&gt;
+&lt;h4&gt;维护代理池&lt;/h4&gt;
+&lt;p&gt;好，有了代理和代理的类型，我们可以将他们做成一个代理池，提供一个接口给客户，让他们通过接口来获取可用的代理。&lt;/p&gt;
+&lt;p&gt;当然这些扫出来的代理有效时间长短不一，有的代理也许可以用很久，有的代理可能一会儿时间就失效了。我们需要保证代理池中的代理是有效的，可以定期的去检查代理的有效性，把失效的从列表中去除，把新的有效的加入进来。&lt;/p&gt;
+&lt;p&gt;当我们做出了这样一个接口后，我们可以把这个接口打包成服务卖给客户，比如按照调用次数收费或者按月收费。&lt;/p&gt;
+&lt;p&gt;市面上，对于代理池的需求还是很大的，主要是爬虫用户，有些公司也需要爬取竞争对手网站的数据来做分析。用代理池可以避免短时间内请求次数太多而被封掉的情况，当然对于公司来说，除了这方面因素，也想隐藏自己的IP来源，不让竞争对手发现自己的意图。&lt;/p&gt;
+&lt;p&gt;以上是一个赚钱项目的思路，分享给大家。&lt;/p&gt;</content></entry><entry><title>Github启用SSH key认证</title><link href="https://www.shenzhongqiang.com/connect-github-with-ssh.html" rel="alternate"></link><published>2019-03-09T00:00:00+08:00</published><updated>2019-03-09T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-03-09:/connect-github-with-ssh.html</id><summary type="html">&lt;p&gt;Github的认证方式有两种：HTTPS和SSH key，默认的方式是HTTPS。&lt;/p&gt;
 &lt;p&gt;以我自己的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Github的认证方式有两种：HTTPS和SSH key，默认的方式是HTTPS。&lt;/p&gt;
 &lt;p&gt;以我自己的&lt;a href="https://github.com/shenzhongqiang/myblog"&gt;博客项目&lt;/a&gt;为例，在repo里面运行&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git remote show origin
