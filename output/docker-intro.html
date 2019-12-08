@@ -19,6 +19,10 @@
     <link href="https://www.shenzhongqiang.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="强哥的世界 Atom">
 
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
 
 
 <meta name="author" content="Zhongqiang Shen" />
@@ -258,7 +262,7 @@ Load average: <span class="m">0</span>.16 <span class="m">0</span>.09 <span clas
 
 
 <p>启动zookeeper服务需要从官网下载zookeeper包，撰写conf/zoo.cfg，并启动zookeeper进程。ADD关键字将URL中的内容下载到指定目录中</p>
-<div class="highlight"><pre><span></span><span class="k">ADD</span> http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+<div class="highlight"><pre><span></span><span class="k">ADD</span><span class="s"> http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp</span>
 </pre></div>
 
 
@@ -286,7 +290,7 @@ Load average: <span class="m">0</span>.16 <span class="m">0</span>.09 <span clas
 
 
 <p>启动zookeeper进程，使用CMD关键字。start-foreground参数让zookeeper在前台运行，如果没有这个参数，.sh脚本退出后会导致容器也退出</p>
-<div class="highlight"><pre><span></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;/opt/zookeeper/bin/zkServer.sh&quot;</span><span class="p">,</span> <span class="s2">&quot;start-foreground&quot;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><span class="k">CMD</span><span class="s"> [&quot;/opt/zookeeper/bin/zkServer.sh&quot;, &quot;start-foreground&quot;]</span>
 </pre></div>
 
 
@@ -296,7 +300,7 @@ Load average: <span class="m">0</span>.16 <span class="m">0</span>.09 <span clas
 <span class="k">MAINTAINER</span><span class="s"> Zhongqiang Shen</span>
 
 <span class="k">WORKDIR</span><span class="s"> /tmp</span>
-<span class="k">ADD</span> http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+<span class="k">ADD</span><span class="s"> http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp</span>
 <span class="k">RUN</span> tar -xzf zookeeper-3.4.10.tar.gz
 <span class="k">RUN</span> mv zookeeper-3.4.10 /opt/zookeeper
 <span class="k">WORKDIR</span><span class="s"> /opt/zookeeper</span>
@@ -304,7 +308,7 @@ Load average: <span class="m">0</span>.16 <span class="m">0</span>.09 <span clas
 <span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;dataDir=/var/lib/zookeeper&quot;</span> &gt;&gt; conf/zoo.cfg
 <span class="k">RUN</span> <span class="nb">echo</span> <span class="s2">&quot;clientPort=2181&quot;</span> &gt;&gt; conf/zoo.cfg
 <span class="k">EXPOSE</span><span class="s"> 2181</span>
-<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;/opt/zookeeper/bin/zkServer.sh&quot;</span><span class="p">,</span> <span class="s2">&quot;start-foreground&quot;</span><span class="p">]</span>
+<span class="k">CMD</span><span class="s"> [&quot;/opt/zookeeper/bin/zkServer.sh&quot;, &quot;start-foreground&quot;]</span>
 </pre></div>
 
 

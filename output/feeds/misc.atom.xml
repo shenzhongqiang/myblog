@@ -1,90 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - misc</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/misc.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2019-03-10T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>一个靠爬虫赚钱的思路</title><link href="https://www.shenzhongqiang.com/proxy-business.html" rel="alternate"></link><published>2019-03-10T00:00:00+08:00</published><updated>2019-03-10T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-03-10:/proxy-business.html</id><summary type="html">&lt;p&gt;今天早上登录我的虚拟机，发现速度慢得出奇。每次运行命令，都要等好一段时间才能看到结果。就如 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天早上登录我的虚拟机，发现速度慢得出奇。每次运行命令，都要等好一段时间才能看到结果。就如 cat 一个文件的内容这种命令，都要等好一会儿。查看CPU使用率、内存使用率，都很正常。但查看网络连接的时候，发现有好多人连到我的3128端口。&lt;/p&gt;
-&lt;p&gt;熟悉代理服务器的朋友们知道，3128是squid的默认端口。之前我在虚拟机上配了一个squid，本来是自己用的，因为没有设用户名密码，这两天被别人扫出来，作为公共的代理被用了。于是我停掉squid服务，果然，一下子虚拟机的速度就回复正常了。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;但是问题来了，是谁在用我的代理呢？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;其实猜也才能猜到，一定是那些代理提供商扫出了我的机器，然后把我的代理提供给他们的用户。我拿我的IP去百度了一下，果然发现被一些代理提供商收录了。&lt;/p&gt;
-&lt;p&gt;进一步深入思考一下，&lt;strong&gt;代理提供商是怎么扫到我的代理的呢？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;扫代理的原理其实很简单，就是扫描一个网络中的服务器，扫出那些启用代理服务的机器，测试它们是哪种类型的代理（透明代理、匿名代理还是高匿代理），然后代理提供商将这些代理提供给它的客户。&lt;/p&gt;
-&lt;p&gt;这么想想，其实做一个代理提供商也不是很难。&lt;strong&gt;那这样，我们不是自己也可以扫描代理，把资源卖给有需要的客户了？&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;顺着上面的思路，我整理了一下自己搭建这样一个服务涉及的几个步骤，列了几个关键点。&lt;/p&gt;
-&lt;h4&gt;扫描代理服务器&lt;/h4&gt;
-&lt;p&gt;扫端口我们可以用 nmap 这个工具。nmap 是一个网络扫描的工具，它可以用来扫描对方服务器启用了哪些端口、哪些服务，服务器是否在线，以及猜测服务器可能运行的操作系统。&lt;/p&gt;
-&lt;p&gt;我们针对一台机器运行 nmap 命令，可以扫出这个机器启用了哪些端口（服务），比如&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nmap &lt;span class="m"&gt;49&lt;/span&gt;.51.193.128
-
-Starting Nmap &lt;span class="m"&gt;7&lt;/span&gt;.01 &lt;span class="o"&gt;(&lt;/span&gt; https://nmap.org &lt;span class="o"&gt;)&lt;/span&gt; at &lt;span class="m"&gt;2019&lt;/span&gt;-03-09 &lt;span class="m"&gt;20&lt;/span&gt;:32 CST
-Nmap scan report &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="m"&gt;49&lt;/span&gt;.51.193.128
-Host is up &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;.18s latency&lt;span class="o"&gt;)&lt;/span&gt;.
-Not shown: &lt;span class="m"&gt;995&lt;/span&gt; closed ports
-PORT     STATE    SERVICE
-&lt;span class="m"&gt;22&lt;/span&gt;/tcp   open     ssh
-&lt;span class="m"&gt;25&lt;/span&gt;/tcp   filtered smtp
-&lt;span class="m"&gt;111&lt;/span&gt;/tcp  open     rpcbind
-&lt;span class="m"&gt;445&lt;/span&gt;/tcp  filtered microsoft-ds
-&lt;span class="m"&gt;1080&lt;/span&gt;/tcp open     socks
-
-Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&gt; IP address &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;1&lt;/span&gt; host up&lt;span class="o"&gt;)&lt;/span&gt; scanned in &lt;span class="m"&gt;27&lt;/span&gt;.34 seconds
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;要扫出一个网段中的代理服务器，我们可以针对一个网段作扫描，如下&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ nmap &lt;span class="m"&gt;49&lt;/span&gt;.51.193.0/24
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;上面的命令会扫出所有在 49.51.193.0/24这个网段中有哪些在线的机器，每台机器上启用了哪些服务。&lt;/p&gt;
-&lt;h4&gt;检测代理类型&lt;/h4&gt;
-&lt;p&gt;扫出来代理服务器后，我们可以对这些代理服务器做测试，看看它们是什么类型的代理。&lt;/p&gt;
-&lt;p&gt;代理基本上分成这三种类型：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;透明代理&lt;/li&gt;
-&lt;li&gt;匿名代理&lt;/li&gt;
-&lt;li&gt;高匿代理&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;通过字面意思，大致能猜到这三种代理的区别。简单的说，透明代理就是用了之后，对方服务器很清楚的知道你是谁，你来自哪个IP。匿名代理用了之后，对方没法知道你是谁，但是知道你用了代理。而高匿代理比匿名代理隐藏性更高，对方不仅不知道你是谁，也不知道你用了代理。&lt;/p&gt;
-&lt;p&gt;三者在技术层面的区别，主要在于HTTP请求头的内容不同&lt;/p&gt;
-&lt;p&gt;透明代理&lt;/p&gt;
-&lt;p&gt;REMOTE_ADDR = Proxy IP&lt;/p&gt;
-&lt;p&gt;HTTP_VIA = Proxy IP&lt;/p&gt;
-&lt;p&gt;HTTP_X_FORWARDED_FOR = Your IP&lt;/p&gt;
-&lt;p&gt;匿名代理&lt;/p&gt;
-&lt;p&gt;REMOTE_ADDR = proxy IP&lt;/p&gt;
-&lt;p&gt;HTTP_VIA = proxy IP&lt;/p&gt;
-&lt;p&gt;HTTP_X_FORWARDED_FOR = proxy IP&lt;/p&gt;
-&lt;p&gt;高匿代理&lt;/p&gt;
-&lt;p&gt;REMOTE_ADDR = Proxy IP&lt;/p&gt;
-&lt;p&gt;HTTP_VIA = not determined&lt;/p&gt;
-&lt;p&gt;HTTP_X_FORWARDED_FOR = not determined&lt;/p&gt;
-&lt;p&gt;检测代理类型的方法也非常简单，只需要自己搭建一个web服务器，在上面跑一个web程序。客户端通过代理向web服务器发起请求，web程序打印出请求头，通过分析请求头的内容就可以知道这个代理是哪种类型的。&lt;/p&gt;
-&lt;p&gt;下面是我用 Flask 写了一个例子，大致是这么个意思&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
-&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;
-
-&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="nd"&gt;@app.route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;hello&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
-    &lt;span class="n"&gt;header&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{}&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;REMOTE_ADDR&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;REMOTE_ADDR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;REMOTE_ADDR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;HTTP_VIA&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_VIA&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_VIA&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;HTTP_X_FORWARDED_FOR&amp;quot;&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-        &lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_X_FORWARDED_FOR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;HTTP_X_FORWARDED_FOR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
-    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;header&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-
-&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
-    &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;host&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;0.0.0.0&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;8080&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-
-&lt;p&gt;运行这个程序，当我们通过代理访问这个web服务，它就会返回代理请求头的信息，我们可以据此判断代理是透明、匿名还是高匿代理。&lt;/p&gt;
-&lt;h4&gt;维护代理池&lt;/h4&gt;
-&lt;p&gt;好，有了代理和代理的类型，我们可以将他们做成一个代理池，提供一个接口给客户，让他们通过接口来获取可用的代理。&lt;/p&gt;
-&lt;p&gt;当然这些扫出来的代理有效时间长短不一，有的代理也许可以用很久，有的代理可能一会儿时间就失效了。我们需要保证代理池中的代理是有效的，可以定期的去检查代理的有效性，把失效的从列表中去除，把新的有效的加入进来。&lt;/p&gt;
-&lt;p&gt;当我们做出了这样一个接口后，我们可以把这个接口打包成服务卖给客户，比如按照调用次数收费或者按月收费。&lt;/p&gt;
-&lt;p&gt;市面上，对于代理池的需求还是很大的，主要是爬虫用户，有些公司也需要爬取竞争对手网站的数据来做分析。用代理池可以避免短时间内请求次数太多而被封掉的情况，当然对于公司来说，除了这方面因素，也想隐藏自己的IP来源，不让竞争对手发现自己的意图。&lt;/p&gt;
-&lt;p&gt;以上是一个赚钱项目的思路，分享给大家。&lt;/p&gt;</content></entry><entry><title>年终奖多发一元，少得千元？Python告诉你为什么</title><link href="https://www.shenzhongqiang.com/annual-bonus-tax.html" rel="alternate"></link><published>2019-01-18T00:00:00+08:00</published><updated>2019-01-18T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-01-18:/annual-bonus-tax.html</id><summary type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - misc</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/misc.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2019-01-18T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>年终奖多发一元，少得千元？Python告诉你为什么</title><link href="https://www.shenzhongqiang.com/annual-bonus-tax.html" rel="alternate"></link><published>2019-01-18T00:00:00+08:00</published><updated>2019-01-18T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-01-18:/annual-bonus-tax.html</id><summary type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-93705d574116cb79418b2d01462f8b88_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;上了这么多年班，我也是最近才搞清楚年终奖的税是怎么算的。年终奖的税和工资税的最大区别就是，年终奖&lt;strong&gt;没有阶梯税率，没有阶梯税率，没有阶梯税率&lt;/strong&gt;，重要的事情说三遍。&lt;/p&gt;
 &lt;p&gt;具体怎么算，我们来看下面的公式&lt;/p&gt;
@@ -135,7 +50,7 @@ Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&g
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-15460c017b74acf4ac7d9fff7e35792b_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;这张图就正常多了，图上没有突然下跌的断层，税后年终奖和税前年终奖呈现单调递增的关系。&lt;/p&gt;
 &lt;p&gt;看到这里，大家是不是理解了年终奖的计税方式了呢？祝大家都能避开跨税档的陷阱~&lt;/p&gt;
-&lt;p&gt;完整代码已上传网盘，公众号【Python与数据分析】后台回复“&lt;strong&gt;年终奖&lt;/strong&gt;”可获取地址。&lt;/p&gt;</content></entry><entry><title>用Python生成马赛克画</title><link href="https://www.shenzhongqiang.com/python-create-mosaic-painting.html" rel="alternate"></link><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-09-12:/python-create-mosaic-painting.html</id><summary type="html">&lt;p&gt;大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~&lt;/p&gt;
+&lt;p&gt;完整代码已上传网盘，公众号【Python与数据分析】后台回复“&lt;strong&gt;年终奖&lt;/strong&gt;”可获取地址。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用Python生成马赛克画</title><link href="https://www.shenzhongqiang.com/python-create-mosaic-painting.html" rel="alternate"></link><published>2018-09-12T00:00:00+08:00</published><updated>2018-09-12T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-09-12:/python-create-mosaic-painting.html</id><summary type="html">&lt;p&gt;大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~&lt;/p&gt;
 &lt;p&gt;马赛克画是一张由小图拼成的大图，本文的封面就是我们的效果图，放大看细节 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~&lt;/p&gt;
 &lt;p&gt;马赛克画是一张由小图拼成的大图，本文的封面就是我们的效果图，放大看细节，每一块都是一张独立的图片，拼在一起组成一张大图，感觉像是用马赛克拼出来的画，所以叫马赛克画。看到网上的一些马赛克画觉得很酷，于是自己用Python实现了一下将一张原图转换成马赛克画。&lt;/p&gt;
 &lt;p&gt;封面的原图是这样的&lt;/p&gt;
@@ -209,7 +124,7 @@ Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&g
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c4506d984d721fb8cfbd9f502911d36d_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;如果对图片的画质不满意，想要更精细的画质，可以考虑在分割的时候把图片分割成更小的方格，不过这样也会增加程序运行的时间。&lt;/p&gt;
 &lt;p&gt;生成图片的过程比较耗时，考虑到性能原因，原程序中使用多进程的方式并行处理。&lt;/p&gt;
-&lt;p&gt;完整代码已上传github，公众号【Python与数据分析】后台回复“mosaic”可获取地址。&lt;/p&gt;</content></entry><entry><title>Python告诉你上海有哪些高性价比的西餐厅</title><link href="https://www.shenzhongqiang.com/python-shanghai-best-western-restaurants.html" rel="alternate"></link><published>2018-08-29T00:00:00+08:00</published><updated>2018-08-29T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-29:/python-shanghai-best-western-restaurants.html</id><summary type="html">&lt;p&gt;七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。&lt;/p&gt;
+&lt;p&gt;完整代码已上传github，公众号【Python与数据分析】后台回复“mosaic”可获取地址。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python告诉你上海有哪些高性价比的西餐厅</title><link href="https://www.shenzhongqiang.com/python-shanghai-best-western-restaurants.html" rel="alternate"></link><published>2018-08-29T00:00:00+08:00</published><updated>2018-08-29T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-29:/python-shanghai-best-western-restaurants.html</id><summary type="html">&lt;p&gt;七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。&lt;/p&gt;
 &lt;p&gt;爬虫的原理不多说了，很简单 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。&lt;/p&gt;
 &lt;p&gt;爬虫的原理不多说了，很简单，按行政区爬取每个区的西餐厅，存入数据库。需要代码的同学可以在公众号【&lt;strong&gt;Python与数据分析&lt;/strong&gt;】后台回复“西餐厅”获取代码地址。&lt;/p&gt;
 &lt;h4&gt;餐厅综合评分&lt;/h4&gt;
@@ -275,7 +190,7 @@ Nmap &lt;span class="k"&gt;done&lt;/span&gt;: &lt;span class="m"&gt;1&lt;/span&g
 &lt;p&gt;上面共43家餐厅。点开链接可以跳转到点评的餐厅主页，可以看到，点评上这几家在口味、环境、服务方面的评价都不错，性价比很高。上海性价比最高的适合约会的餐厅基本都在这里了。&lt;/p&gt;
 &lt;p&gt;明天就是七夕了，七夕节还没有安排的，妹子还没追到手的，强哥只能帮你到这儿了~&lt;/p&gt;
 &lt;p&gt;最后祝大家七夕节快乐：）&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-07dac14a2279972e16cda140648e4cb9_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>用Python识别验证码</title><link href="https://www.shenzhongqiang.com/python-captcha-recognition.html" rel="alternate"></link><published>2018-08-28T00:00:00+08:00</published><updated>2018-08-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-28:/python-captcha-recognition.html</id><summary type="html">&lt;p&gt;很多网站登录都需要输入验证码，如果要实现自动登录就不可避免的要识别验证码。最近学习了一下图像处理相关的知识，并用Python实现了基于KNN的验证码识别。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-07dac14a2279972e16cda140648e4cb9_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用Python识别验证码</title><link href="https://www.shenzhongqiang.com/python-captcha-recognition.html" rel="alternate"></link><published>2018-08-28T00:00:00+08:00</published><updated>2018-08-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-28:/python-captcha-recognition.html</id><summary type="html">&lt;p&gt;很多网站登录都需要输入验证码，如果要实现自动登录就不可避免的要识别验证码。最近学习了一下图像处理相关的知识，并用Python实现了基于KNN的验证码识别。&lt;/p&gt;
 &lt;h4&gt;准备工作 …&lt;/h4&gt;</summary><content type="html">&lt;p&gt;很多网站登录都需要输入验证码，如果要实现自动登录就不可避免的要识别验证码。最近学习了一下图像处理相关的知识，并用Python实现了基于KNN的验证码识别。&lt;/p&gt;
 &lt;h4&gt;准备工作&lt;/h4&gt;
 &lt;p&gt;这里我们使用opencv做图像处理，所以需要安装下面两个库&lt;/p&gt;
@@ -531,7 +446,7 @@ e
 &lt;p&gt;图片中的验证码被成功地识别出来。&lt;/p&gt;
 &lt;p&gt;我们测试了下识别的准确率，取100张验证码图片（存在test目录下）进行识别，识别的准确率约为82%。看到有人说用神经网络识别验证码，准确率可以达到90%以上，下次有机会可以尝试一下。&lt;/p&gt;
 &lt;p&gt;完整代码已上传github：&lt;a href="http://link.zhihu.com/?target=https%3A//github.com/pythonml/captacha"&gt;pythonml/captacha&lt;/a&gt; &lt;/p&gt;
-&lt;p&gt;所有训练数据、测试数据、已标注图片都已上传百度网盘，公众号【&lt;strong&gt;Python与数据分析&lt;/strong&gt;】后台回复“验证码”可获取网盘地址。&lt;/p&gt;</content></entry><entry><title>Python爬虫告诉你北京房价有多高</title><link href="https://www.shenzhongqiang.com/python-beijing-house-price.html" rel="alternate"></link><published>2018-08-16T00:00:00+08:00</published><updated>2018-08-16T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-16:/python-beijing-house-price.html</id><summary type="html">&lt;p&gt;这篇是之前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐弟篇，这一篇我们来分析分析首都北京的房价。&lt;/p&gt;
+&lt;p&gt;所有训练数据、测试数据、已标注图片都已上传百度网盘，公众号【&lt;strong&gt;Python与数据分析&lt;/strong&gt;】后台回复“验证码”可获取网盘地址。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python爬虫告诉你北京房价有多高</title><link href="https://www.shenzhongqiang.com/python-beijing-house-price.html" rel="alternate"></link><published>2018-08-16T00:00:00+08:00</published><updated>2018-08-16T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-16:/python-beijing-house-price.html</id><summary type="html">&lt;p&gt;这篇是之前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐弟篇，这一篇我们来分析分析首都北京的房价。&lt;/p&gt;
 &lt;p&gt;贝壳上北京的在售房源共有 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;这篇是之前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐弟篇，这一篇我们来分析分析首都北京的房价。&lt;/p&gt;
 &lt;p&gt;贝壳上北京的在售房源共有&lt;strong&gt;54107&lt;/strong&gt;套，平均售价&lt;strong&gt;677万&lt;/strong&gt;/套，平均单价&lt;strong&gt;66568元&lt;/strong&gt;/平方，平均房龄&lt;strong&gt;16.6&lt;/strong&gt;年。&lt;/p&gt;
 &lt;p&gt;北京各区的房源分布如下&lt;/p&gt;
@@ -566,7 +481,7 @@ e
 &lt;p&gt;前面两篇分别介绍了上海和深圳的房价，两篇的地址在这里：&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://zhuanlan.zhihu.com/p/41694635"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;比较北上深的房价，可以发现&lt;strong&gt;北京不论在平均单价还是套均总价上都比上海深圳高出了不少&lt;/strong&gt;。豪宅方面，每个城市都有每个城市的特点，&lt;strong&gt;上海的特点在于贵，深圳的特点在于精致，北京的特点在于大&lt;/strong&gt;。&lt;/p&gt;</content></entry><entry><title>Python爬虫告诉你深圳房价有多高</title><link href="https://www.shenzhongqiang.com/python-shenzhen-house-price.html" rel="alternate"></link><published>2018-08-10T00:00:00+08:00</published><updated>2018-08-10T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-10:/python-shenzhen-house-price.html</id><summary type="html">&lt;p&gt;这一篇是前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐妹篇，这一篇我们来看一看中国最具活力的城市&lt;strong&gt;深圳 …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;这一篇是前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐妹篇，这一篇我们来看一看中国最具活力的城市&lt;strong&gt;深圳&lt;/strong&gt;的房价。爬虫原理类似，我们直接分享数据。&lt;/p&gt;
+&lt;p&gt;比较北上深的房价，可以发现&lt;strong&gt;北京不论在平均单价还是套均总价上都比上海深圳高出了不少&lt;/strong&gt;。豪宅方面，每个城市都有每个城市的特点，&lt;strong&gt;上海的特点在于贵，深圳的特点在于精致，北京的特点在于大&lt;/strong&gt;。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python爬虫告诉你深圳房价有多高</title><link href="https://www.shenzhongqiang.com/python-shenzhen-house-price.html" rel="alternate"></link><published>2018-08-10T00:00:00+08:00</published><updated>2018-08-10T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-08-10:/python-shenzhen-house-price.html</id><summary type="html">&lt;p&gt;这一篇是前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐妹篇，这一篇我们来看一看中国最具活力的城市&lt;strong&gt;深圳 …&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;这一篇是前一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;的姐妹篇，这一篇我们来看一看中国最具活力的城市&lt;strong&gt;深圳&lt;/strong&gt;的房价。爬虫原理类似，我们直接分享数据。&lt;/p&gt;
 &lt;p&gt;贝壳上，深圳的在售房源共有&lt;strong&gt;26822&lt;/strong&gt;套，在售房源的平均售价是&lt;strong&gt;530万&lt;/strong&gt;/套，平均单价是&lt;strong&gt;57436元&lt;/strong&gt;/平米，平均房龄&lt;strong&gt;12.7&lt;/strong&gt;年。&lt;/p&gt;
 &lt;p&gt;深圳各区县的房源数量分布如下&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-3574bcd44d86d6408649846aa4a3c559_r.jpg"&gt;&lt;/p&gt;
@@ -591,7 +506,7 @@ e
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-1dd05d139abfdb16ab59e9dd35d7bfa7_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;绿化覆盖率很高，小区环境看着很舒适，房子也很气派，很有豪宅的气质。&lt;/p&gt;
 &lt;p&gt;比较一下深圳和上海两地的房价（上一篇&lt;a href="https://zhuanlan.zhihu.com/p/40293278"&gt;Python爬虫告诉你上海房价有多高&lt;/a&gt;），可以发现，深圳和上海的平均单价和套均总价均相差不大。豪宅方面，上海的顶级豪宅要比深圳的顶级豪宅贵不少，上海排名前10的豪宅最便宜的也在1亿以上，而这里的数据里深圳最贵的豪宅也就1个亿，这有点令人难以置信。比较贝壳上这两个城市的房源数量，可以发现深圳的房源远少于上海的房源，可能深圳一些更贵的豪宅没有在贝壳上挂牌吧。&lt;/p&gt;
-&lt;p&gt;本文我们分析了一下深圳的房价数据，下一篇我们来看一下北京的房价。敬请期待~&lt;/p&gt;</content></entry><entry><title>Python爬虫告诉你上海房价有多高</title><link href="https://www.shenzhongqiang.com/python-shanghai-house-price.html" rel="alternate"></link><published>2018-07-22T00:00:00+08:00</published><updated>2018-07-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-07-22:/python-shanghai-house-price.html</id><summary type="html">&lt;p&gt;最近用Python爬取了贝壳上7万多套上海的在售房源，7万多套房源是目前贝壳上正在挂牌出售的房源，覆盖了上海各个区县。我们对这7万多套房源做一下分析，来真实地感受一下上海的房价到底有多高 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近用Python爬取了贝壳上7万多套上海的在售房源，7万多套房源是目前贝壳上正在挂牌出售的房源，覆盖了上海各个区县。我们对这7万多套房源做一下分析，来真实地感受一下上海的房价到底有多高。&lt;/p&gt;
+&lt;p&gt;本文我们分析了一下深圳的房价数据，下一篇我们来看一下北京的房价。敬请期待~&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python爬虫告诉你上海房价有多高</title><link href="https://www.shenzhongqiang.com/python-shanghai-house-price.html" rel="alternate"></link><published>2018-07-22T00:00:00+08:00</published><updated>2018-07-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-07-22:/python-shanghai-house-price.html</id><summary type="html">&lt;p&gt;最近用Python爬取了贝壳上7万多套上海的在售房源，7万多套房源是目前贝壳上正在挂牌出售的房源，覆盖了上海各个区县。我们对这7万多套房源做一下分析，来真实地感受一下上海的房价到底有多高 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近用Python爬取了贝壳上7万多套上海的在售房源，7万多套房源是目前贝壳上正在挂牌出售的房源，覆盖了上海各个区县。我们对这7万多套房源做一下分析，来真实地感受一下上海的房价到底有多高。&lt;/p&gt;
 &lt;h4&gt;爬虫思路&lt;/h4&gt;
 &lt;p&gt;首先介绍一下我们这个爬虫的思路。贝壳网上的房源按照区县、版块做了划分，如下&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-1307e0c656cf57acc59555209580fe64_r.jpg"&gt;&lt;/p&gt;
@@ -623,7 +538,7 @@ e
 &lt;p&gt;看了是不是很喜欢？是不是很动心？&lt;/p&gt;
 &lt;p&gt;那么月薪1万，如何才能买得起这样的豪宅呢？&lt;/p&gt;
 &lt;p&gt;不要急，一步步来。先设定一个小目标，比如：先活他个500年。&lt;/p&gt;
-&lt;p&gt;爬虫代码已上传github，如需代码，可在公众号【&lt;strong&gt;Python与数据分析&lt;/strong&gt;】后台回复“房价”获取代码地址。&lt;/p&gt;</content></entry><entry><title>用Python算一算n阶乘的末尾有几个零</title><link href="https://www.shenzhongqiang.com/algorithms-tailing-zeros-for-factorial" rel="alternate"></link><published>2018-07-04T00:00:00+08:00</published><updated>2018-07-04T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-07-04:/algorithms-tailing-zeros-for-factorial</id><summary type="html">&lt;p&gt;这是Lintcode第二题，原题在此 &lt;a href="http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/"&gt;尾部的零&lt;/a&gt;。题目虽然标为“简单 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;这是Lintcode第二题，原题在此 &lt;a href="http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/"&gt;尾部的零&lt;/a&gt;。题目虽然标为“简单”，但答对率却不高。&lt;/p&gt;
+&lt;p&gt;爬虫代码已上传github，如需代码，可在公众号【&lt;strong&gt;Python与数据分析&lt;/strong&gt;】后台回复“房价”获取代码地址。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用Python算一算n阶乘的末尾有几个零</title><link href="https://www.shenzhongqiang.com/algorithms-tailing-zeros-for-factorial" rel="alternate"></link><published>2018-07-04T00:00:00+08:00</published><updated>2018-07-04T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-07-04:/algorithms-tailing-zeros-for-factorial</id><summary type="html">&lt;p&gt;这是Lintcode第二题，原题在此 &lt;a href="http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/"&gt;尾部的零&lt;/a&gt;。题目虽然标为“简单 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;这是Lintcode第二题，原题在此 &lt;a href="http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/"&gt;尾部的零&lt;/a&gt;。题目虽然标为“简单”，但答对率却不高。&lt;/p&gt;
 &lt;p&gt;看到这一题，比较直观的想法是计算从1到n的连乘，但这样很容易溢出，因为乘起来的数字太大。&lt;/p&gt;
 &lt;p&gt;换一个思路，我们将n阶乘做质因数分解，将n阶乘表示成&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=n%21+%3D+a+%5Ctimes+2%5E%7Bm%7D+%5Ctimes+5%5E%7Bk%7D"&gt; &lt;/p&gt;
@@ -662,7 +577,7 @@ e
 &lt;li&gt;上面的代码中用到了这样一个假设： &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ol&gt;</content></entry><entry><title>10行代码识别二维码</title><link href="https://www.shenzhongqiang.com/recognize-qr-code.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/recognize-qr-code.html</id><summary type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影。最近坐地铁又推出了扫二维码进出站。&lt;/p&gt;
+&lt;/ol&gt;</content><category term="misc"></category></entry><entry><title>10行代码识别二维码</title><link href="https://www.shenzhongqiang.com/recognize-qr-code.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/recognize-qr-code.html</id><summary type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影。最近坐地铁又推出了扫二维码进出站。&lt;/p&gt;
 &lt;p&gt;最近一段时间，上海的很多地铁检票机器都装上了像下面这样的二维码扫描器&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-acebb23eaff588dc3f0844726d0605c0_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;只需打开手机app上的二维码，对准扫描窗口扫一扫，就可以进站，到站后再扫一扫，就可以出站并自动扣款。&lt;/p&gt;
@@ -710,7 +625,7 @@ pip install opencv-python
 
 &lt;p&gt;：）&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>50行代码实现人脸检测</title><link href="https://www.shenzhongqiang.com/python-face-detection.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/python-face-detection.html</id><summary type="html">&lt;p&gt;现在的人脸识别技术已经得到了非常广泛的应用，支付领域、身份验证、美颜相机里都有它的应用。用iPhone的同学们应该对下面的功能比较熟悉 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;现在的人脸识别技术已经得到了非常广泛的应用，支付领域、身份验证、美颜相机里都有它的应用。用iPhone的同学们应该对下面的功能比较熟悉&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>50行代码实现人脸检测</title><link href="https://www.shenzhongqiang.com/python-face-detection.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/python-face-detection.html</id><summary type="html">&lt;p&gt;现在的人脸识别技术已经得到了非常广泛的应用，支付领域、身份验证、美颜相机里都有它的应用。用iPhone的同学们应该对下面的功能比较熟悉 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;现在的人脸识别技术已经得到了非常广泛的应用，支付领域、身份验证、美颜相机里都有它的应用。用iPhone的同学们应该对下面的功能比较熟悉&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-ccf07fb5689f8b6037eb619a5a5ce11a_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;iPhone的照片中有一个“人物”的功能，能够将照片里的人脸识别出来并分类，背后的原理也是人脸识别技术。&lt;/p&gt;
 &lt;p&gt;这篇文章主要介绍怎样用Python实现人脸检测。人脸检测是人脸识别的基础。人脸检测的目的是识别出照片里的人脸并定位面部特征点，人脸识别是在人脸检测的基础上进一步告诉你这个人是谁。&lt;/p&gt;
@@ -828,7 +743,7 @@ $ pip install dlib
 &lt;p&gt;欢迎点赞~ &lt;/p&gt;
 &lt;p&gt;视点赞情况，后续再另开一篇写写怎样实现人脸识别，告诉你照片里的人是谁。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>基于face_recognition实现人脸识别</title><link href="https://www.shenzhongqiang.com/recognize-face.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/recognize-face.html</id><summary type="html">&lt;p&gt;上一篇文章&lt;a href="https://zhuanlan.zhihu.com/p/32781218"&gt;50行代码实现人脸检测&lt;/a&gt;收到了很多朋友的点赞，非常感谢大家的鼓励。上一篇中我们实现了检测照片中的人脸并标出人脸特征点 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇文章&lt;a href="https://zhuanlan.zhihu.com/p/32781218"&gt;50行代码实现人脸检测&lt;/a&gt;收到了很多朋友的点赞，非常感谢大家的鼓励。上一篇中我们实现了检测照片中的人脸并标出人脸特征点（鼻子，眼睛，眉毛等），这一篇我们将在上一篇的基础上，进一步实现人脸识别，告诉你照片里的人是谁。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>基于face_recognition实现人脸识别</title><link href="https://www.shenzhongqiang.com/recognize-face.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/recognize-face.html</id><summary type="html">&lt;p&gt;上一篇文章&lt;a href="https://zhuanlan.zhihu.com/p/32781218"&gt;50行代码实现人脸检测&lt;/a&gt;收到了很多朋友的点赞，非常感谢大家的鼓励。上一篇中我们实现了检测照片中的人脸并标出人脸特征点 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇文章&lt;a href="https://zhuanlan.zhihu.com/p/32781218"&gt;50行代码实现人脸检测&lt;/a&gt;收到了很多朋友的点赞，非常感谢大家的鼓励。上一篇中我们实现了检测照片中的人脸并标出人脸特征点（鼻子，眼睛，眉毛等），这一篇我们将在上一篇的基础上，进一步实现人脸识别，告诉你照片里的人是谁。&lt;/p&gt;
 &lt;h4&gt;准备工作&lt;/h4&gt;
 &lt;p&gt;我们的人脸识别基于face_recognition库。face_recognition基于dlib实现，用深度学习训练数据，模型准确率高达99.38%。在开始我们的工作前，我们先安装face_recognition&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install face_recognition
@@ -909,7 +824,7 @@ $ pip install dlib
 &lt;p&gt;威廉王子和凯特王妃的人脸都被准确地识别出来。绿色的框框出了人脸区域，框的上方标注了识别到的人的名字。&lt;/p&gt;
 &lt;p&gt;至此，我们成功地实现了人脸识别。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python 2与Python 3的区别</title><link href="https://www.shenzhongqiang.com/diff-between-python2-and-python3.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-python2-and-python3.html</id><summary type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了，也体会了一下2和3的区别。主要的一些区别在以下几个方面：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python 2与Python 3的区别</title><link href="https://www.shenzhongqiang.com/diff-between-python2-and-python3.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-python2-and-python3.html</id><summary type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了，也体会了一下2和3的区别。主要的一些区别在以下几个方面：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;print函数&lt;/li&gt;
 &lt;li&gt;整数相除&lt;/li&gt;
@@ -1083,7 +998,7 @@ AttributeError: &amp;#39;dict&amp;#39; object has no attribute &amp;#39;has_key&
 
 &lt;p&gt;以上是最近整理的一些，后续会继续更新，也欢迎大家补充。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python面试之 is 和 == 的区别</title><link href="https://www.shenzhongqiang.com/diff-between-is-and-doubleequal.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-is-and-doubleequal.html</id><summary type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时，很多同学都答不上来，搞不清两者什么时候返回一致，什么时候返回不一致。本文我们来看一下这两者的区别。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python面试之 is 和 == 的区别</title><link href="https://www.shenzhongqiang.com/diff-between-is-and-doubleequal.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-is-and-doubleequal.html</id><summary type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时，很多同学都答不上来，搞不清两者什么时候返回一致，什么时候返回不一致。本文我们来看一下这两者的区别。&lt;/p&gt;
 &lt;p&gt;我们先来看几个例子：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
@@ -1153,7 +1068,7 @@ AttributeError: &amp;#39;dict&amp;#39; object has no attribute &amp;#39;has_key&
 &lt;/ul&gt;
 &lt;p&gt;欢迎回答在评论区~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python面试之可变对象和不可变对象</title><link href="https://www.shenzhongqiang.com/mutable-and-immutable.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/mutable-and-immutable.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别 …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别&lt;/a&gt;的最后留了一个问题：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python面试之可变对象和不可变对象</title><link href="https://www.shenzhongqiang.com/mutable-and-immutable.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/mutable-and-immutable.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别 …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别&lt;/a&gt;的最后留了一个问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Python里和None比较时，为什么是 is None 而不是 == None 呢？*&lt;/li&gt;
 &lt;/ul&gt;
@@ -1253,7 +1168,7 @@ AttributeError: &amp;#39;dict&amp;#39; object has no attribute &amp;#39;has_key&
 &lt;p&gt;那么问题来了，怎样修改代码才能解决上面默认参数的问题呢？&lt;/p&gt;
 &lt;p&gt;答案下期揭晓，欢迎关注~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python面试之理解__new__和__init__的区别</title><link href="https://www.shenzhongqiang.com/diff-between-new-and-init" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-new-and-init</id><summary type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python面试之理解__new__和__init__的区别</title><link href="https://www.shenzhongqiang.com/diff-between-new-and-init" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-new-and-init</id><summary type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下。&lt;/p&gt;
 &lt;p&gt;我们先来看一下__init__的用法&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1367,7 +1282,7 @@ in __init__
 
 &lt;p&gt;看完上面两个例子，大家是不是对__new__和__init__的区别有了更深入的理解？&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python面试之连接字符串用join还是+</title><link href="https://www.shenzhongqiang.com/diff-between-join-and-plus.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-join-and-plus.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;的最后留了一个问题&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python面试之连接字符串用join还是+</title><link href="https://www.shenzhongqiang.com/diff-between-join-and-plus.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-join-and-plus.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;的最后留了一个问题&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Group …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;的最后留了一个问题&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Group&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;group_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;members&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[]):&lt;/span&gt;
@@ -1433,7 +1348,7 @@ in __init__
 &lt;p&gt;可以看到，join的性能明显好于+。这是为什么呢？&lt;/p&gt;
 &lt;p&gt;原因是这样的，上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;中讲过字符串是不可变对象，当用操作符+连接字符串的时候，每执行一次+都会申请一块新的内存，然后复制上一个+操作的结果和本次操作的右操作符到这块内存空间，因此用+连接字符串的时候会涉及好几次内存申请和复制。而join在连接字符串的时候，会先计算需要多大的内存存放结果，然后一次性申请所需内存并将字符串复制过去，这是为什么join的性能优于+的原因。所以在连接字符串数组的时候，我们应考虑优先使用join。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python也能聊微信</title><link href="https://www.shenzhongqiang.com/python-wechat.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/python-wechat.html</id><summary type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 Web 微信的通讯协议，实现了微信登录、收发消息、搜索好友、数据统计等功能。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python也能聊微信</title><link href="https://www.shenzhongqiang.com/python-wechat.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/python-wechat.html</id><summary type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 Web 微信的通讯协议，实现了微信登录、收发消息、搜索好友、数据统计等功能。&lt;/p&gt;
 &lt;p&gt;这里我们就来介绍一下这个库，并在最后实现一个聊天机器人。&lt;/p&gt;
 &lt;h4&gt;准备工作&lt;/h4&gt;
 &lt;p&gt;安装非常简单，从官方源下载安装&lt;/p&gt;
@@ -1591,7 +1506,7 @@ in __init__
 &lt;p&gt;wxpy文档：&lt;a href="http://link.zhihu.com/?target=http%3A//wxpy.readthedocs.io/zh/latest/"&gt;wxpy: 用 Python 玩微信&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;github地址：&lt;a href="http://link.zhihu.com/?target=https%3A//github.com/youfou/wxpy/blob/master/docs/index.rst"&gt;youfou/wxpy&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>一款超酷的Chrome插件</title><link href="https://www.shenzhongqiang.com/cool-chrome-extensions-momentum.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/cool-chrome-extensions-momentum.html</id><summary type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味。装上了Momentum后，打开新的Tab页面，展现在你眼前的是一张漂亮的风景照片，不由让人觉得耳目一新，心情也随之振奋起来。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>一款超酷的Chrome插件</title><link href="https://www.shenzhongqiang.com/cool-chrome-extensions-momentum.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/cool-chrome-extensions-momentum.html</id><summary type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味。装上了Momentum后，打开新的Tab页面，展现在你眼前的是一张漂亮的风景照片，不由让人觉得耳目一新，心情也随之振奋起来。&lt;/p&gt;
 &lt;p&gt;Momentum每天换一张图，装上了Momentum的Chrome的新页面长这样&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-7f16b6ae262f5cf2c923883ca0167779_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;除了漂亮的背景图片、时间显示，这款插件还提供了天气预报、收藏夹、待办事项的功能，像下面&lt;/p&gt;
@@ -1601,7 +1516,7 @@ in __init__
 &lt;p&gt;自从装上了这款插件，感觉工作效率也比以前有了提升。&lt;/p&gt;
 &lt;p&gt;Momentum的官方地址是&lt;a href="http://link.zhihu.com/?target=https%3A//momentumdash.com/"&gt;Momentum Dashboard&lt;/a&gt;。通过Chrome应用商店安装这款插件需要科学上网。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>知乎Live数据面面观</title><link href="https://www.shenzhongqiang.com/zhihu-live-data-analysis.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/zhihu-live-data-analysis.html</id><summary type="html">&lt;p&gt;从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频、视频的知识分享途径，知乎Live以直播的方式分享知识，给用户一种全新的体验。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>知乎Live数据面面观</title><link href="https://www.shenzhongqiang.com/zhihu-live-data-analysis.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/zhihu-live-data-analysis.html</id><summary type="html">&lt;p&gt;从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频、视频的知识分享途径，知乎Live以直播的方式分享知识，给用户一种全新的体验。&lt;/p&gt;
 &lt;p&gt;最近爬取了所有成功举办的知乎Live。从2016年知乎Live开播以来，知乎共计举办了5707场Live。通过数据分析，本文将会告诉你知乎Live的发展情况如何，覆盖哪些专业领域，有哪些奇特的Live，哪些Live最受欢迎，哪些Live最受好评，哪些Live最吸金等有趣的答案。&lt;/p&gt;
 &lt;h4&gt;每月新开Live数量&lt;/h4&gt;
 &lt;p&gt;下图为从2016年5月至今的每月新开播的Live数量统计（横轴是月份，看不清可以放大图片）&lt;/p&gt;
@@ -1679,7 +1594,7 @@ in __init__
 &lt;p&gt;非常震惊，上面的每场Live都超过了百万收入，最后一场 &lt;a href="http://www.zhihu.com/people/e8e1b3c9f41a0528399733b96005db69"&gt;@李笑来&lt;/a&gt; 老师的Live更是超过了千万收入。仔细阅读本文的同学可以发现，这场Live除了是最吸金的Live之外，还是最受欢迎（参与人数最多）的Live。&lt;/p&gt;
 &lt;p&gt;以上是本次统计的所有图表和数据。本人还是非常喜欢Live这种知识分享的模式，收听的几场Live质量都很高，给了我很多启发。知乎Live还在不断发展中，也期待将来能够有越来越多高质量的Live出现。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>用Python给图片加上抖音效果</title><link href="https://www.shenzhongqiang.com/douyin-effect-image.html" rel="alternate"></link><published>2018-06-15T00:00:00+08:00</published><updated>2018-06-15T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-15:/douyin-effect-image.html</id><summary type="html">&lt;p&gt;前一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37951669"&gt;Python实现抖音体&lt;/a&gt; 给文字加上抖音效果，这一篇我们来用Python给图片加上抖音效果。原理其实是类似的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;前一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37951669"&gt;Python实现抖音体&lt;/a&gt; 给文字加上抖音效果，这一篇我们来用Python给图片加上抖音效果。原理其实是类似的，这里我们详细地讲解一下过程，并且给出代码实现。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用Python给图片加上抖音效果</title><link href="https://www.shenzhongqiang.com/douyin-effect-image.html" rel="alternate"></link><published>2018-06-15T00:00:00+08:00</published><updated>2018-06-15T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-15:/douyin-effect-image.html</id><summary type="html">&lt;p&gt;前一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37951669"&gt;Python实现抖音体&lt;/a&gt; 给文字加上抖音效果，这一篇我们来用Python给图片加上抖音效果。原理其实是类似的 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;前一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37951669"&gt;Python实现抖音体&lt;/a&gt; 给文字加上抖音效果，这一篇我们来用Python给图片加上抖音效果。原理其实是类似的，这里我们详细地讲解一下过程，并且给出代码实现。&lt;/p&gt;
 &lt;h4&gt;准备工作&lt;/h4&gt;
 &lt;p&gt;程序用到Pillow，numpy，需要安装这些库&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip3 install Pillow
@@ -1769,7 +1684,7 @@ pip3 install numpy
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-810b2350884291749317a744d8dfac04_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;加上特效后仿佛看到了动图的效果。是不是很有趣~ &lt;/p&gt;
 &lt;p&gt;完整代码已上传GitHub。公众号【&lt;strong&gt;Python与数据分析&lt;/strong&gt;】后台回复“抖音”可获取代码地址。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-ea99d43d4233dc22bca1718b50db60c2_b.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python实现抖音体</title><link href="https://www.shenzhongqiang.com/douyin-effect-text" rel="alternate"></link><published>2018-06-11T00:00:00+08:00</published><updated>2018-06-11T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-11:/douyin-effect-text</id><summary type="html">&lt;p&gt;周末在家沉迷抖音。看完抖音，索性用Python写了个程序实现抖音效果的字体。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-ea99d43d4233dc22bca1718b50db60c2_b.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python实现抖音体</title><link href="https://www.shenzhongqiang.com/douyin-effect-text" rel="alternate"></link><published>2018-06-11T00:00:00+08:00</published><updated>2018-06-11T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-11:/douyin-effect-text</id><summary type="html">&lt;p&gt;周末在家沉迷抖音。看完抖音，索性用Python写了个程序实现抖音效果的字体。&lt;/p&gt;
 &lt;p&gt;程序的名字就叫&lt;strong&gt;&lt;em&gt;douyinti …&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;周末在家沉迷抖音。看完抖音，索性用Python写了个程序实现抖音效果的字体。&lt;/p&gt;
 &lt;p&gt;程序的名字就叫&lt;strong&gt;&lt;em&gt;douyinti&lt;/em&gt;&lt;/strong&gt;，代码已发布到PYPI，直接运行下面的命令即可安装&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip3 install douyinti
@@ -1802,7 +1717,7 @@ optional arguments:
 &lt;p&gt;程序的原理也很简单，就是基于原图生成两张图片，一张红色，一张绿色，略微错开后，叠加在一起，就有了抖音的效果。&lt;/p&gt;
 &lt;p&gt;对源码感兴趣的同学可以参见github，源码已上传&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://link.zhihu.com/?target=https%3A//github.com/pythonml/douyinti"&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;如果觉得有趣，欢迎点赞~&lt;/p&gt;</content></entry><entry><title>用Python算24点</title><link href="https://www.shenzhongqiang.com/python-calc-24.html" rel="alternate"></link><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-02:/python-calc-24.html</id><summary type="html">&lt;p&gt;小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：&lt;/p&gt;
+&lt;p&gt;如果觉得有趣，欢迎点赞~&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用Python算24点</title><link href="https://www.shenzhongqiang.com/python-calc-24.html" rel="alternate"></link><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-02:/python-calc-24.html</id><summary type="html">&lt;p&gt;小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：&lt;/p&gt;
 &lt;p&gt;7 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：&lt;/p&gt;
 &lt;p&gt;7  7  3  3&lt;/p&gt;
 &lt;p&gt;8  8  3  3&lt;/p&gt;
@@ -1916,7 +1831,7 @@ optional arguments:
 
 &lt;p&gt;哈哈，都用到了小数运算，怪不得心算这么难呢~ 是不是很有趣？&lt;/p&gt;
 &lt;p&gt;算法中有一些重复的计算，有关于优化算法的建议，欢迎留言~&lt;/p&gt;
-&lt;p&gt;完整代码已上传GitHub。公众号【Python与数据分析】后台回复“&lt;strong&gt;二十四&lt;/strong&gt;”可获取代码地址。&lt;/p&gt;</content></entry><entry><title>推荐一款提升web开发效率的利器</title><link href="https://www.shenzhongqiang.com/chrome-json-view.html" rel="alternate"></link><published>2018-05-30T00:00:00+08:00</published><updated>2018-05-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-30:/chrome-json-view.html</id><summary type="html">&lt;p&gt;今天要推荐的是一款Chrome插件，名叫JSONView。&lt;/p&gt;
+&lt;p&gt;完整代码已上传GitHub。公众号【Python与数据分析】后台回复“&lt;strong&gt;二十四&lt;/strong&gt;”可获取代码地址。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>推荐一款提升web开发效率的利器</title><link href="https://www.shenzhongqiang.com/chrome-json-view.html" rel="alternate"></link><published>2018-05-30T00:00:00+08:00</published><updated>2018-05-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-30:/chrome-json-view.html</id><summary type="html">&lt;p&gt;今天要推荐的是一款Chrome插件，名叫JSONView。&lt;/p&gt;
 &lt;p&gt;在做web开发的时候，api接口一般是返回json格式的。而在调试api接口的时候 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天要推荐的是一款Chrome插件，名叫JSONView。&lt;/p&gt;
 &lt;p&gt;在做web开发的时候，api接口一般是返回json格式的。而在调试api接口的时候，我们经常需要在浏览器里查看api的返回结果。&lt;/p&gt;
 &lt;p&gt;没有JSONView的时候，Chrome显示的json是这样的&lt;/p&gt;
@@ -1925,7 +1840,7 @@ optional arguments:
 &lt;p&gt;有了JSONView之后，Chrome显示的json就变成了这样&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c85e25e8e6aadf3f9bcdabcd90fccfaf_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;一下子清楚了很多有没有？Debug效率大大提升了有没有？安装了这款插件后，心情都变好了呢~&lt;/p&gt;
-&lt;p&gt;通过Chrome应用商店安装这款插件需科学上网。&lt;/p&gt;</content></entry><entry><title>用yield实现协程</title><link href="https://www.shenzhongqiang.com/implement-coroutine-with-yield.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-28:/implement-coroutine-with-yield.html</id><summary type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程。&lt;/p&gt;
+&lt;p&gt;通过Chrome应用商店安装这款插件需科学上网。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用yield实现协程</title><link href="https://www.shenzhongqiang.com/implement-coroutine-with-yield.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-28:/implement-coroutine-with-yield.html</id><summary type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程。&lt;/p&gt;
 &lt;p&gt;先来解答一下上一篇留下的问题：下面的代码为什么第二次调用next打印None呢？&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;echo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -2085,7 +2000,7 @@ before yield
 &lt;/ol&gt;
 &lt;p&gt;produce和consume函数在一个线程内执行，通过调用send方法和yield互相切换，实现协程的功能。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>理解python中的yield关键字</title><link href="https://www.shenzhongqiang.com/understand-yield-in-python.html" rel="alternate"></link><published>2018-05-26T00:00:00+08:00</published><updated>2018-05-26T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-26:/understand-yield-in-python.html</id><summary type="html">&lt;p&gt;想必大家都看到过这样的代码：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>理解python中的yield关键字</title><link href="https://www.shenzhongqiang.com/understand-yield-in-python.html" rel="alternate"></link><published>2018-05-26T00:00:00+08:00</published><updated>2018-05-26T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-26:/understand-yield-in-python.html</id><summary type="html">&lt;p&gt;想必大家都看到过这样的代码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_square&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;i …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;想必大家都看到过这样的代码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_square&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -2228,7 +2143,7 @@ StopIteration
 
 &lt;p&gt;答案下期揭晓~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>520用Python画一颗特别的♥送给她</title><link href="https://www.shenzhongqiang.com/special-heart-for-beloved.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/special-heart-for-beloved.html</id><summary type="html">&lt;p&gt;今天520，大家有没有和心爱的女生在一起呢？&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>520用Python画一颗特别的♥送给她</title><link href="https://www.shenzhongqiang.com/special-heart-for-beloved.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/special-heart-for-beloved.html</id><summary type="html">&lt;p&gt;今天520，大家有没有和心爱的女生在一起呢？&lt;/p&gt;
 &lt;p&gt;今天我们来用Python画一颗特别的爱心，送给那个特别的她，给她一份浪漫的惊喜吧 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天520，大家有没有和心爱的女生在一起呢？&lt;/p&gt;
 &lt;p&gt;今天我们来用Python画一颗特别的爱心，送给那个特别的她，给她一份浪漫的惊喜吧~&lt;/p&gt;
 &lt;p&gt;还记得那个心形曲线的公式吗？&lt;/p&gt;
@@ -2290,7 +2205,7 @@ pip3 install matplotlib
 &lt;p&gt;大家是不是学会了呢 ？&lt;/p&gt;
 &lt;p&gt;最后祝大家520快乐！&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号，欢迎扫一扫关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>酷酷的format</title><link href="https://www.shenzhongqiang.com/understand-python-keyword-format.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/understand-python-keyword-format.html</id><summary type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言），用起来非常方便，可以实现不少%不能实现的功能。本文就来介绍一下酷酷的format。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>酷酷的format</title><link href="https://www.shenzhongqiang.com/understand-python-keyword-format.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/understand-python-keyword-format.html</id><summary type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言），用起来非常方便，可以实现不少%不能实现的功能。本文就来介绍一下酷酷的format。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;基本用法&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Peppa Pig&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 引用第一个参数&lt;/span&gt;
 &lt;span class="c1"&gt;# 输出 &amp;#39;Hello Peppa Pig&amp;#39;&lt;/span&gt;
@@ -2406,7 +2321,7 @@ pip3 install matplotlib
 
 &lt;p&gt;先整理了这一些，欢迎补充~&lt;/p&gt;
 &lt;p&gt;本文已更新同名公众号&lt;strong&gt;【Python与数据分析】 &lt;/strong&gt;(ID: PythonML)，这里分享有趣的 Python 知识，用 Python 做有趣的数据分析。欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c6367761654e55126b5bca1a6a69a755_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Python面试之with与上下文管理器</title><link href="https://www.shenzhongqiang.com/understand-with-context-manager.html" rel="alternate"></link><published>2018-05-09T00:00:00+08:00</published><updated>2018-05-09T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-09:/understand-with-context-manager.html</id><summary type="html">&lt;h4&gt;With基本语法&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c6367761654e55126b5bca1a6a69a755_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python面试之with与上下文管理器</title><link href="https://www.shenzhongqiang.com/understand-with-context-manager.html" rel="alternate"></link><published>2018-05-09T00:00:00+08:00</published><updated>2018-05-09T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-09:/understand-with-context-manager.html</id><summary type="html">&lt;h4&gt;With基本语法&lt;/h4&gt;
 &lt;p&gt;Python老司机应该对下面的语法不陌生&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;output …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h4&gt;With基本语法&lt;/h4&gt;
 &lt;p&gt;Python老司机应该对下面的语法不陌生&lt;/p&gt;
@@ -2526,7 +2441,7 @@ Exception: something wrong
 &lt;p&gt;上面的代码涉及到装饰器（@contextmanager），生成器（yield），有点难读。这里yield之前的代码相当于__enter__方法，在进入with语句体之前执行，yield之后的代码相当于__exit__方法，在退出with语句体的时候执行。&lt;/p&gt;
 &lt;p&gt;接下来的几篇文章，我们来逐一介绍一下，什么是装饰器，什么是生成器，@contextmanager是如何实现上下文管理器的。敬请期待~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号，欢迎扫一扫关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>263本知乎书店的免费图书</title><link href="https://www.shenzhongqiang.com/free-books-in-zhihu-bookstore.html" rel="alternate"></link><published>2018-04-12T00:00:00+08:00</published><updated>2018-04-12T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-04-12:/free-books-in-zhihu-bookstore.html</id><summary type="html">&lt;p&gt;不知道大家是否发现，知乎书店有很多免费的书，像知乎周刊、知乎日报年度精选、以及一些大V编写的书 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;不知道大家是否发现，知乎书店有很多免费的书，像知乎周刊、知乎日报年度精选、以及一些大V编写的书。最近写了个爬虫，爬了下知乎书店上所有免费的图书，整理出来分享给大家。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>263本知乎书店的免费图书</title><link href="https://www.shenzhongqiang.com/free-books-in-zhihu-bookstore.html" rel="alternate"></link><published>2018-04-12T00:00:00+08:00</published><updated>2018-04-12T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-04-12:/free-books-in-zhihu-bookstore.html</id><summary type="html">&lt;p&gt;不知道大家是否发现，知乎书店有很多免费的书，像知乎周刊、知乎日报年度精选、以及一些大V编写的书 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;不知道大家是否发现，知乎书店有很多免费的书，像知乎周刊、知乎日报年度精选、以及一些大V编写的书。最近写了个爬虫，爬了下知乎书店上所有免费的图书，整理出来分享给大家。&lt;/p&gt;
 &lt;p&gt;下面是所有知乎书店里免费的图书，一共263本，按评分从高到低排序&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/19550387"&gt;牙齿保卫战&lt;/a&gt;    评分：9.9&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/19551198"&gt;大发明家&lt;/a&gt;    评分：9.8&lt;/p&gt;
@@ -2790,7 +2705,7 @@ Exception: something wrong
 &lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/19550457"&gt;2014 年度 300 问：看上去很高级&lt;/a&gt;    评分：0.0&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/19550922"&gt;笑场的雷雨&lt;/a&gt;    评分：0.0&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/19550448"&gt;见笑了&lt;/a&gt;    评分：0.0&lt;/p&gt;
-&lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/119564750"&gt;原生家庭：爱与痛的起点&lt;/a&gt;    评分：0.0&lt;/p&gt;</content></entry><entry><title>Python面试之交换变量值</title><link href="https://www.shenzhongqiang.com/swap-value.html" rel="alternate"></link><published>2018-04-02T00:00:00+08:00</published><updated>2018-04-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-04-02:/swap-value.html</id><summary type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://www.zhihu.com/pub/book/119564750"&gt;原生家庭：爱与痛的起点&lt;/a&gt;    评分：0.0&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python面试之交换变量值</title><link href="https://www.shenzhongqiang.com/swap-value.html" rel="alternate"></link><published>2018-04-02T00:00:00+08:00</published><updated>2018-04-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-04-02:/swap-value.html</id><summary type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
@@ -2866,7 +2781,7 @@ None
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;通过字节码可以看到，swap1和swap2最大的区别在于，swap1中通过ROT_TWO交换栈顶的两个元素实现x和y值的互换，swap2中引入了tmp变量，多了一次LOAD_FAST, STORE_FAST的操作。执行一个ROT_TWO指令比执行一个LOAD_FAST+STORE_FAST的指令快，这也是为什么swap1比swap2性能更好的原因。&lt;/p&gt;</content></entry><entry><title>豆瓣最受好评的20本Python图书</title><link href="https://www.shenzhongqiang.com/douban-python-books-top-20.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/douban-python-books-top-20.html</id><summary type="html">&lt;p&gt;用豆瓣API爬取了豆瓣上的Python图书，筛选了评分人数&amp;gt;80的书，按照评分高低排序，删除了些中英文版本重复的书 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用豆瓣API爬取了豆瓣上的Python图书，筛选了评分人数&amp;gt;80的书，按照评分高低排序，删除了些中英文版本重复的书，整理出了下面这张最受好评的20本Python图书榜单，书名包含豆瓣链接，点击直达豆瓣书的详情页面。&lt;/p&gt;
+&lt;p&gt;通过字节码可以看到，swap1和swap2最大的区别在于，swap1中通过ROT_TWO交换栈顶的两个元素实现x和y值的互换，swap2中引入了tmp变量，多了一次LOAD_FAST, STORE_FAST的操作。执行一个ROT_TWO指令比执行一个LOAD_FAST+STORE_FAST的指令快，这也是为什么swap1比swap2性能更好的原因。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>豆瓣最受好评的20本Python图书</title><link href="https://www.shenzhongqiang.com/douban-python-books-top-20.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/douban-python-books-top-20.html</id><summary type="html">&lt;p&gt;用豆瓣API爬取了豆瓣上的Python图书，筛选了评分人数&amp;gt;80的书，按照评分高低排序，删除了些中英文版本重复的书 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用豆瓣API爬取了豆瓣上的Python图书，筛选了评分人数&amp;gt;80的书，按照评分高低排序，删除了些中英文版本重复的书，整理出了下面这张最受好评的20本Python图书榜单，书名包含豆瓣链接，点击直达豆瓣书的详情页面。&lt;/p&gt;
 &lt;p&gt;No.1 &lt;a href="http://link.zhihu.com/?target=https%3A//book.douban.com/subject/26278021/"&gt;Fluent Python&lt;/a&gt;（&lt;strong&gt;豆瓣评分：9.6&lt;/strong&gt;）&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c851d6aa7b2705589a785b4fc5b81992_b.jpg"&gt;&lt;/p&gt;
 &lt;blockquote&gt;
@@ -2987,7 +2902,7 @@ As you work through the numerous examples, you'll explore key topics like classi
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-a4075e6b3e876e56827f56080ed46303_b.jpg"&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Master Python and become a programmer-even if you never thought you could! This breakthrough book and CD can help practically anyone get started in programming. It's called "The Hard Way," but it's really quite simple. What's "hard" is this: it requires discipline, practice, and persistence. Zed A. Shaw teaches the Python programming language through a series of 52 brilliantly-crafted exercises-all formatted consistently, and most no longer than two pages (including "extra credit"). Just read each exercise, type in its sample code precisely (no copy-and-paste!), and make the programs run. As you read, type, fix your mistakes, and watch the results, you'll learn how software works, how programming works, what good programs look like, and how to read, write, and see code. You'll discover how to spot crucial differences that fundamentally affect program behavior, and you'll learn everything you need to know about Python logic, input/output, variables, and functions. Above all, you'll learn the attention to detail that is indispensable to successful programming (and so much else in life). At first, yes, it can be difficult. But it gets easier. And Shaw offers plenty of extra guidance and insight through 5+ full hours of teaching video on the accompanying CD. As Shaw's thousands of online readers and fans will attest, the moment will come when you just "get it"-and that moment feels great. Nothing important comes without discipline, practice, and persistence. But, with Learn Python the Hard Way, readers who bring those qualities to programming will master it-and they will reap the rewards, both personally and in their careers.&lt;/p&gt;
-&lt;/blockquote&gt;</content></entry><entry><title>Kafka入门简介</title><link href="https://www.shenzhongqiang.com/kafka-intro.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/kafka-intro.html</id><summary type="html">&lt;p&gt;本文简单的介绍下kafka，主要包含以下部分：&lt;/p&gt;
+&lt;/blockquote&gt;</content><category term="misc"></category></entry><entry><title>Kafka入门简介</title><link href="https://www.shenzhongqiang.com/kafka-intro.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/kafka-intro.html</id><summary type="html">&lt;p&gt;本文简单的介绍下kafka，主要包含以下部分：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;什么是Kafka&lt;/li&gt;
 &lt;li&gt;Kafka的基本概念&lt;/li&gt;
@@ -3266,7 +3181,7 @@ ConsumerRecord(topic=u&amp;#39;test&amp;#39;, partition=0, offset=832, timestamp
 &lt;p&gt;本文主要介绍了一下kafka的基本概念，并结合一些实验帮助理解kafka中的一些难点，如多个consumer的容错性机制，offset管理。&lt;/p&gt;
 &lt;h4&gt;引用资料&lt;/h4&gt;
 &lt;p&gt;kafka-python在线文档 - &lt;a href="http://link.zhihu.com/?target=http%3A//kafka-python.readthedocs.io/en/master/"&gt;kafka-python - kafka-python 1.3.6.dev documentation&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;kafka官方文档 - &lt;a href="http://link.zhihu.com/?target=https%3A//kafka.apache.org/0100/documentation.html"&gt;Apache Kafka&lt;/a&gt;&lt;/p&gt;</content></entry><entry><title>Numpy的结构化数组</title><link href="https://www.shenzhongqiang.com/numpy-structured-array.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/numpy-structured-array.html</id><summary type="html">&lt;p&gt;numpy可以创建包含同类型数据的数组，底层用C实现，效率非常高。我们可以用如下的方式创建一个numpy数组：&lt;/p&gt;
+&lt;p&gt;kafka官方文档 - &lt;a href="http://link.zhihu.com/?target=https%3A//kafka.apache.org/0100/documentation.html"&gt;Apache Kafka&lt;/a&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Numpy的结构化数组</title><link href="https://www.shenzhongqiang.com/numpy-structured-array.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/numpy-structured-array.html</id><summary type="html">&lt;p&gt;numpy可以创建包含同类型数据的数组，底层用C实现，效率非常高。我们可以用如下的方式创建一个numpy数组：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;numpy可以创建包含同类型数据的数组，底层用C实现，效率非常高。我们可以用如下的方式创建一个numpy数组：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
 &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;array&lt;/span&gt;&lt;span class="p"&gt;([&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
@@ -3373,7 +3288,7 @@ ConsumerRecord(topic=u&amp;#39;test&amp;#39;, partition=0, offset=832, timestamp
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;可以看到，两者性能差了250多倍。&lt;/p&gt;</content></entry><entry><title>Numpy二元运算的broadcasting机制</title><link href="https://www.shenzhongqiang.com/numpy-binary-op-broadcasting" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/numpy-binary-op-broadcasting</id><summary type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘）的时候，broadcasting就在背后默默地工作。本文我们就来介绍下numpy的broadcasting。&lt;/p&gt;
+&lt;p&gt;可以看到，两者性能差了250多倍。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Numpy二元运算的broadcasting机制</title><link href="https://www.shenzhongqiang.com/numpy-binary-op-broadcasting" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/numpy-binary-op-broadcasting</id><summary type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘）的时候，broadcasting就在背后默默地工作。本文我们就来介绍下numpy的broadcasting。&lt;/p&gt;
 &lt;h4&gt;什么是broadcasting&lt;/h4&gt;
 &lt;p&gt;我们通过一个简单的例子来认识一下broadcasting，考虑下面的代码&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
@@ -3549,7 +3464,7 @@ a.shape -&amp;gt; (3, 3)
 
 
 &lt;h4&gt;总结&lt;/h4&gt;
-&lt;p&gt;broadcasting在numpy数组的计算中无处不在，任何二元运算的ufunc都实现了broadcasting机制。broadcasting也很方便，很多时候我们甚至感知不到它的存在，但深入地理解它背后的工作机制，可以帮助我们避开一些陷阱。&lt;/p&gt;</content></entry><entry><title>数据告诉你新股上市能涨多久</title><link href="https://www.shenzhongqiang.com/how-much-can-ipo-stock-go-up.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/how-much-can-ipo-stock-go-up.html</id><summary type="html">&lt;p&gt;涨停打开的那一天卖掉股票，获利了结。但又不少股票涨停打开后，经过一番盘整后，继而冲上更高的高峰 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;涨停打开的那一天卖掉股票，获利了结。但又不少股票涨停打开后，经过一番盘整后，继而冲上更高的高峰。提前抛掉股票的股民只能惋惜自己卖得太早，错过了行情。&lt;/p&gt;
+&lt;p&gt;broadcasting在numpy数组的计算中无处不在，任何二元运算的ufunc都实现了broadcasting机制。broadcasting也很方便，很多时候我们甚至感知不到它的存在，但深入地理解它背后的工作机制，可以帮助我们避开一些陷阱。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>数据告诉你新股上市能涨多久</title><link href="https://www.shenzhongqiang.com/how-much-can-ipo-stock-go-up.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/how-much-can-ipo-stock-go-up.html</id><summary type="html">&lt;p&gt;涨停打开的那一天卖掉股票，获利了结。但又不少股票涨停打开后，经过一番盘整后，继而冲上更高的高峰 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;涨停打开的那一天卖掉股票，获利了结。但又不少股票涨停打开后，经过一番盘整后，继而冲上更高的高峰。提前抛掉股票的股民只能惋惜自己卖得太早，错过了行情。&lt;/p&gt;
 &lt;p&gt;本文旨在通过对历史数据的分析，预测新股上市后短期内的上涨幅度，给出更精准的抛售时机。&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://link.zhihu.com/?target=http%3A//data.eastmoney.com/xg/xg/default.html"&gt;新股申购与中签查询 _ 数据中心 _ 东方财富网&lt;/a&gt; 里可以看到所有的新股数据，如下图所示&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-3df950e5fd4b98a45337e47a8d297a1d_r.jpg"&gt;&lt;/p&gt;
@@ -3632,7 +3547,7 @@ sh603661  22.980000   47.590000   56.880001  0.02360
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;这几只新股还未上市，等上市后可以验证一下，看是否能涨到预测的价格。&lt;/p&gt;
-&lt;p&gt;总结一下，本文主要给出了一种方法用于预测新股上涨到的最高价。不同于传统的涨停打开就卖出的策略，本文对于价格的预测能给出更精确的卖出建议。&lt;/p&gt;</content></entry><entry><title>用Cython和PyPy提升Python性能</title><link href="https://www.shenzhongqiang.com/improve-performance-by-cython.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/improve-performance-by-cython.html</id><summary type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例，尝试用几种方法优化Python性能，并将优化的结果做个比较。&lt;/p&gt;
+&lt;p&gt;总结一下，本文主要给出了一种方法用于预测新股上涨到的最高价。不同于传统的涨停打开就卖出的策略，本文对于价格的预测能给出更精确的卖出建议。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>用Cython和PyPy提升Python性能</title><link href="https://www.shenzhongqiang.com/improve-performance-by-cython.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/improve-performance-by-cython.html</id><summary type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例，尝试用几种方法优化Python性能，并将优化的结果做个比较。&lt;/p&gt;
 &lt;p&gt;这里计算的积分如下&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=%5Cint_%7Ba%7D%5E%7Bb%7De%5E%7B-x%5E%7B2%7D%7D"&gt; &lt;/p&gt;
 &lt;p&gt;未作优化的Python代码如下&lt;/p&gt;
@@ -3713,7 +3628,7 @@ sh603661  22.980000   47.590000   56.880001  0.02360
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-2192bca03dcb5a441ed5aece94dea038_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;可以看到，三种优化方式对性能都有很大的提升，其中Cython优化代码后对性能的提升最大。用Cython优化后的执行时间（7.36s）差不多比未经优化的CPython代码（46.33s）少了一个数量级，和Java版本（8.58s）的性能相当。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;在涉及大量科学计算的项目中，通过优化Python还是有希望达到非常不错的性能的。Python自带了很多做科学计算的库，如Numpy，Scipy等，底层都是用C实现的，性能上已经做了很大的优化。如果需要自己实现算法，也可以用Cython做优化，将耗费CPU的部分编译成高效的C代码来达到性能的提升。&lt;/p&gt;</content></entry><entry><title>Python告诉你iPhone X有多热卖</title><link href="https://www.shenzhongqiang.com/iphonex-sales.html" rel="alternate"></link><published>2017-12-14T00:00:00+08:00</published><updated>2017-12-14T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2017-12-14:/iphonex-sales.html</id><summary type="html">&lt;p&gt;老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么。老婆要买iPhone X，强哥当然支持了。强哥立刻转了一笔巨款给老婆&lt;/p&gt;
+&lt;p&gt;在涉及大量科学计算的项目中，通过优化Python还是有希望达到非常不错的性能的。Python自带了很多做科学计算的库，如Numpy，Scipy等，底层都是用C实现的，性能上已经做了很大的优化。如果需要自己实现算法，也可以用Cython做优化，将耗费CPU的部分编译成高效的C代码来达到性能的提升。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Python告诉你iPhone X有多热卖</title><link href="https://www.shenzhongqiang.com/iphonex-sales.html" rel="alternate"></link><published>2017-12-14T00:00:00+08:00</published><updated>2017-12-14T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2017-12-14:/iphonex-sales.html</id><summary type="html">&lt;p&gt;老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;老婆最近生气了，说强哥不肯给她买iPhone X。强哥觉得挺委屈的，强哥是小气的人么。老婆要买iPhone X，强哥当然支持了。强哥立刻转了一笔巨款给老婆&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-4b784f72b1964ddcaa68408337f6ebbd_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;发完转账，老婆就把强哥给拉黑了。强哥当时的心情是这样的&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-497886754145e37caf08601d2123bece_b.jpg"&gt;&lt;/p&gt;
@@ -3861,7 +3776,7 @@ iPhone X sold money: &lt;span class="m"&gt;1605100188&lt;/span&gt;.36
 &lt;p&gt;可以看到&lt;strong&gt;iPhone X无论在销量还是销售额上都遥遥领先，远远超过其他手机&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;当然淘宝只是iPhone X的一个销售平台，同样在销售iPhone X的还有京东，苏宁，苹果线上和线下的实体商店等。由于很多大平台并不公开销量数据，要统计iPhone X总的销售量还有很大的难度。但根据之前新闻报道iPhone X开卖2小时招行销售额破20亿、双十一京东购机预约数量破200万、苹果商店门前排起长队、黄牛将一部手机价格炒到2万等这些来判断，这次的iPhone X一定是大受好评的。&lt;/p&gt;
 &lt;p&gt;至此，强哥算是明白老婆为什么这么喜欢iPhone X了。强哥知道错了，强哥这就给老婆买iPhone X去。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e0028b21e1882896d138de10d641b5fe_b.jpg"&gt;&lt;/p&gt;</content></entry><entry><title>Docker初体验</title><link href="https://www.shenzhongqiang.com/docker-intro.html" rel="alternate"></link><published>2017-11-30T00:00:00+08:00</published><updated>2017-11-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2017-11-30:/docker-intro.html</id><summary type="html">&lt;p&gt;最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e0028b21e1882896d138de10d641b5fe_b.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Docker初体验</title><link href="https://www.shenzhongqiang.com/docker-intro.html" rel="alternate"></link><published>2017-11-30T00:00:00+08:00</published><updated>2017-11-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2017-11-30:/docker-intro.html</id><summary type="html">&lt;p&gt;最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。&lt;/p&gt;
 &lt;p&gt;本文由以下内容组成 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。&lt;/p&gt;
 &lt;p&gt;本文由以下内容组成：&lt;/p&gt;
 &lt;ul&gt;
@@ -4011,7 +3926,7 @@ Load average: &lt;span class="m"&gt;0&lt;/span&gt;.16 &lt;span class="m"&gt;0&lt
 
 
 &lt;p&gt;启动zookeeper服务需要从官网下载zookeeper包，撰写conf/zoo.cfg，并启动zookeeper进程。ADD关键字将URL中的内容下载到指定目录中&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;ADD&lt;/span&gt; http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;ADD&lt;/span&gt;&lt;span class="s"&gt; http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -4039,7 +3954,7 @@ Load average: &lt;span class="m"&gt;0&lt;/span&gt;.16 &lt;span class="m"&gt;0&lt
 
 
 &lt;p&gt;启动zookeeper进程，使用CMD关键字。start-foreground参数让zookeeper在前台运行，如果没有这个参数，.sh脚本退出后会导致容器也退出&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/opt/zookeeper/bin/zkServer.sh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;start-foreground&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;CMD&lt;/span&gt;&lt;span class="s"&gt; [&amp;quot;/opt/zookeeper/bin/zkServer.sh&amp;quot;, &amp;quot;start-foreground&amp;quot;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -4049,7 +3964,7 @@ Load average: &lt;span class="m"&gt;0&lt;/span&gt;.16 &lt;span class="m"&gt;0&lt
 &lt;span class="k"&gt;MAINTAINER&lt;/span&gt;&lt;span class="s"&gt; Zhongqiang Shen&lt;/span&gt;
 
 &lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="s"&gt; /tmp&lt;/span&gt;
-&lt;span class="k"&gt;ADD&lt;/span&gt; http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp
+&lt;span class="k"&gt;ADD&lt;/span&gt;&lt;span class="s"&gt; http://apache.osuosl.org/zookeeper/stable/zookeeper-3.4.10.tar.gz /tmp&lt;/span&gt;
 &lt;span class="k"&gt;RUN&lt;/span&gt; tar -xzf zookeeper-3.4.10.tar.gz
 &lt;span class="k"&gt;RUN&lt;/span&gt; mv zookeeper-3.4.10 /opt/zookeeper
 &lt;span class="k"&gt;WORKDIR&lt;/span&gt;&lt;span class="s"&gt; /opt/zookeeper&lt;/span&gt;
@@ -4057,7 +3972,7 @@ Load average: &lt;span class="m"&gt;0&lt;/span&gt;.16 &lt;span class="m"&gt;0&lt
 &lt;span class="k"&gt;RUN&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;dataDir=/var/lib/zookeeper&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; conf/zoo.cfg
 &lt;span class="k"&gt;RUN&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;clientPort=2181&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; conf/zoo.cfg
 &lt;span class="k"&gt;EXPOSE&lt;/span&gt;&lt;span class="s"&gt; 2181&lt;/span&gt;
-&lt;span class="k"&gt;CMD&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/opt/zookeeper/bin/zkServer.sh&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;start-foreground&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="k"&gt;CMD&lt;/span&gt;&lt;span class="s"&gt; [&amp;quot;/opt/zookeeper/bin/zkServer.sh&amp;quot;, &amp;quot;start-foreground&amp;quot;]&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 
@@ -4249,4 +4164,4 @@ ConsumerRecord&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;topic&l
 &lt;p&gt;可以看到之前插入的数据被成功的读取到。&lt;/p&gt;
 &lt;h4&gt;总结&lt;/h4&gt;
 &lt;p&gt;本文对Docker做了个简单介绍，包括Docker的基本概念、基本命令、如何创建Docker镜像、以及如何部署多容器。&lt;/p&gt;
-&lt;p&gt;除以上内容，Kubernetes也是Docker生态圈中的重要一员。Kubernetes是一个开源的容器集群管理系统，提供资源调度、均衡容灾、服务注册、动态扩缩容等功能，可以作为下一步学习的内容。&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;除以上内容，Kubernetes也是Docker生态圈中的重要一员。Kubernetes是一个开源的容器集群管理系统，提供资源调度、均衡容灾、服务注册、动态扩缩容等功能，可以作为下一步学习的内容。&lt;/p&gt;</content><category term="misc"></category></entry></feed>

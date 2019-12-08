@@ -209,7 +209,7 @@ https://119.177.210.163:9999
 
 
 &lt;p&gt;现在爬虫又重新开始工作，可以获取到图书的信息了。&lt;/p&gt;
-&lt;p&gt;通过这样的自建代理池，我们破解了豆瓣的反爬。不过需要注意的是，很多免费代理有效时间比较短，毕竟是免费的，稳定性没保障。大家获取免费代理后，还是要趁热尽快使用。如果要追求稳定性，建议大家还是使用付费代理。&lt;/p&gt;</content></entry><entry><title>爬了下Unsplash上的高赞壁纸，总有一款适合你</title><link href="https://www.shenzhongqiang.com/unsplash-hd-wallpaper.html" rel="alternate"></link><published>2018-12-28T00:00:00+08:00</published><updated>2018-12-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-12-28:/unsplash-hd-wallpaper.html</id><summary type="html">&lt;p&gt;Unsplash是个高清摄影图片的网站，里面的照片非常精美，分辨率也很高，最重要的是，所有的照片都没有版权 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unsplash是个高清摄影图片的网站，里面的照片非常精美，分辨率也很高，最重要的是，所有的照片都没有版权，无须向原作者申请授权，即可任意使用。&lt;/p&gt;
+&lt;p&gt;通过这样的自建代理池，我们破解了豆瓣的反爬。不过需要注意的是，很多免费代理有效时间比较短，毕竟是免费的，稳定性没保障。大家获取免费代理后，还是要趁热尽快使用。如果要追求稳定性，建议大家还是使用付费代理。&lt;/p&gt;</content><category term="爬虫"></category></entry><entry><title>爬了下Unsplash上的高赞壁纸，总有一款适合你</title><link href="https://www.shenzhongqiang.com/unsplash-hd-wallpaper.html" rel="alternate"></link><published>2018-12-28T00:00:00+08:00</published><updated>2018-12-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-12-28:/unsplash-hd-wallpaper.html</id><summary type="html">&lt;p&gt;Unsplash是个高清摄影图片的网站，里面的照片非常精美，分辨率也很高，最重要的是，所有的照片都没有版权 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Unsplash是个高清摄影图片的网站，里面的照片非常精美，分辨率也很高，最重要的是，所有的照片都没有版权，无须向原作者申请授权，即可任意使用。&lt;/p&gt;
 &lt;p&gt;最近闲暇的时候写了个爬虫爬了下Unsplash上的那些高赞的壁纸。爬虫原理非常简单，就是爬取所有的壁纸，然后筛选那些赞数最高的图片。代码比较简单，这里不作介绍，后面有获取方式。&lt;/p&gt;
 &lt;p&gt;这里整理了80张赞数最高的壁纸。大家最喜欢哪一张呢，欢迎在评论里告诉我~&lt;/p&gt;
 &lt;p&gt;所有原图已上传百度网盘，代码已上传github，可在公众号【Python与数据分析】后台回复unsplash获取。&lt;/p&gt;
@@ -374,4 +374,4 @@ https://119.177.210.163:9999
 &lt;p&gt;79.&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-65c82e47c11562cd16682a226870281a_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;80.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-748cdc99477cd8c8b3dfc346531713b7_r.jpg"&gt;&lt;/p&gt;</content></entry></feed>
+&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-748cdc99477cd8c8b3dfc346531713b7_r.jpg"&gt;&lt;/p&gt;</content><category term="爬虫"></category></entry></feed>
