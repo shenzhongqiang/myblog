@@ -2,7 +2,8 @@ Title: 520用Python画一颗特别的♥送给她
 url: special-heart-for-beloved.html
 save_as: special-heart-for-beloved.html
 Date: 2018-05-20
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 今天520，大家有没有和心爱的女生在一起呢？

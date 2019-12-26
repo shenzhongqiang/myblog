@@ -2,7 +2,8 @@ Title: 知乎Live数据面面观
 url: zhihu-live-data-analysis.html
 save_as: zhihu-live-data-analysis.html
 Date: 2018-06-23
-Category:
+Category: 数据分析
+Tags: 爬虫, 数据分析
 Authors: Zhongqiang Shen
 
 从2016年5月第一场知乎Live开播，到今天，知乎Live已走过将近两个年头。有别于传统的文字、音频、视频的知识分享途径，知乎Live以直播的方式分享知识，给用户一种全新的体验。

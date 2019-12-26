@@ -2,7 +2,8 @@ Title: 用yield实现协程
 url: implement-coroutine-with-yield.html
 save_as: implement-coroutine-with-yield.html
 Date: 2018-05-28
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 上一篇 [理解python中的yield关键字](https://zhuanlan.zhihu.com/p/37257918) 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程。

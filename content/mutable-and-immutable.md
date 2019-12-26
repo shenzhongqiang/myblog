@@ -2,7 +2,8 @@ Title: Python面试之可变对象和不可变对象
 url: mutable-and-immutable.html
 save_as: mutable-and-immutable.html
 Date: 2018-06-23
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 上一篇[Python面试之 is 和 == 的区别](https://zhuanlan.zhihu.com/p/35219174)的最后留了一个问题：

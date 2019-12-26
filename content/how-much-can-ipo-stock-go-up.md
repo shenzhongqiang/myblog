@@ -2,7 +2,8 @@ Title: 数据告诉你新股上市能涨多久
 url: how-much-can-ipo-stock-go-up.html
 save_as: how-much-can-ipo-stock-go-up.html
 Date: 2018-03-22
-Category:
+Category: 数据分析
+Tags: Python, 数据分析
 Authors: Zhongqiang Shen
 
 涨停打开的那一天卖掉股票，获利了结。但又不少股票涨停打开后，经过一番盘整后，继而冲上更高的高峰。提前抛掉股票的股民只能惋惜自己卖得太早，错过了行情。

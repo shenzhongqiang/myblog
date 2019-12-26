@@ -2,7 +2,8 @@ Title: 50行代码实现人脸检测
 url: python-face-detection.html
 save_as: python-face-detection.html
 Date: 2018-06-23
-Category:
+Category: 图像处理
+Tags: Python, 图像处理
 Authors: Zhongqiang Shen
 
 现在的人脸识别技术已经得到了非常广泛的应用，支付领域、身份验证、美颜相机里都有它的应用。用iPhone的同学们应该对下面的功能比较熟悉

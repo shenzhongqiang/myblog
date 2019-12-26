@@ -2,7 +2,8 @@ Title: Python告诉你上海有哪些高性价比的西餐厅
 url: python-shanghai-best-western-restaurants.html
 save_as: python-shanghai-best-western-restaurants.html
 Date: 2018-08-29
-Category:
+Category: 数据分析
+Tags: Python, 数据分析, 爬虫
 Authors: Zhongqiang Shen
 
 七夕节就要到了，我们用Python爬了下点评上所有上海的西餐厅，看看上海都有哪些高性价比的西餐厅。

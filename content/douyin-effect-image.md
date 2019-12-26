@@ -2,7 +2,8 @@ Title: 用Python给图片加上抖音效果
 url: douyin-effect-image.html
 save_as: douyin-effect-image.html
 Date: 2018-06-15
-Category:
+Category: 图像处理
+Tags: Python, 图像处理
 Authors: Zhongqiang Shen
 
 前一篇 [Python实现抖音体](https://zhuanlan.zhihu.com/p/37951669) 给文字加上抖音效果，这一篇我们来用Python给图片加上抖音效果。原理其实是类似的，这里我们详细地讲解一下过程，并且给出代码实现。

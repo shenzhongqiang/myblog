@@ -2,7 +2,8 @@ Title: Numpy的结构化数组
 url: numpy-structured-array.html
 save_as: numpy-structured-array.html
 Date: 2018-03-22
-Category:
+Category: Numpy
+Tags: Python, Numpy
 Authors: Zhongqiang Shen
 
 numpy可以创建包含同类型数据的数组，底层用C实现，效率非常高。我们可以用如下的方式创建一个numpy数组：

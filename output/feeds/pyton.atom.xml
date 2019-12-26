@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - Pyton</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/pyton.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2018-07-04T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>用Python算一算n阶乘的末尾有几个零</title><link href="https://www.shenzhongqiang.com/algorithms-tailing-zeros-for-factorial" rel="alternate"></link><published>2018-07-04T00:00:00+08:00</published><updated>2018-07-04T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-07-04:/algorithms-tailing-zeros-for-factorial</id><summary type="html">&lt;p&gt;这是Lintcode第二题，原题在此 &lt;a href="http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/"&gt;尾部的零&lt;/a&gt;。题目虽然标为“简单 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;这是Lintcode第二题，原题在此 &lt;a href="http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/"&gt;尾部的零&lt;/a&gt;。题目虽然标为“简单”，但答对率却不高。&lt;/p&gt;
+&lt;p&gt;看到这一题，比较直观的想法是计算从1到n的连乘，但这样很容易溢出，因为乘起来的数字太大。&lt;/p&gt;
+&lt;p&gt;换一个思路，我们将n阶乘做质因数分解，将n阶乘表示成&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=n%21+%3D+a+%5Ctimes+2%5E%7Bm%7D+%5Ctimes+5%5E%7Bk%7D"&gt; &lt;/p&gt;
+&lt;p&gt;其中a, m, n都是非负整数，且a不能被2和5整除。&lt;/p&gt;
+&lt;p&gt;上面的表达式中，每一对2和5都贡献了一个末尾的零，所以我们只要知道n的阶乘中有多少个因子2，有多少个因子5，求两者的最小值 &lt;img alt="" src="http://www.zhihu.com/equation?tex=min%28m%2C+k%29"&gt; 就是末尾零的个数了。&lt;/p&gt;
+&lt;p&gt;我们先来看一下n的阶乘有多少个因子5。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=n%21+%3D+1+%5Ctimes+2+%5Ctimes+3+%5Ctimes+...+%5Ctimes+n"&gt; &lt;/p&gt;
+&lt;p&gt;从1到n中，每一个5的倍数都至少贡献了一个5，比如数字5，10，15，都贡献了一个5。每个 &lt;img alt="" src="http://www.zhihu.com/equation?tex=5%5E%7B2%7D"&gt; 的倍数都至少贡献了两个5，比如数字25，50。所以n的阶乘中包含的5的因子的个数，可以用下面的表达式来计算&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=k+%3D+%5Cleft%5B+n%2F5+%5Cright%5D+%2B+%5Cleft%5B+n%2F5%5E%7B2%7D+%5Cright%5D+%2B+%5Cleft%5B+n%2F5%5E%7B3%7D+%5Cright%5D+%2B+..."&gt; &lt;/p&gt;
+&lt;p&gt;同样的，n的阶乘包含的2的因子的个数可以用下面的表达式计算&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=m+%3D+%5Cleft%5B+n%2F2+%5Cright%5D+%2B+%5Cleft%5B+n%2F2%5E%7B2%7D+%5Cright%5D+%2B+%5Cleft%5B+n%2F2%5E%7B3%7D+%5Cright%5D+%2B+..."&gt; &lt;/p&gt;
+&lt;p&gt;很显然 m &amp;gt; k。前面说过，末尾零的个数是 &lt;img alt="" src="http://www.zhihu.com/equation?tex=min%28m%2C+k%29"&gt; 也就是k了。&lt;/p&gt;
+&lt;p&gt;理解了上面的步骤，接下来就可以用代码来实现算法了，如下&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;trailing_zero_num&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;
+
+    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="k"&gt;break&lt;/span&gt;
+        &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;n&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;num&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;代码其实很简单。我们来思考两个问题&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;上面的代码的算法复杂度是多少？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;上面的代码中用到了这样一个假设： &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Pyton"></category><category term="Python"></category></entry></feed>

@@ -2,7 +2,8 @@ Title: Python面试之交换变量值
 url: swap-value.html
 save_as: swap-value.html
 Date: 2018-04-02
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案

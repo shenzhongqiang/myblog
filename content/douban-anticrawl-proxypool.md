@@ -3,6 +3,7 @@ url: douban-anticrawl-proxypool.html
 save_as: douban-anticrawl-proxypool.html
 Date: 2019-01-13
 Category: 爬虫
+Tags: Python, 爬虫
 Authors: Zhongqiang Shen
 
 爬过豆瓣的同学应该都有过这样的经历，一开始爬取的过程挺正常的，但爬着爬着就不能获取到数据了。这是因为豆瓣对IP作了限制，如果短时间内来自同一个IP的请求太多，就会禁止来自这个IP的访问，我们的爬虫也就无法继续获取到数据了。

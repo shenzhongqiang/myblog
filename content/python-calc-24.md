@@ -2,7 +2,8 @@ Title: 用Python算24点
 url: python-calc-24.html
 save_as: python-calc-24.html
 Date: 2018-06-02
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：

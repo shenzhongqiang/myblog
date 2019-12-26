@@ -2,7 +2,8 @@ Title: Python面试之 is 和 == 的区别
 url: diff-between-is-and-doubleequal.html
 save_as: diff-between-is-and-doubleequal.html
 Date: 2018-06-23
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 面试实习生的时候，当问到 is 和 == 的区别时，很多同学都答不上来，搞不清两者什么时候返回一致，什么时候返回不一致。本文我们来看一下这两者的区别。

@@ -2,7 +2,8 @@ Title: Python面试之理解__new__和__init__的区别
 url: diff-between-new-and-init
 save_as: diff-between-new-and-init.html
 Date: 2018-06-23
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 很多同学都以为Python中的\_\_init\_\_是构造方法，但其实不然，Python中真正的构造方法是\_\_new\_\_。\_\_init\_\_和\_\_new\_\_有什么区别？本文就来探讨一下。

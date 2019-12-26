@@ -2,7 +2,8 @@ Title: 理解python中的yield关键字
 url: understand-yield-in-python.html
 save_as: understand-yield-in-python.html
 Date: 2018-05-26
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 想必大家都看到过这样的代码：

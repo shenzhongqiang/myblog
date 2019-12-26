@@ -2,7 +2,8 @@ Title: 263本知乎书店的免费图书
 url: free-books-in-zhihu-bookstore.html
 save_as: free-books-in-zhihu-bookstore.html
 Date: 2018-04-12
-Category:
+Category: 爬虫
+Tags: Python, 爬虫
 Authors: Zhongqiang Shen
 
 不知道大家是否发现，知乎书店有很多免费的书，像知乎周刊、知乎日报年度精选、以及一些大V编写的书。最近写了个爬虫，爬了下知乎书店上所有免费的图书，整理出来分享给大家。

@@ -2,7 +2,8 @@ Title: Python面试之连接字符串用join还是+
 url: diff-between-join-and-plus.html
 save_as: diff-between-join-and-plus.html
 Date: 2018-06-23
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 上一篇[Python面试之可变对象和不可变对象](https://zhuanlan.zhihu.com/p/35389687)的最后留了一个问题

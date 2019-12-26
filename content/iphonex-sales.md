@@ -2,7 +2,8 @@ Title: Python告诉你iPhone X有多热卖
 url: iphonex-sales.html
 save_as: iphonex-sales.html
 Date: 2017-12-14
-Category:
+Category: 数据分析
+Tags: Python, 数据分析, 爬虫
 Authors: Zhongqiang Shen
 
 

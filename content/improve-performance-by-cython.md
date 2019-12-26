@@ -2,7 +2,8 @@ Title: 用Cython和PyPy提升Python性能
 url: improve-performance-by-cython.html
 save_as: improve-performance-by-cython.html
 Date: 2018-03-22
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例，尝试用几种方法优化Python性能，并将优化的结果做个比较。

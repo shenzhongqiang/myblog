@@ -2,7 +2,8 @@ Title: 用Python识别验证码
 url: python-captcha-recognition.html
 save_as: python-captcha-recognition.html
 Date: 2018-08-28
-Category:
+Category: 图像处理
+Tags: Python, 图像处理
 Authors: Zhongqiang Shen
 
 很多网站登录都需要输入验证码，如果要实现自动登录就不可避免的要识别验证码。最近学习了一下图像处理相关的知识，并用Python实现了基于KNN的验证码识别。

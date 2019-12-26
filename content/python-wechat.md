@@ -2,7 +2,8 @@ Title: Python也能聊微信
 url: python-wechat.html
 save_as: python-wechat.html
 Date: 2018-06-23
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 Web 微信的通讯协议，实现了微信登录、收发消息、搜索好友、数据统计等功能。

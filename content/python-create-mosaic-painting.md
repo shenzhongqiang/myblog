@@ -2,7 +2,8 @@ Title: 用Python生成马赛克画
 url: python-create-mosaic-painting.html
 save_as: python-create-mosaic-painting.html
 Date: 2018-09-12
-Category:
+Category: 图像处理
+Tags: Python, 图像处理
 Authors: Zhongqiang Shen
 
 大家知道马赛克画是什么吗？不是动作片里的马赛克哦~~

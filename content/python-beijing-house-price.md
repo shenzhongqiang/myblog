@@ -2,7 +2,8 @@ Title: Python爬虫告诉你北京房价有多高
 url: python-beijing-house-price.html
 save_as: python-beijing-house-price.html
 Date: 2018-08-16
-Category:
+Category: 数据分析
+Tags: Python, 爬虫, 数据分析
 Authors: Zhongqiang Shen
 
 这篇是之前一篇[Python爬虫告诉你上海房价有多高](https://zhuanlan.zhihu.com/p/40293278)的姐弟篇，这一篇我们来分析分析首都北京的房价。

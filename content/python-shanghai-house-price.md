@@ -2,7 +2,8 @@ Title: Python爬虫告诉你上海房价有多高
 url: python-shanghai-house-price.html
 save_as: python-shanghai-house-price.html
 Date: 2018-07-22
-Category:
+Category: 数据分析
+Tags: Python, 爬虫, 数据分析
 Authors: Zhongqiang Shen
 
 最近用Python爬取了贝壳上7万多套上海的在售房源，7万多套房源是目前贝壳上正在挂牌出售的房源，覆盖了上海各个区县。我们对这7万多套房源做一下分析，来真实地感受一下上海的房价到底有多高。

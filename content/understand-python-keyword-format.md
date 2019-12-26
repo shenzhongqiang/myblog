@@ -2,7 +2,8 @@ Title: 酷酷的format
 url: understand-python-keyword-format.html
 save_as: understand-python-keyword-format.html
 Date: 2018-05-20
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言），用起来非常方便，可以实现不少%不能实现的功能。本文就来介绍一下酷酷的format。

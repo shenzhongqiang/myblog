@@ -2,7 +2,8 @@ Title: 用Python算一算n阶乘的末尾有几个零
 url: algorithms-tailing-zeros-for-factorial
 save_as: algorithms-tailing-zeros-for-factorial.html
 Date: 2018-07-04
-Category:
+Category: Pyton
+Tags: Python
 Authors: Zhongqiang Shen
 
 这是Lintcode第二题，原题在此 [尾部的零](http://link.zhihu.com/?target=https%3A//www.lintcode.com/zh-cn/old/problem/trailing-zeros/)。题目虽然标为“简单”，但答对率却不高。

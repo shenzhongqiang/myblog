@@ -2,7 +2,8 @@ Title: Python实现抖音体
 url: douyin-effect-text
 save_as: douyin-effect-text.html
 Date: 2018-06-11
-Category:
+Category: 图像处理
+Tags: Python, 图像处理
 Authors: Zhongqiang Shen
 
 周末在家沉迷抖音。看完抖音，索性用Python写了个程序实现抖音效果的字体。

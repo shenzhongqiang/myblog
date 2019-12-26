@@ -2,7 +2,8 @@ Title: Python爬虫告诉你深圳房价有多高
 url: python-shenzhen-house-price.html
 save_as: python-shenzhen-house-price.html
 Date: 2018-08-10
-Category:
+Category: 数据分析
+Tags: Python, 爬虫, 数据分析
 Authors: Zhongqiang Shen
 
 这一篇是前一篇[Python爬虫告诉你上海房价有多高](https://zhuanlan.zhihu.com/p/40293278)的姐妹篇，这一篇我们来看一看中国最具活力的城市**深圳**的房价。爬虫原理类似，我们直接分享数据。

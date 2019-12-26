@@ -2,7 +2,8 @@ Title: 豆瓣最受好评的20本Python图书
 url: douban-python-books-top-20.html
 save_as: douban-python-books-top-20.html
 Date: 2018-03-22
-Category:
+Category: 爬虫
+Tags: Python, 爬虫
 Authors: Zhongqiang Shen
 
 用豆瓣API爬取了豆瓣上的Python图书，筛选了评分人数>80的书，按照评分高低排序，删除了些中英文版本重复的书，整理出了下面这张最受好评的20本Python图书榜单，书名包含豆瓣链接，点击直达豆瓣书的详情页面。

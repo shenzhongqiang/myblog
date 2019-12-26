@@ -2,7 +2,8 @@ Title: Numpy二元运算的broadcasting机制
 url: numpy-binary-op-broadcasting
 save_as: numpy-binary-op-broadcasting.html
 Date: 2018-03-22
-Category:
+Category: Python
+Tags: Python, Numpy
 Authors: Zhongqiang Shen
 
 Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘）的时候，broadcasting就在背后默默地工作。本文我们就来介绍下numpy的broadcasting。

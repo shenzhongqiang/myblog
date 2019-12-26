@@ -2,7 +2,8 @@ Title: 年终奖多发一元，少得千元？Python告诉你为什么
 url: annual-bonus-tax.html
 save_as: annual-bonus-tax.html
 Date: 2019-01-18
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？

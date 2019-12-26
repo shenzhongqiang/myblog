@@ -2,7 +2,8 @@ Title: Python 2与Python 3的区别
 url: diff-between-python2-and-python3.html
 save_as: diff-between-python2-and-python3.html
 Date: 2018-06-23
-Category:
+Category: Python
+Tags: Python
 Authors: Zhongqiang Shen
 
 越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了，也体会了一下2和3的区别。主要的一些区别在以下几个方面：

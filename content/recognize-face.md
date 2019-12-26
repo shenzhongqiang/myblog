@@ -2,7 +2,8 @@ Title: 基于face_recognition实现人脸识别
 url: recognize-face.html
 save_as: recognize-face.html
 Date: 2018-06-23
-Category:
+Category: 图像处理
+Tags: Python, 图像处理
 Authors: Zhongqiang Shen
 
 上一篇文章[50行代码实现人脸检测](https://zhuanlan.zhihu.com/p/32781218)收到了很多朋友的点赞，非常感谢大家的鼓励。上一篇中我们实现了检测照片中的人脸并标出人脸特征点（鼻子，眼睛，眉毛等），这一篇我们将在上一篇的基础上，进一步实现人脸识别，告诉你照片里的人是谁。

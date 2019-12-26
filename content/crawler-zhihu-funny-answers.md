@@ -2,8 +2,8 @@ Title: 60行代码爬取知乎神回复
 url: crawler-zhihu-funny-answers.html
 save_as: crawler-zhihu-funny-answers.html
 Date: 2018-11-05 10:20
-Category: Python
-Tags: 爬虫
+Category: 数据分析
+Tags: Python, 爬虫, 数据分析
 Authors: Zhongqiang Shen
 
 之前的一篇文章 [爬虫爬了下知乎上的神回复，已笑趴～](https://zhuanlan.zhihu.com/p/46132179) 在公众号发布后，引发了大家热烈的反响。很多朋友觉得很神奇，在后台问强哥是怎么做到的，有的朋友还表示不太相信。其实爬取知乎神回复很简单，这篇文章 我们就来揭晓一下背后的原理。
