@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - Python</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/python.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2019-01-18T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>年终奖多发一元，少得千元？Python告诉你为什么</title><link href="https://www.shenzhongqiang.com/annual-bonus-tax.html" rel="alternate"></link><published>2019-01-18T00:00:00+08:00</published><updated>2019-01-18T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-01-18:/annual-bonus-tax.html</id><summary type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-93705d574116cb79418b2d01462f8b88_b.jpg"&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - Python</title><link href="http://www.shenzhongqiang.com/" rel="alternate"></link><link href="http://www.shenzhongqiang.com/feeds/python.atom.xml" rel="self"></link><id>http://www.shenzhongqiang.com/</id><updated>2019-01-18T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>年终奖多发一元，少得千元？Python告诉你为什么</title><link href="http://www.shenzhongqiang.com/annual-bonus-tax.html" rel="alternate"></link><published>2019-01-18T00:00:00+08:00</published><updated>2019-01-18T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2019-01-18:/annual-bonus-tax.html</id><summary type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;年终奖多发一元，到手却会少一千元，甚至更多。听到这个消息的时候，大家是不是和我一样，觉得很难过？&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-93705d574116cb79418b2d01462f8b88_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;上了这么多年班，我也是最近才搞清楚年终奖的税是怎么算的。年终奖的税和工资税的最大区别就是，年终奖&lt;strong&gt;没有阶梯税率，没有阶梯税率，没有阶梯税率&lt;/strong&gt;，重要的事情说三遍。&lt;/p&gt;
 &lt;p&gt;具体怎么算，我们来看下面的公式&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://www.zhihu.com/equation?tex=%E5%B9%B4%E7%BB%88%E5%A5%96%E7%A8%8E+%3D+%E5%B9%B4%E7%BB%88%E5%A5%96+%5Ctimes+%E7%A8%8E%E7%8E%87+-+%E9%80%9F%E7%AE%97%E6%89%A3%E9%99%A4%E6%95%B0"&gt; &lt;/p&gt;
 &lt;p&gt;税率和速算扣除数按照税率表，最新的税率表如下&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-7aec470a0d883849088aff69bcb8f971_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-7aec470a0d883849088aff69bcb8f971_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;我们假设一个人的年终奖是30000元，因为没超过36000元，查上表得到税率3%，速算扣除数是0，因此他要交的税是&lt;img alt="" src="https://www.zhihu.com/equation?tex=30000+%5Ctimes+3%5C%25+-+0+%3D+900%E5%85%83"&gt; 。&lt;/p&gt;
 &lt;p&gt;如果一个人的年终奖是120000元，因为在36000元~144000元的区间内，查上表得到税率10%，速算扣除数210，所以他要交的税是 &lt;img alt="" src="https://www.zhihu.com/equation?tex=120000+%5Ctimes+10%5C%25+-+210+%3D+11790%E5%85%83"&gt; 。&lt;/p&gt;
 &lt;p&gt;基于年终奖税的计算方式，我们用Python实现了一个算税的函数。代码如下&lt;/p&gt;
@@ -41,20 +41,20 @@
 
 
 &lt;p&gt;这段程序的末尾会将税后年终奖和税前年终奖的关系制作成一张折线图，展现出来，如下&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-6a5dc17cda5d9a8c572b30b2beacd7d8_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-6a5dc17cda5d9a8c572b30b2beacd7d8_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;横轴是税前的年终奖，纵轴是税后拿到手的收入。可以看到上图中税后到手的收入和税前年终奖并不是呈现单调递增的关系，在几个节点上会出现突然的下跌，也就是说税前年终奖虽然增加了，但税后到手的收入却减少了。&lt;/p&gt;
 &lt;p&gt;这是为什么呢？&lt;/p&gt;
 &lt;p&gt;我们注意到这些突然的下跌都是出现在跨税档的边界上。比如36000元的年终奖，需要交的税是 &lt;img alt="" src="https://www.zhihu.com/equation?tex=36000+%5Ctimes+3%5C%25+-+0+%3D+1080%E5%85%83"&gt; ，但36001元的年终奖，就需要交 &lt;img alt="" src="https://www.zhihu.com/equation?tex=36001+%5Ctimes+10%5C%25+-+210+%3D+3390%E5%85%83"&gt; 的税，年终奖增加一元，收入反而减少了。同样的问题也出现在144000元、300000元、420000元、660000元、960000元这些年终奖上。在这些跨税档的边界上，年终奖虽然增加了，但因为跨了税档，税率提高了，导致税后所得反而减少了。&lt;/p&gt;
 &lt;p&gt;出现这个问题的根本原因，还是在于年终奖的计税存在一个漏洞。年终奖计税的税率是基于工资税的税率表，工资税的税率表上收入额这一栏是月收入，而上面的表格里的收入额是年收入，收入额乘以了12，但速算扣除数没有，这就导致跨税档的时候会出现收入突然下跌。&lt;/p&gt;
 &lt;p&gt;如果我们把上面表格中的速算扣除数都乘以12，再画一下税后年终奖和税前年终奖的关系图，可以得到下面的图&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-15460c017b74acf4ac7d9fff7e35792b_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-15460c017b74acf4ac7d9fff7e35792b_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;这张图就正常多了，图上没有突然下跌的断层，税后年终奖和税前年终奖呈现单调递增的关系。&lt;/p&gt;
 &lt;p&gt;看到这里，大家是不是理解了年终奖的计税方式了呢？祝大家都能避开跨税档的陷阱~&lt;/p&gt;
-&lt;p&gt;完整代码已上传网盘，公众号【Python与数据分析】后台回复“&lt;strong&gt;年终奖&lt;/strong&gt;”可获取地址。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Windows上做Python开发太痛苦？Docker了解一下</title><link href="https://www.shenzhongqiang.com/windows-py-on-docker.html" rel="alternate"></link><published>2018-11-26T10:20:00+08:00</published><updated>2018-11-26T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-11-26:/windows-py-on-docker.html</id><summary type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-402a08b55cd89812b83bb3848c33cbc0_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;完整代码已上传网盘，公众号【Python与数据分析】后台回复“&lt;strong&gt;年终奖&lt;/strong&gt;”可获取地址。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Windows上做Python开发太痛苦？Docker了解一下</title><link href="http://www.shenzhongqiang.com/windows-py-on-docker.html" rel="alternate"></link><published>2018-11-26T10:20:00+08:00</published><updated>2018-11-26T10:20:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-11-26:/windows-py-on-docker.html</id><summary type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;用Windows的朋友应该都体会过，Windows上做Python开发有多痛苦。用pip装库各种报错，然后每次都要花很多时间找解决办法，每次的心情都像这样&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-402a08b55cd89812b83bb3848c33cbc0_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;之前我的解决方法是在Windows上装VMWare，VMWare上运行Ubuntu，然后在Ubuntu里面做开发。但这样也不太方便，每次进入开发环境都要先启动VMWare，再启动Ubuntu，然后打开命令行窗口开始开发，而且有时候需要在宿主机和虚拟机之间来回切换，也很麻烦。&lt;/p&gt;
 &lt;p&gt;最近了解到Docker也有Windows的版本，于是就想到在windows上利用Docker运行一个Ubuntu镜像，在容器里搭建Python开发环境，这 样既解决了安装库的问题，也解决了VMWare虚拟机的不方便之处。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-5e97f157eb2f8660c60672b440cdd4f0_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-5e97f157eb2f8660c60672b440cdd4f0_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;关于容器的基本使用，可以参考我之前的一篇文章 &lt;a href="https://zhuanlan.zhihu.com/p/31436920"&gt;Docker初体验&lt;/a&gt;。&lt;/p&gt;
 &lt;p&gt;需要注意的是，Windows上安装Docker对系统有以下的要求：&lt;/p&gt;
 &lt;ul&gt;
@@ -66,7 +66,7 @@
 &lt;p&gt;安装程序可以从这里下载 &lt;a href="http://link.zhihu.com/?target=https%3A//download.docker.com/win/stable/Docker%2520for%2520Windows%2520Installer.exe"&gt;Docker for Windows&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;安装完之后，运行Docker for Windows。&lt;/p&gt;
 &lt;p&gt;Docker运行后可以在状态栏里看到有一个小鲸鱼的图标，如下所示&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-2dc9098e780c3bb757fd5e94957768d7_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-2dc9098e780c3bb757fd5e94957768d7_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;打开命令行窗口，运行下面的命令查看Docker版本&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker --version
 &lt;/pre&gt;&lt;/div&gt;
@@ -212,7 +212,7 @@ ubuntu                      18.04               93fd78260bd1        6 days ago  
 
 
 &lt;p&gt;如果大家有更好的Windows上配置Python开发环境的建议，也欢迎在评论里告诉我~&lt;/p&gt;
-&lt;p&gt;本文已同步更新到公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>Python 2与Python 3的区别</title><link href="https://www.shenzhongqiang.com/diff-between-python2-and-python3.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-python2-and-python3.html</id><summary type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了，也体会了一下2和3的区别。主要的一些区别在以下几个方面：&lt;/p&gt;
+&lt;p&gt;本文已同步更新到公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;</content><category term="Python"></category></entry><entry><title>Python 2与Python 3的区别</title><link href="http://www.shenzhongqiang.com/diff-between-python2-and-python3.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-python2-and-python3.html</id><summary type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;越来越多的库要放弃Python 2了，强哥也开始转向Python 3了。最近的项目开始用Python3写了，也体会了一下2和3的区别。主要的一些区别在以下几个方面：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;print函数&lt;/li&gt;
 &lt;li&gt;整数相除&lt;/li&gt;
@@ -386,7 +386,7 @@ AttributeError: &amp;#39;dict&amp;#39; object has no attribute &amp;#39;has_key&
 
 &lt;p&gt;以上是最近整理的一些，后续会继续更新，也欢迎大家补充。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之 is 和 == 的区别</title><link href="https://www.shenzhongqiang.com/diff-between-is-and-doubleequal.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-is-and-doubleequal.html</id><summary type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时，很多同学都答不上来，搞不清两者什么时候返回一致，什么时候返回不一致。本文我们来看一下这两者的区别。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之 is 和 == 的区别</title><link href="http://www.shenzhongqiang.com/diff-between-is-and-doubleequal.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-is-and-doubleequal.html</id><summary type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;面试实习生的时候，当问到 is 和 == 的区别时，很多同学都答不上来，搞不清两者什么时候返回一致，什么时候返回不一致。本文我们来看一下这两者的区别。&lt;/p&gt;
 &lt;p&gt;我们先来看几个例子：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
 &lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;hello&amp;quot;&lt;/span&gt;
@@ -456,7 +456,7 @@ AttributeError: &amp;#39;dict&amp;#39; object has no attribute &amp;#39;has_key&
 &lt;/ul&gt;
 &lt;p&gt;欢迎回答在评论区~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之可变对象和不可变对象</title><link href="https://www.shenzhongqiang.com/mutable-and-immutable.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/mutable-and-immutable.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别 …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别&lt;/a&gt;的最后留了一个问题：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之可变对象和不可变对象</title><link href="http://www.shenzhongqiang.com/mutable-and-immutable.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/mutable-and-immutable.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别 …&lt;/a&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35219174"&gt;Python面试之 is 和 == 的区别&lt;/a&gt;的最后留了一个问题：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Python里和None比较时，为什么是 is None 而不是 == None 呢？*&lt;/li&gt;
 &lt;/ul&gt;
@@ -556,7 +556,7 @@ AttributeError: &amp;#39;dict&amp;#39; object has no attribute &amp;#39;has_key&
 &lt;p&gt;那么问题来了，怎样修改代码才能解决上面默认参数的问题呢？&lt;/p&gt;
 &lt;p&gt;答案下期揭晓，欢迎关注~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之理解__new__和__init__的区别</title><link href="https://www.shenzhongqiang.com/diff-between-new-and-init" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-new-and-init</id><summary type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之理解__new__和__init__的区别</title><link href="http://www.shenzhongqiang.com/diff-between-new-and-init" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-new-and-init</id><summary type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;很多同学都以为Python中的__init__是构造方法，但其实不然，Python中真正的构造方法是__new__。__init__和__new__有什么区别？本文就来探讨一下。&lt;/p&gt;
 &lt;p&gt;我们先来看一下__init__的用法&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Person&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;age&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -670,7 +670,7 @@ in __init__
 
 &lt;p&gt;看完上面两个例子，大家是不是对__new__和__init__的区别有了更深入的理解？&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之连接字符串用join还是+</title><link href="https://www.shenzhongqiang.com/diff-between-join-and-plus.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-join-and-plus.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;的最后留了一个问题&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之连接字符串用join还是+</title><link href="http://www.shenzhongqiang.com/diff-between-join-and-plus.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/diff-between-join-and-plus.html</id><summary type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;的最后留了一个问题&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Group …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;的最后留了一个问题&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Group&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;group_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;members&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[]):&lt;/span&gt;
@@ -736,7 +736,7 @@ in __init__
 &lt;p&gt;可以看到，join的性能明显好于+。这是为什么呢？&lt;/p&gt;
 &lt;p&gt;原因是这样的，上一篇&lt;a href="https://zhuanlan.zhihu.com/p/35389687"&gt;Python面试之可变对象和不可变对象&lt;/a&gt;中讲过字符串是不可变对象，当用操作符+连接字符串的时候，每执行一次+都会申请一块新的内存，然后复制上一个+操作的结果和本次操作的右操作符到这块内存空间，因此用+连接字符串的时候会涉及好几次内存申请和复制。而join在连接字符串的时候，会先计算需要多大的内存存放结果，然后一次性申请所需内存并将字符串复制过去，这是为什么join的性能优于+的原因。所以在连接字符串数组的时候，我们应考虑优先使用join。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python也能聊微信</title><link href="https://www.shenzhongqiang.com/python-wechat.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/python-wechat.html</id><summary type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 Web 微信的通讯协议，实现了微信登录、收发消息、搜索好友、数据统计等功能。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python也能聊微信</title><link href="http://www.shenzhongqiang.com/python-wechat.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/python-wechat.html</id><summary type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近研究微信API，发现个非常好用的python库：wxpy。wxpy基于itchat，使用了 Web 微信的通讯协议，实现了微信登录、收发消息、搜索好友、数据统计等功能。&lt;/p&gt;
 &lt;p&gt;这里我们就来介绍一下这个库，并在最后实现一个聊天机器人。&lt;/p&gt;
 &lt;h4&gt;准备工作&lt;/h4&gt;
 &lt;p&gt;安装非常简单，从官方源下载安装&lt;/p&gt;
@@ -774,7 +774,7 @@ in __init__
 
 
 &lt;p&gt;这里的file_helper就是微信的文件传输助手，我们给文件传输助手发送一条消息，可以在手机端收到如下的消息&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-609a81939031969ebf3414ae12b14b75_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-609a81939031969ebf3414ae12b14b75_r.jpg"&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;接受消息&lt;/li&gt;
 &lt;/ol&gt;
@@ -790,7 +790,7 @@ in __init__
 
 
 &lt;p&gt;强哥打开自己的公众号管理平台，在后端向自己发送消息，就可以收到如下的消息回复&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-624c0149e4d1082a42422eb119da0c74_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-624c0149e4d1082a42422eb119da0c74_r.jpg"&gt;&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;搜索好友及微信群&lt;/li&gt;
 &lt;/ol&gt;
@@ -840,7 +840,7 @@ in __init__
 
 
 &lt;p&gt;统计出来的地区分布数据画成图表如下&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-b3df2a0409cddb145b03f25a7f48b054_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-b3df2a0409cddb145b03f25a7f48b054_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;强哥身在上海，大多数的好友也来自上海，上面的图表也如实地反应了这一情况。&lt;/p&gt;
 &lt;p&gt;统计性别分布的代码如下&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;sex&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;count&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;friends_stat&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;sex&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iteritems&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
@@ -853,7 +853,7 @@ in __init__
 
 
 &lt;p&gt;把性别分布的数据生成图表如下&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-3750ef9714cd9871ca1b930c6d64fc17_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-3750ef9714cd9871ca1b930c6d64fc17_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;可以看到好友中男性占了大多数。男性朋友多多，老婆放心多多，嗯~~&lt;/p&gt;
 &lt;h4&gt;聊天机器人&lt;/h4&gt;
 &lt;p&gt;有了上面功能简介部分的基础，我们来实现一个聊天机器人。&lt;/p&gt;
@@ -887,14 +887,14 @@ in __init__
 
 
 &lt;p&gt;运行上面的程序，发送消息给自己，可以看到如下的对话&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-211031326c8768547f2cddc6e0d6cdfd_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-211031326c8768547f2cddc6e0d6cdfd_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;机器人太逗了，上来就要红包，还把我当男朋友了~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-ace102a35ee4a3e8fbccdbdf7fdabf8e_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-ace102a35ee4a3e8fbccdbdf7fdabf8e_r.jpg"&gt;&lt;/p&gt;
 &lt;h4&gt;附录&lt;/h4&gt;
 &lt;p&gt;wxpy文档：&lt;a href="http://link.zhihu.com/?target=http%3A//wxpy.readthedocs.io/zh/latest/"&gt;wxpy: 用 Python 玩微信&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;github地址：&lt;a href="http://link.zhihu.com/?target=https%3A//github.com/youfou/wxpy/blob/master/docs/index.rst"&gt;youfou/wxpy&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>用Python算24点</title><link href="https://www.shenzhongqiang.com/python-calc-24.html" rel="alternate"></link><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-02:/python-calc-24.html</id><summary type="html">&lt;p&gt;小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>用Python算24点</title><link href="http://www.shenzhongqiang.com/python-calc-24.html" rel="alternate"></link><published>2018-06-02T00:00:00+08:00</published><updated>2018-06-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-02:/python-calc-24.html</id><summary type="html">&lt;p&gt;小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：&lt;/p&gt;
 &lt;p&gt;7 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;小外甥女的课后作业是算24点，看了一下题目，发现都挺难的，像下面这些：&lt;/p&gt;
 &lt;p&gt;7  7  3  3&lt;/p&gt;
 &lt;p&gt;8  8  3  3&lt;/p&gt;
@@ -906,7 +906,7 @@ in __init__
 &lt;h4&gt;基本思路&lt;/h4&gt;
 &lt;p&gt;枚举4个数字可以组成的所有的算式，找到其中等于24的式子。&lt;/p&gt;
 &lt;p&gt;对于每一个算式，我们用一棵二叉树来存取。根节点保存运算符（+,-,*,/），左子树保存运算符左侧的子算式，右子树保存运算符右侧的子算式，运算结果也存在根节点中。如下图&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-76bec4dc034124082b813a71e333e030_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-76bec4dc034124082b813a71e333e030_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;这棵二叉树对应的算式就是 (4 + 10) + (2 * 5) 。非常简单直观。&lt;/p&gt;
 &lt;p&gt;有了二叉树后，对于给定的一组数字，我们就可以递归地列出这组数字组成的所有可能的算式。&lt;/p&gt;
 &lt;h4&gt;具体实现&lt;/h4&gt;
@@ -1008,7 +1008,7 @@ in __init__
 
 &lt;p&gt;哈哈，都用到了小数运算，怪不得心算这么难呢~ 是不是很有趣？&lt;/p&gt;
 &lt;p&gt;算法中有一些重复的计算，有关于优化算法的建议，欢迎留言~&lt;/p&gt;
-&lt;p&gt;完整代码已上传GitHub。公众号【Python与数据分析】后台回复“&lt;strong&gt;二十四&lt;/strong&gt;”可获取代码地址。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>用yield实现协程</title><link href="https://www.shenzhongqiang.com/implement-coroutine-with-yield.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-28:/implement-coroutine-with-yield.html</id><summary type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程。&lt;/p&gt;
+&lt;p&gt;完整代码已上传GitHub。公众号【Python与数据分析】后台回复“&lt;strong&gt;二十四&lt;/strong&gt;”可获取代码地址。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>用yield实现协程</title><link href="http://www.shenzhongqiang.com/implement-coroutine-with-yield.html" rel="alternate"></link><published>2018-05-28T00:00:00+08:00</published><updated>2018-05-28T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-28:/implement-coroutine-with-yield.html</id><summary type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;上一篇 &lt;a href="https://zhuanlan.zhihu.com/p/37257918"&gt;理解python中的yield关键字&lt;/a&gt; 介绍了使用yeld实现生成器函数，这一篇我们来继续深入的了解一下yield，用yield实现协程。&lt;/p&gt;
 &lt;p&gt;先来解答一下上一篇留下的问题：下面的代码为什么第二次调用next打印None呢？&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;echo&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
@@ -1168,7 +1168,7 @@ before yield
 &lt;/ol&gt;
 &lt;p&gt;produce和consume函数在一个线程内执行，通过调用send方法和yield互相切换，实现协程的功能。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>理解python中的yield关键字</title><link href="https://www.shenzhongqiang.com/understand-yield-in-python.html" rel="alternate"></link><published>2018-05-26T00:00:00+08:00</published><updated>2018-05-26T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-26:/understand-yield-in-python.html</id><summary type="html">&lt;p&gt;想必大家都看到过这样的代码：&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>理解python中的yield关键字</title><link href="http://www.shenzhongqiang.com/understand-yield-in-python.html" rel="alternate"></link><published>2018-05-26T00:00:00+08:00</published><updated>2018-05-26T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-26:/understand-yield-in-python.html</id><summary type="html">&lt;p&gt;想必大家都看到过这样的代码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_square&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;i …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;想必大家都看到过这样的代码：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;generate_square&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
@@ -1311,7 +1311,7 @@ StopIteration
 
 &lt;p&gt;答案下期揭晓~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>520用Python画一颗特别的♥送给她</title><link href="https://www.shenzhongqiang.com/special-heart-for-beloved.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/special-heart-for-beloved.html</id><summary type="html">&lt;p&gt;今天520，大家有没有和心爱的女生在一起呢？&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>520用Python画一颗特别的♥送给她</title><link href="http://www.shenzhongqiang.com/special-heart-for-beloved.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/special-heart-for-beloved.html</id><summary type="html">&lt;p&gt;今天520，大家有没有和心爱的女生在一起呢？&lt;/p&gt;
 &lt;p&gt;今天我们来用Python画一颗特别的爱心，送给那个特别的她，给她一份浪漫的惊喜吧 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天520，大家有没有和心爱的女生在一起呢？&lt;/p&gt;
 &lt;p&gt;今天我们来用Python画一颗特别的爱心，送给那个特别的她，给她一份浪漫的惊喜吧~&lt;/p&gt;
 &lt;p&gt;还记得那个心形曲线的公式吗？&lt;/p&gt;
@@ -1345,7 +1345,7 @@ pip3 install matplotlib
 
 
 &lt;p&gt;运行后上面的代码会显示下面的图&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-84fbd1170f8691f40c30590575cd2a08_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-84fbd1170f8691f40c30590575cd2a08_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;爱心的形状有了，接下来我们来解锁高级定制款，给爱心填充不同的颜色。&lt;/p&gt;
 &lt;h4&gt;爱心高级定制款&lt;/h4&gt;
 &lt;p&gt;给爱心填充不同的颜色，只需在上面代码的scatter函数中指定cmap参数即可，如下&lt;/p&gt;
@@ -1355,25 +1355,25 @@ pip3 install matplotlib
 
 &lt;p&gt;下面是不同色系的定制款&lt;/p&gt;
 &lt;p&gt;&lt;cmap="autumn"&gt; 橙色的爱心送给热情洋溢的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-b53db16256d7c9fd8b4274195efebdd2_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-b53db16256d7c9fd8b4274195efebdd2_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="cool"&gt; 紫色的爱心送给优雅宁静的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-62bfdd9c5e2fe5b1639b825f47009320_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-62bfdd9c5e2fe5b1639b825f47009320_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="magma"&gt; 晚霞般的爱心送给醇厚脱俗的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-88d2cf35d938685cafac388f389cf6b3_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-88d2cf35d938685cafac388f389cf6b3_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="rainbow"&gt; 彩虹般的爱心送给充满绚丽幻想的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-48f56ffc60082dcfab467d8371bf6fbc_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-48f56ffc60082dcfab467d8371bf6fbc_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="Reds"&gt; 炽热的爱心送给热烈奔放的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c6ecaa9f7e5e5b645caeedbf3d52021d_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-c6ecaa9f7e5e5b645caeedbf3d52021d_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="spring"&gt; 青春的爱心送给充满朝气的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-885690905761323f5e0d9959066e42e2_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-885690905761323f5e0d9959066e42e2_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="viridis"&gt; 翡翠色的爱心送给平静柔和的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e88092fb87f9e2e465026611128615b3_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e88092fb87f9e2e465026611128615b3_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;cmap="gist\_rainbow"&gt; 五彩缤纷的爱心送给多姿多彩的她&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-4110f68d43f8dfa8272a496500c65946_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-4110f68d43f8dfa8272a496500c65946_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;大家是不是学会了呢 ？&lt;/p&gt;
 &lt;p&gt;最后祝大家520快乐！&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号，欢迎扫一扫关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>酷酷的format</title><link href="https://www.shenzhongqiang.com/understand-python-keyword-format.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/understand-python-keyword-format.html</id><summary type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言），用起来非常方便，可以实现不少%不能实现的功能。本文就来介绍一下酷酷的format。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>酷酷的format</title><link href="http://www.shenzhongqiang.com/understand-python-keyword-format.html" rel="alternate"></link><published>2018-05-20T00:00:00+08:00</published><updated>2018-05-20T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-20:/understand-python-keyword-format.html</id><summary type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;以前格式化字符串一直用的%，最近认识了一下format。format是Python中新的格式化字符串的方式（相较于%而言），用起来非常方便，可以实现不少%不能实现的功能。本文就来介绍一下酷酷的format。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;基本用法&lt;/strong&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Hello {0}&amp;quot;&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;format&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Peppa Pig&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="c1"&gt;# 引用第一个参数&lt;/span&gt;
 &lt;span class="c1"&gt;# 输出 &amp;#39;Hello Peppa Pig&amp;#39;&lt;/span&gt;
@@ -1489,7 +1489,7 @@ pip3 install matplotlib
 
 &lt;p&gt;先整理了这一些，欢迎补充~&lt;/p&gt;
 &lt;p&gt;本文已更新同名公众号&lt;strong&gt;【Python与数据分析】 &lt;/strong&gt;(ID: PythonML)，这里分享有趣的 Python 知识，用 Python 做有趣的数据分析。欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c6367761654e55126b5bca1a6a69a755_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之with与上下文管理器</title><link href="https://www.shenzhongqiang.com/understand-with-context-manager.html" rel="alternate"></link><published>2018-05-09T00:00:00+08:00</published><updated>2018-05-09T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-09:/understand-with-context-manager.html</id><summary type="html">&lt;h4&gt;With基本语法&lt;/h4&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-c6367761654e55126b5bca1a6a69a755_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之with与上下文管理器</title><link href="http://www.shenzhongqiang.com/understand-with-context-manager.html" rel="alternate"></link><published>2018-05-09T00:00:00+08:00</published><updated>2018-05-09T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-09:/understand-with-context-manager.html</id><summary type="html">&lt;h4&gt;With基本语法&lt;/h4&gt;
 &lt;p&gt;Python老司机应该对下面的语法不陌生&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;output …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;h4&gt;With基本语法&lt;/h4&gt;
 &lt;p&gt;Python老司机应该对下面的语法不陌生&lt;/p&gt;
@@ -1609,7 +1609,7 @@ Exception: something wrong
 &lt;p&gt;上面的代码涉及到装饰器（@contextmanager），生成器（yield），有点难读。这里yield之前的代码相当于__enter__方法，在进入with语句体之前执行，yield之后的代码相当于__exit__方法，在退出with语句体的时候执行。&lt;/p&gt;
 &lt;p&gt;接下来的几篇文章，我们来逐一介绍一下，什么是装饰器，什么是生成器，@contextmanager是如何实现上下文管理器的。敬请期待~&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号，欢迎扫一扫关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之交换变量值</title><link href="https://www.shenzhongqiang.com/swap-value.html" rel="alternate"></link><published>2018-04-02T00:00:00+08:00</published><updated>2018-04-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-04-02:/swap-value.html</id><summary type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Python面试之交换变量值</title><link href="http://www.shenzhongqiang.com/swap-value.html" rel="alternate"></link><published>2018-04-02T00:00:00+08:00</published><updated>2018-04-02T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-04-02:/swap-value.html</id><summary type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;平时时不时会面面实习生，大多数的同学在学校里都已经掌握了Python。面试的时候要求同学们实现一个简单的函数，交换两个变量的值，大多数的同学给出的都是如下的答案&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;swap&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
     &lt;span class="n"&gt;tmp&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;
     &lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;
@@ -1685,7 +1685,7 @@ None
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;通过字节码可以看到，swap1和swap2最大的区别在于，swap1中通过ROT_TWO交换栈顶的两个元素实现x和y值的互换，swap2中引入了tmp变量，多了一次LOAD_FAST, STORE_FAST的操作。执行一个ROT_TWO指令比执行一个LOAD_FAST+STORE_FAST的指令快，这也是为什么swap1比swap2性能更好的原因。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Numpy二元运算的broadcasting机制</title><link href="https://www.shenzhongqiang.com/numpy-binary-op-broadcasting" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/numpy-binary-op-broadcasting</id><summary type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘）的时候，broadcasting就在背后默默地工作。本文我们就来介绍下numpy的broadcasting。&lt;/p&gt;
+&lt;p&gt;通过字节码可以看到，swap1和swap2最大的区别在于，swap1中通过ROT_TWO交换栈顶的两个元素实现x和y值的互换，swap2中引入了tmp变量，多了一次LOAD_FAST, STORE_FAST的操作。执行一个ROT_TWO指令比执行一个LOAD_FAST+STORE_FAST的指令快，这也是为什么swap1比swap2性能更好的原因。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry><entry><title>Numpy二元运算的broadcasting机制</title><link href="http://www.shenzhongqiang.com/numpy-binary-op-broadcasting" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/numpy-binary-op-broadcasting</id><summary type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Numpy中有一个非常方便的特性：broadcasting。当我们对两个不同长度的numpy数组作二元计算（如相加，相乘）的时候，broadcasting就在背后默默地工作。本文我们就来介绍下numpy的broadcasting。&lt;/p&gt;
 &lt;h4&gt;什么是broadcasting&lt;/h4&gt;
 &lt;p&gt;我们通过一个简单的例子来认识一下broadcasting，考虑下面的代码&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;numpy&lt;/span&gt; &lt;span class="kn"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;np&lt;/span&gt;
@@ -1702,7 +1702,7 @@ None
 
 
 &lt;p&gt;这里就用到了broadcasting。broadcasting会把5扩展成[5, 5, 5]，然后上面的代码就变成了对两个同样长度的数组相加。用图画出来，是这样的一个过程（半透明的方块表示被扩展出来的数值）&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-0be61eb588d42912151a3d7feb70020d_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-0be61eb588d42912151a3d7feb70020d_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;需要注意的是，broadcasting不会分配额外的内存来存取被复制的数据，这里为了描述方便作了简化。&lt;/p&gt;
 &lt;p&gt;接下来我们扩展一下上面的例子，看一下多维数组的情况&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ones&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
@@ -1721,7 +1721,7 @@ None
 
 
 &lt;p&gt;这里一维数组a被扩展成了二维数组，和e的shape相同。用图的形式表示，是这样的&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-95cf74a482e41f8350f37e024cf730a6_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-95cf74a482e41f8350f37e024cf730a6_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;我们再来考虑一个更复杂的情况，需要对两个数组都做broadcasting的例子&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;np&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;arange&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;reshape&lt;/span&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
 &lt;span class="c1"&gt;# b is&lt;/span&gt;
@@ -1739,7 +1739,7 @@ None
 
 
 &lt;p&gt;这里a和b都被扩展成相同shape的二维数组。用图的形式表示这个过程，如下&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-f7d7beef96b1adc5ac21948d3c9ed3ca_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-f7d7beef96b1adc5ac21948d3c9ed3ca_r.jpg"&gt;&lt;/p&gt;
 &lt;h4&gt;broadcasting的规则&lt;/h4&gt;
 &lt;p&gt;对两个numpy数组之间的作二元计算，broadcasting须遵循一下规则：&lt;/p&gt;
 &lt;ol&gt;
@@ -1861,7 +1861,7 @@ a.shape -&amp;gt; (3, 3)
 
 
 &lt;h4&gt;总结&lt;/h4&gt;
-&lt;p&gt;broadcasting在numpy数组的计算中无处不在，任何二元运算的ufunc都实现了broadcasting机制。broadcasting也很方便，很多时候我们甚至感知不到它的存在，但深入地理解它背后的工作机制，可以帮助我们避开一些陷阱。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category><category term="Numpy"></category></entry><entry><title>用Cython和PyPy提升Python性能</title><link href="https://www.shenzhongqiang.com/improve-performance-by-cython.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/improve-performance-by-cython.html</id><summary type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例，尝试用几种方法优化Python性能，并将优化的结果做个比较。&lt;/p&gt;
+&lt;p&gt;broadcasting在numpy数组的计算中无处不在，任何二元运算的ufunc都实现了broadcasting机制。broadcasting也很方便，很多时候我们甚至感知不到它的存在，但深入地理解它背后的工作机制，可以帮助我们避开一些陷阱。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category><category term="Numpy"></category></entry><entry><title>用Cython和PyPy提升Python性能</title><link href="http://www.shenzhongqiang.com/improve-performance-by-cython.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/improve-performance-by-cython.html</id><summary type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近在比较Python和Java的性能。Python在做科学计算方面的性能的确蛮弱的，但网上查阅了一些文档，发现有很多方法可以优化Python的性能。这里以一个简单的积分程序为例，尝试用几种方法优化Python性能，并将优化的结果做个比较。&lt;/p&gt;
 &lt;p&gt;这里计算的积分如下&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="http://www.zhihu.com/equation?tex=%5Cint_%7Ba%7D%5E%7Bb%7De%5E%7B-x%5E%7B2%7D%7D"&gt; &lt;/p&gt;
 &lt;p&gt;未作优化的Python代码如下&lt;/p&gt;
@@ -1939,7 +1939,7 @@ a.shape -&amp;gt; (3, 3)
 
 &lt;p&gt;执行Cython优化的代码，耗时7.36s。&lt;/p&gt;
 &lt;p&gt;下图展示了上述优化前和优化后的性能比较：&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-2192bca03dcb5a441ed5aece94dea038_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-2192bca03dcb5a441ed5aece94dea038_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;可以看到，三种优化方式对性能都有很大的提升，其中Cython优化代码后对性能的提升最大。用Cython优化后的执行时间（7.36s）差不多比未经优化的CPython代码（46.33s）少了一个数量级，和Java版本（8.58s）的性能相当。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;总结&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;在涉及大量科学计算的项目中，通过优化Python还是有希望达到非常不错的性能的。Python自带了很多做科学计算的库，如Numpy，Scipy等，底层都是用C实现的，性能上已经做了很大的优化。如果需要自己实现算法，也可以用Cython做优化，将耗费CPU的部分编译成高效的C代码来达到性能的提升。&lt;/p&gt;</content><category term="Python"></category><category term="Python"></category></entry></feed>

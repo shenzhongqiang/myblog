@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - misc</title><link href="https://www.shenzhongqiang.com/" rel="alternate"></link><link href="https://www.shenzhongqiang.com/feeds/misc.atom.xml" rel="self"></link><id>https://www.shenzhongqiang.com/</id><updated>2018-06-23T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>10行代码识别二维码</title><link href="https://www.shenzhongqiang.com/recognize-qr-code.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/recognize-qr-code.html</id><summary type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影。最近坐地铁又推出了扫二维码进出站。&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>强哥的世界 - misc</title><link href="http://www.shenzhongqiang.com/" rel="alternate"></link><link href="http://www.shenzhongqiang.com/feeds/misc.atom.xml" rel="self"></link><id>http://www.shenzhongqiang.com/</id><updated>2018-06-23T00:00:00+08:00</updated><subtitle>技术 | 生活 | 摄影</subtitle><entry><title>10行代码识别二维码</title><link href="http://www.shenzhongqiang.com/recognize-qr-code.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/recognize-qr-code.html</id><summary type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;二维码现在已深入到我们生活的方方面面了，手机支付、微信加好友、app下载、电子票务等方方面面都有它的身影。最近坐地铁又推出了扫二维码进出站。&lt;/p&gt;
 &lt;p&gt;最近一段时间，上海的很多地铁检票机器都装上了像下面这样的二维码扫描器&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-acebb23eaff588dc3f0844726d0605c0_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-acebb23eaff588dc3f0844726d0605c0_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;只需打开手机app上的二维码，对准扫描窗口扫一扫，就可以进站，到站后再扫一扫，就可以出站并自动扣款。&lt;/p&gt;
 &lt;p&gt;今天我们就来用Python实现一个简单的识别二维码的程序。&lt;/p&gt;
 &lt;h4&gt;准备工作&lt;/h4&gt;
@@ -38,8 +38,8 @@ pip install opencv-python
 
 &lt;h4&gt;测试&lt;/h4&gt;
 &lt;p&gt;我们拿下面的二维码来测试一下（因为知乎会自动转换二维码，这里不得已把图片作了下分割）&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-6c12c28182327fd821763cda91ed22a9_b.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-40192faa7a28708c254571598c3f9961_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-6c12c28182327fd821763cda91ed22a9_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-40192faa7a28708c254571598c3f9961_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;运行上面的read_qrcode.py，可以看到如下的结果：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;QRCODE 欢迎关注“Python与数据分析”专栏
 &lt;/pre&gt;&lt;/div&gt;
@@ -47,26 +47,26 @@ pip install opencv-python
 
 &lt;p&gt;：）&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>一款超酷的Chrome插件</title><link href="https://www.shenzhongqiang.com/cool-chrome-extensions-momentum.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/cool-chrome-extensions-momentum.html</id><summary type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味。装上了Momentum后，打开新的Tab页面，展现在你眼前的是一张漂亮的风景照片，不由让人觉得耳目一新，心情也随之振奋起来。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>一款超酷的Chrome插件</title><link href="http://www.shenzhongqiang.com/cool-chrome-extensions-momentum.html" rel="alternate"></link><published>2018-06-23T00:00:00+08:00</published><updated>2018-06-23T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-06-23:/cool-chrome-extensions-momentum.html</id><summary type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近发现一款超酷的Chrome插件，名叫Momentum。每次打开一个新的Tab页面，看着Chrome单调的默认页面，难免让人觉得乏味。装上了Momentum后，打开新的Tab页面，展现在你眼前的是一张漂亮的风景照片，不由让人觉得耳目一新，心情也随之振奋起来。&lt;/p&gt;
 &lt;p&gt;Momentum每天换一张图，装上了Momentum的Chrome的新页面长这样&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-7f16b6ae262f5cf2c923883ca0167779_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-7f16b6ae262f5cf2c923883ca0167779_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;除了漂亮的背景图片、时间显示，这款插件还提供了天气预报、收藏夹、待办事项的功能，像下面&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-0343afc26e38eff1a405792cb662d241_b.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-f33d26707fc672c409c444ee61b4618e_b.jpg"&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-490c725d5f2f168fcb096c40366442e1_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-0343afc26e38eff1a405792cb662d241_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-f33d26707fc672c409c444ee61b4618e_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-490c725d5f2f168fcb096c40366442e1_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;自从装上了这款插件，感觉工作效率也比以前有了提升。&lt;/p&gt;
 &lt;p&gt;Momentum的官方地址是&lt;a href="http://link.zhihu.com/?target=https%3A//momentumdash.com/"&gt;Momentum Dashboard&lt;/a&gt;。通过Chrome应用商店安装这款插件需要科学上网。&lt;/p&gt;
 &lt;p&gt;本文已更新微信同名公众号【Python与数据分析】，欢迎关注~&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>推荐一款提升web开发效率的利器</title><link href="https://www.shenzhongqiang.com/chrome-json-view.html" rel="alternate"></link><published>2018-05-30T00:00:00+08:00</published><updated>2018-05-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-30:/chrome-json-view.html</id><summary type="html">&lt;p&gt;今天要推荐的是一款Chrome插件，名叫JSONView。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b0b9b9584ccdd3ff4c96b7ecfd8a56_r.jpg"&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>推荐一款提升web开发效率的利器</title><link href="http://www.shenzhongqiang.com/chrome-json-view.html" rel="alternate"></link><published>2018-05-30T00:00:00+08:00</published><updated>2018-05-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-05-30:/chrome-json-view.html</id><summary type="html">&lt;p&gt;今天要推荐的是一款Chrome插件，名叫JSONView。&lt;/p&gt;
 &lt;p&gt;在做web开发的时候，api接口一般是返回json格式的。而在调试api接口的时候 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;今天要推荐的是一款Chrome插件，名叫JSONView。&lt;/p&gt;
 &lt;p&gt;在做web开发的时候，api接口一般是返回json格式的。而在调试api接口的时候，我们经常需要在浏览器里查看api的返回结果。&lt;/p&gt;
 &lt;p&gt;没有JSONView的时候，Chrome显示的json是这样的&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-114cd53cd898decf0cd936a1440c7bf9_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-114cd53cd898decf0cd936a1440c7bf9_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;各种各样的字段密密麻麻挤在一起，看都看不清楚，每次调试起来都非常痛苦。&lt;/p&gt;
 &lt;p&gt;有了JSONView之后，Chrome显示的json就变成了这样&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c85e25e8e6aadf3f9bcdabcd90fccfaf_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-c85e25e8e6aadf3f9bcdabcd90fccfaf_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;一下子清楚了很多有没有？Debug效率大大提升了有没有？安装了这款插件后，心情都变好了呢~&lt;/p&gt;
-&lt;p&gt;通过Chrome应用商店安装这款插件需科学上网。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Kafka入门简介</title><link href="https://www.shenzhongqiang.com/kafka-intro.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/kafka-intro.html</id><summary type="html">&lt;p&gt;本文简单的介绍下kafka，主要包含以下部分：&lt;/p&gt;
+&lt;p&gt;通过Chrome应用商店安装这款插件需科学上网。&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Kafka入门简介</title><link href="http://www.shenzhongqiang.com/kafka-intro.html" rel="alternate"></link><published>2018-03-22T00:00:00+08:00</published><updated>2018-03-22T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2018-03-22:/kafka-intro.html</id><summary type="html">&lt;p&gt;本文简单的介绍下kafka，主要包含以下部分：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;什么是Kafka&lt;/li&gt;
 &lt;li&gt;Kafka的基本概念&lt;/li&gt;
@@ -95,15 +95,15 @@ id（offset）。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Consumer Group&lt;/strong&gt; - 消费者分组，用于归组同类消费者。每个consumer属于一个特定的consumer group，多个消费者可以共同消息一个Topic下的消息，每个消费者消费其中的部分消息，这些消费者就组成了一个分组，拥有同一个分组名称，通常也被称为消费者集群。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Offset &lt;/strong&gt;- 消息在partition中的偏移量。每一条消息在partition都有唯一的偏移量，消息者可以指定偏移量来指定要消费的消息。&lt;/p&gt;
 &lt;h4&gt;Kafka分布式架构&lt;/h4&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-f04083507c2860e62a686c3e868c719a_b.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-f04083507c2860e62a686c3e868c719a_b.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;如上图所示，kafka将topic中的消息存在不同的partition中。如果存在键值（key），消息按照键值（key）做分类存在不同的partiition中，如果不存在键值（key），消息按照轮询（Round Robin）机制存在不同的partition中。默认情况下，键值（key）决定了一条消息会被存在哪个partition中。&lt;/p&gt;
 &lt;p&gt;partition中的消息序列是有序的消息序列。kafka在partition使用偏移量（offset）来指定消息的位置。一个topic的一个partition只能被一个consumer group中的一个consumer消费，多个consumer消费同一个partition中的数据是不允许的，但是一个consumer可以消费多个partition中的数据。&lt;/p&gt;
 &lt;p&gt;kafka将partition的数据复制到不同的broker，提供了partition数据的备份。每一个partition都有一个broker作为leader，若干个broker作为follower。所有的数据读写都通过leader所在的服务器进行，并且leader在不同broker之间复制数据。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-e9b8513d58089eee6a131278ea949502_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-e9b8513d58089eee6a131278ea949502_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;上图中，对于Partition 0，broker 1是它的leader，broker 2和broker 3是follower。对于Partition 1，broker 2是它的leader，broker 1和broker 3是follower。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-a247b3d0f9fc622224f69bbdda1ab933_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-a247b3d0f9fc622224f69bbdda1ab933_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;在上图中，当有Client（也就是Producer）要写入数据到Partition 0时，会写入到leader Broker 1，Broker 1再将数据复制到follower Broker 2和Broker 3。&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-9f15b48732fb965a8ed0644cc902bd67_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-9f15b48732fb965a8ed0644cc902bd67_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;在上图中，Client向Partition 1中写入数据时，会写入到Broker 2，因为Broker 2是Partition 1的Leader，然后Broker 2再将数据复制到follower Broker 1和Broker 3中。&lt;/p&gt;
 &lt;p&gt;上图中的topic一共有3个partition，对每个partition的读写都由不同的broker处理，因此总的吞吐量得到了提升。&lt;/p&gt;
 &lt;h4&gt;配置单机版Kafka&lt;/h4&gt;
@@ -159,7 +159,7 @@ This is another message
 &lt;h4&gt;实验一：kafka-python实现生产者消费者&lt;/h4&gt;
 &lt;p&gt;kafka-python是一个python的Kafka客户端，可以用来向kafka的topic发送消息、消费消息。&lt;/p&gt;
 &lt;p&gt;这个实验会实现一个producer和一个consumer，producer向kafka发送消息，consumer从topic中消费消息。结构如下图&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-198d01ebb230395234999a3b8ac07502_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-198d01ebb230395234999a3b8ac07502_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;producer代码&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# producer.py&lt;/span&gt;
 &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
@@ -220,7 +220,7 @@ ConsumerRecord&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;topic&l
 &lt;p&gt;可以看到window2中的consumer成功的读到了producer写入的数据&lt;/p&gt;
 &lt;h4&gt;实验二：消费组实现容错性机制&lt;/h4&gt;
 &lt;p&gt;这个实验将展示消费组的容错性的特点。这个实验中将创建一个有2个partition的topic，和2个consumer，这2个consumer共同消费同一个topic中的数据。结构如下所示&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-c13a7ea159c44df872a5845c3cd3f6c6_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-c13a7ea159c44df872a5845c3cd3f6c6_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;producer部分代码和实验一相同，这里不再重复。consumer需要指定所属的consumer group，代码如下&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# consumer.py&lt;/span&gt;
 &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;kafka&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;KafkaConsumer&lt;/span&gt;
@@ -345,7 +345,7 @@ ConsumerRecord(topic=u&amp;#39;test&amp;#39;, partition=0, offset=832, timestamp
 &lt;p&gt;本文主要介绍了一下kafka的基本概念，并结合一些实验帮助理解kafka中的一些难点，如多个consumer的容错性机制，offset管理。&lt;/p&gt;
 &lt;h4&gt;引用资料&lt;/h4&gt;
 &lt;p&gt;kafka-python在线文档 - &lt;a href="http://link.zhihu.com/?target=http%3A//kafka-python.readthedocs.io/en/master/"&gt;kafka-python - kafka-python 1.3.6.dev documentation&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;kafka官方文档 - &lt;a href="http://link.zhihu.com/?target=https%3A//kafka.apache.org/0100/documentation.html"&gt;Apache Kafka&lt;/a&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Docker初体验</title><link href="https://www.shenzhongqiang.com/docker-intro.html" rel="alternate"></link><published>2017-11-30T00:00:00+08:00</published><updated>2017-11-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2017-11-30:/docker-intro.html</id><summary type="html">&lt;p&gt;最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。&lt;/p&gt;
+&lt;p&gt;kafka官方文档 - &lt;a href="http://link.zhihu.com/?target=https%3A//kafka.apache.org/0100/documentation.html"&gt;Apache Kafka&lt;/a&gt;&lt;/p&gt;</content><category term="misc"></category></entry><entry><title>Docker初体验</title><link href="http://www.shenzhongqiang.com/docker-intro.html" rel="alternate"></link><published>2017-11-30T00:00:00+08:00</published><updated>2017-11-30T00:00:00+08:00</updated><author><name>Zhongqiang Shen</name></author><id>tag:www.shenzhongqiang.com,2017-11-30:/docker-intro.html</id><summary type="html">&lt;p&gt;最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。&lt;/p&gt;
 &lt;p&gt;本文由以下内容组成 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;最近的项目中用到了Docker，感觉超级好用。写下这篇文章作为自己学习的一个小结，也作为一篇Docker的入门介绍。&lt;/p&gt;
 &lt;p&gt;本文由以下内容组成：&lt;/p&gt;
 &lt;ul&gt;
@@ -365,9 +365,9 @@ ConsumerRecord(topic=u&amp;#39;test&amp;#39;, partition=0, offset=832, timestamp
 &lt;p&gt;&lt;strong&gt;仓库（repository）&lt;/strong&gt;- 提供集中存储、镜像分发的服务，类似github。用户可以从仓库（repository）上传或下载镜像&lt;/p&gt;
 &lt;h4&gt;容器和传统VM的区别&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;传统VM架构&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-7ee61067dfb9eac458ced806d2bd4fa6_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-7ee61067dfb9eac458ced806d2bd4fa6_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;容器架构&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="https://www.shenzhongqiang.com/images/v2-f211aa72def9826fb7050944bdd5c108_r.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://www.shenzhongqiang.com/images/v2-f211aa72def9826fb7050944bdd5c108_r.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;每个虚拟机都有自己独立的操作系统，而不同的容器可以共享同一个操作系统。虚拟机面向操作系统，而Docker是面向应用的。容器一般被设计为运行一个主要进程，而不是管理多个进程集合。&lt;/p&gt;
 &lt;h4&gt;安装Docker&lt;/h4&gt;
 &lt;p&gt;以ubuntu为例，运行以下命令&lt;/p&gt;
