@@ -31,19 +31,29 @@ class Block(object):
             return md
 
         # code
-        if element.tag == "div" and element.attrib["class"] == "highlight":
-            code = element.text_content()
-            lang_class = element.xpath('./pre/code')[0].attrib["class"]
-            matched = re.match("language-(.*)$", lang_class)
-            lang = matched.group(1)
-            md = '```{}\n{}\n```'.format(lang, code)
-            return md
+        if element.tag == "div":
+            if element.attrib["class"] == "highlight":
+                code = element.text_content()
+                lang_class = element.xpath('./pre/code')[0].attrib["class"]
+                matched = re.match("language-(.*)$", lang_class)
+                lang = matched.group(1)
+                md = '```{}\n{}\n```'.format(lang, code)
+                return md
+            else:
+                md = "" if element.text is None else Block.escape_underscore(element.text)
+                for node in element:
+                    node_md = Block.html2md(node)
+                    md += node_md
+                    node_tail = "" if node.tail is None else Block.escape_underscore(node.tail)
+                    md += node_tail
+                return md
+
         if element.tag == "code":
             code = element.text
             md = '`{}`'.format(code)
             return md
 
-        # head
+        # head2
         if element.tag == "h2":
             if len(element) == 0:
                 text = Block.escape_underscore(element.text)
@@ -53,6 +63,17 @@ class Block(object):
                 node = element[0]
                 md = Block.html2md(node)
                 return "#### {}".format(md)
+
+        # head3
+        if element.tag == "h3":
+            if len(element) == 0:
+                text = Block.escape_underscore(element.text)
+                md = "### {}".format(text)
+                return md
+            elif len(element) == 1:
+                node = element[0]
+                md = Block.html2md(node)
+                return "### {}".format(md)
 
         # html
         if element.tag == "p":
@@ -155,6 +176,10 @@ class Block(object):
                 md += node_tail
             return md
 
+        if element.tag == "style":
+            return ""
+
+        print(etree.tostring(element))
         raise Exception("unrecognized tag {}".format(element.tag))
 
     def __repr__(self):
@@ -235,7 +260,7 @@ def download_image(url):
     return filename
 
 def replace_img_path(content):
-    matched = re.findall(r"(https://.*?zhimg.com/.*?jpg)", content, re.M)
+    matched = re.findall(r"(https://[^()]*?zhimg.com/[^()]*?jpg)", content, re.M)
     url_map = {}
     result = content
     for url in matched:
